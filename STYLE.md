@@ -41,7 +41,7 @@ The only point in which SDSS slightly diverges from PEP8 is the line length. Whi
 
 It is beyond the scope of this document to summarise the PEP8 conventions, but here are some of the most salient points:
 
-- Indentation of four spaces. **No tabs. Never.***
+- Indentation of four spaces. **No tabs. Never.**
 - Two blank lines between functions and classes. One blank line between methods in a class. A single line at the end of each file.
 - Always use spaces around operators and assignments (`a = 1`). The only exception if for function and method keyword arguments (`my_function(1, key='a')`).
 - No trailing spaces. You can configure your editor to strip the lines automatically for you.
