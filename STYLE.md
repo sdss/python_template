@@ -46,6 +46,18 @@ Version tracking may be complicated so we recommend using `bumpversion` (see [he
 All changes should be logged in a `CHANGELOG.rst` or `CHANGELOG.md` file. See [the template CHANGELOG.rst](./CHANGELOG.rst) for an example of formatting. When releasing a new version, copy the change log for the relevant version in the GitHub release description.
 
 
+## Deployment
+
+SDSS Python packages should follow the general Python standards for packaging. If looking for documentation, [start here](https://packaging.python.org/).
+
+All packages must contains a (setup.py)[./setup.py] to automate building, installation, and packaging. The `setup.py` file must take care of compiling and linking all external code (e.g., C libraries) that is used by the project.
+
+Dependencies must be maintained in two different locations. For standard, pip-installable dependencies, use the [requirements.txt](./requirements.txt) file. See [here](https://pip.pypa.io/en/stable/user_guide/#requirements-files) for more information on using requirements.txt files. Consider using multiple requirements.txt files (e.g, `requirements.txt`, `requirements_dev.txt`, `requirements_docs.txt`) for different pieces of functionality. Additionally you must maintain the [module](etc/python_template.module) file for your product. If you package depends on SDSS-specific, non pip-installable packages, use the module file to load the necessary dependencies.
+
+Should you make your package pip-installable? The general answers is yes, but consider the scope of your project. If your code is to be used for mountain operations and needs to be maintained with modules/EUPS version control, making it pip installable may not be necessary, since it is unlikely to be installed in that way. However, if your product will be distributed and installed widely in the collaboration (examples of this include analysis tools, pipelines, schedulers), you *must* make it pip-installable. Start [here](https://pip.pypa.io/en/stable/) for some documentation on making pip-installable packages. Another good resource is [twine](https://github.com/pypa/twine), which will help you automate much of the packaging and uploading process.
+
+SDSS has a [PyPI account](https://pypi.org/user/sdss/) that should be used to host released version of your pip-installable projects. Do not deploy the project in your own account. Instead, contact [XXX](mailto:me@email.com) to get access to the PyPI account.
+
 
 ## Coding style
 
@@ -78,6 +90,12 @@ For docstrings, follow [PEP257](https://www.python.org/dev/peps/pep-0257/). In o
 - Private methods and functions (those that start with an underscore) may not have a docstring **only** if their purpose is really obvious.
 - In general, we prefer [Numpy style](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html#example-numpy) docstrings over [Google style](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google) docstrings, but you are free to choose one as long as you stick with it across all the product. Avoid style such as `param path: The path of the file to wrap` which are difficult to read.
 
+### General advice
+
+- Blank lines take only one byte; there is no reason for you not to use them frequently in your code and improve its legibility.
+- Remember the [Zen of Python](https://www.python.org/dev/peps/pep-0020/). Explicit is better than implicit. Simple is better than complex.
+
+## Testing
 
 ## Automatic documentation generation
 
@@ -85,16 +103,10 @@ For docstrings, follow [PEP257](https://www.python.org/dev/peps/pep-0257/). In o
 
 ### Readthedocs
 
-## General advice
-
-- Blank lines take only one byte; there is no reason for you not to use them frequently in your code and improve its legibility.
-
 ## TODO:
 
-- Licenses
-- Code versioning and storage
-- Deployment
-    - Bumpversion
+- Licensing: should SDSS adopt a default license?
+- Should we keep the python directory?
 - Testing
     - pytest
     - Travis
@@ -103,5 +115,6 @@ For docstrings, follow [PEP257](https://www.python.org/dev/peps/pep-0257/). In o
 - Sphinx
     - Readthedocs
 - General documentation / tutorials.
-- File headers
-- General advice
+- File headers: should we agree on a template?
+- Travis configuration file.
+- Zenodo
