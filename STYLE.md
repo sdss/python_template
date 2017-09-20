@@ -33,6 +33,20 @@ Some resources that can be useful to write code that is Python 2 and 3-compatibl
 - TODO: description and link to `2to3`.
 
 
+## Code storage, versioning, and changelogs.
+
+All code must be version controlled using [git](https://git-scm.com/). Older code, still under the SVN repository, can be maintained using Subversion until it has been ported to Git.
+
+All code must live in the [SDSS GitHub organisation](https://www.github.com/sdss). When starting a new product, start a new repository in the GitHub organisation (you can choose to make it public or private) and follow the instructions to clone it to your computer. Feel free to create forks of the repositories to your own GitHub account, but make sure the production version of the code lives in the organisation repo.
+
+Software versions should follow the convention `X.Y.Z` (e.g., `1.2.5`) where X indicates the major version (large, maybe non-backwards compatible changes), Y is for minor changes and additions (backwards compatible), and Z is for bug fixes (no added functionality). Suffixes to the version, such as `dev`, `alpha`, `beta`, are accepted. Do not use a hyphen between version and suffix (`1.2.5dev` is ok, `1.2.5-dev` is not).
+
+Version tracking may be complicated so we recommend using `bumpversion` (see [here](https://github.com/peritus/bumpversion) for documentation). This template already implements a [configuration file](./.bumpversion.cfg) that automates updating the version number in all the places in the code where it appears. Let's say that your current version is `0.5.1` and you are going to work on minor changes to a product. You can go to the root of the package and run `bumpversion minor`. This will update the version to `0.6.0dev` everywhere needed and commit the changes. When you are ready to release, you can do `bumpversion release` to change the version to `0.6.0`.
+
+All changes should be logged in a `CHANGELOG.rst` or `CHANGELOG.md` file. See [the template CHANGELOG.rst](./CHANGELOG.rst) for an example of formatting. When releasing a new version, copy the change log for the relevant version in the GitHub release description.
+
+
+
 ## Coding style
 
 SDSS code follows the [PEP8 standard](https://www.python.org/dev/peps/pep-0008/). Please, read that document carefully and follow at every, unless there are very good reasons not to.
@@ -71,6 +85,9 @@ For docstrings, follow [PEP257](https://www.python.org/dev/peps/pep-0257/). In o
 
 ### Readthedocs
 
+## General advice
+
+- Blank lines take only one byte; there is no reason for you not to use them frequently in your code and improve its legibility.
 
 ## TODO:
 
@@ -87,3 +104,4 @@ For docstrings, follow [PEP257](https://www.python.org/dev/peps/pep-0257/). In o
     - Readthedocs
 - General documentation / tutorials.
 - File headers
+- General advice
