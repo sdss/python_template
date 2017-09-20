@@ -90,6 +90,12 @@ For docstrings, follow [PEP257](https://www.python.org/dev/peps/pep-0257/). In o
 - Private methods and functions (those that start with an underscore) may not have a docstring **only** if their purpose is really obvious.
 - In general, we prefer [Numpy style](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html#example-numpy) docstrings over [Google style](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google) docstrings, but you are free to choose one as long as you stick with it across all the product. Avoid style such as `param path: The path of the file to wrap` which are difficult to read.
 
+### Linters
+
+Do use a linter. These are plugins available for almost every editor (vim, emacs, Sublime Text, Atom) that are executed every time you save code and show you syntax error and where you are not following PEP8 conventions. They normally rely on an underlying library, usually [pylint](https://www.pylint.org/) or [flake8](http://flake8.pycqa.org/en/latest/). This template includes customised configuration files for both libraries. You can also place `.flake8` and `.pylintrc` files in your home directory and they will be used for all your projects (configuration files *in* the root of the project override the general configuration for that project).
+
+While `pylint` is a more fully fleshed library, and provides estimates on code complexity, docstring linting, etc., it may be a bit excessive and verbose for most users. `flake8` provides more limited features, but its default configuration is usually what you want (and we enforce in SDSS). It is up to you to test them and decide which one to use.
+
 ### General advice
 
 - Blank lines take only one byte; there is no reason for you not to use them frequently in your code and improve its legibility.
