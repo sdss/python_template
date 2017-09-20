@@ -105,9 +105,18 @@ While `pylint` is a more fully fleshed library, and provides estimates on code c
 
 ## Automatic documentation generation
 
-### Sphinx
+As a software developer, it is part of your responsibility to document your code and keep that documentation up to date. Documentation takes two forms: inline documentation in the form of comments and docstrings; and explicit documentation, tutorials, plain-text explanations, etc.
 
-### Readthedocs
+Explicit documentation can take many forms (PDFs, wiki pages, plain text files) but the rule of thumb is that the best place to keep your documentation is the product itself. That makes sure a user knows where to look for the documentation, and keeps it under version control.
+
+SDSS uses and **strongly encourages**  [Sphinx](http://www.sphinx-doc.org/en/stable/intro.html) to automatically generated documentation. Sphinx translate [reStructuredText](http://docutils.sourceforge.net/rst.html) source files to HTML (plugins for Latex, HTML, and other are available). It also automates the process of gathering the docstrings in your code and generating nicely formatted HTML code.
+
+It is beyond the purpose of this document to explain how to use Sphinx, but [its documentation](http://www.sphinx-doc.org/en/stable/contents.html) is quite good and multiple tutorials exist online. A large ecosystem of plugins and extensions exist to perform almost any imaginable task. This template includes a basic but functional [Sphinx template](./docs/sphinx) that you can build running `make html`.
+
+### Read the Docs
+
+Deploying your Sphinx documentation is critical. SDSS uses [Rad the Docs](https://readthedocs.org) to automatically build and deploy documentation. Read the Docs can be added as a plugin to your GitHub repo for continuous integration so that documentation in built on each commit. SDSS owns a Read the Docs account. Contact [XXX](mailto:me@email.com) to deploy your documentation there.
+
 
 ## TODO / Questions
 
