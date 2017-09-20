@@ -181,6 +181,7 @@ You also may want to consider the possibility of using [forks](https://help.gith
 
 ## TODO / Questions
 
+- Section on how to use this template?
 - Licensing: should SDSS adopt a default license?
 - Should we keep the python directory?
 - Tox
