@@ -105,16 +105,16 @@ For docstrings, follow [PEP257](https://www.python.org/dev/peps/pep-0257/). In o
 
 ## TODO:
 
-- Licensing: should SDSS adopt a default license?
-- Should we keep the python directory?
-- Testing
-    - pytest
-    - Travis
-    - Tox
-    - Coverall
-- Sphinx
-    - Readthedocs
-- General documentation / tutorials.
-- File headers: should we agree on a template?
-- Travis configuration file.
-- Zenodo
+[ ] Licensing: should SDSS adopt a default license?
+[ ] Should we keep the python directory?
+[ ] Testing
+    [ ] pytest
+    [ ] Travis
+    [ ] Tox
+    [ ] Coverall
+[ ] Sphinx
+    [ ] Readthedocs
+[ ] Bibliography / tutorials.
+[ ] File headers: should we agree on a template?
+[ ] Travis configuration file.
+[ ] Zenodo
