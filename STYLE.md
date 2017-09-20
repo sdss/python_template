@@ -100,6 +100,8 @@ Do use a linter. These are plugins available for almost every editor (vim, emacs
 
 While `pylint` is a more fully fleshed library, and provides estimates on code complexity, docstring linting, etc., it may be a bit excessive and verbose for most users. `flake8` provides more limited features, but its default configuration is usually what you want (and we enforce in SDSS). It is up to you to test them and decide which one to use.
 
+Do update the `.flake8` or `.pylintrc` files in your project with your specific configuration you want to use in for that product. That is critical for other people contributing to the code while keeping your coding style choices.
+
 ### General advice
 
 - Blank lines take only one byte; there is no reason for you not to use them frequently in your code and improve its legibility.
