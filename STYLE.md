@@ -192,3 +192,4 @@ You also may want to consider the possibility of using [forks](https://help.gith
 - test directory at the top level?
 - Add a template logging system.
 - reStructured vs markdown.
+- Cookiecutter
