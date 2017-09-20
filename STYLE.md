@@ -30,3 +30,16 @@ Some resources that can be useful to write code that is Python 2 and 3-compatibl
 - TODO: link to a web with advice to write code for 2 and 3.
 - TODO: description and link to `six.py`.
 - TODO: description and link to `2to3`.
+
+
+## TODO:
+
+- PEP8 and docstrings
+- Testing
+    - pytest
+    - Travis
+    - Tox
+    - Coverall
+- Sphinx
+    - Readthedocs
+- Bumpversion
