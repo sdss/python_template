@@ -193,3 +193,4 @@ You may want to consider the possibility of using [forks](https://help.github.co
 - Add a template logging system.
 - reStructured vs markdown.
 - Cookiecutter
+- CLI: argparse vs click?
