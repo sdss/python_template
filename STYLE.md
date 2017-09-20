@@ -74,8 +74,10 @@ For docstrings, follow [PEP257](https://www.python.org/dev/peps/pep-0257/). In o
 
 ## TODO:
 
-- PEP8 and docstrings
+- Licenses
+- Code versioning and storage
 - Deployment
+    - Bumpversion
 - Testing
     - pytest
     - Travis
@@ -83,5 +85,5 @@ For docstrings, follow [PEP257](https://www.python.org/dev/peps/pep-0257/). In o
     - Coverall
 - Sphinx
     - Readthedocs
-- Bumpversion
 - General documentation / tutorials.
+- File headers
