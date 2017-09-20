@@ -145,6 +145,20 @@ It is beyond the purpose of this document to explain how to use Sphinx, but [its
 Deploying your Sphinx documentation is critical. SDSS uses [Rad the Docs](https://readthedocs.org) to automatically build and deploy documentation. Read the Docs can be added as a plugin to your GitHub repo for continuous integration so that documentation in built on each commit. SDSS owns a Read the Docs account. Contact [XXX](mailto:me@email.com) to deploy your documentation there.
 
 
+## Git workflow
+
+Working with Git and GitHub provides a series of extremely useful tools to write code collaboratively. Atlassian provides a [good tutorial](https://www.atlassian.com/git/tutorials/syncing) on Git workflows. While the topic is an extensive one, here is a simplified version of a typical Git workflow you should follow:
+
+1. [Clone](https://git-scm.com/docs/git-clone) the repository.
+2. Create a [branch](https://git-scm.com/docs/git-branch) (usually from master) to work on a bug fix or new feature. Develop all your work in that branch. Add tests.
+3. Once your branch is ready and well tested, and your are ready to integrate your changes, you have two options:
+    1. If you are the owner of the repo and no other people are contributing code at the time (or your changes are **very** small and non-controversial) you can simple [merge](https://git-scm.com/docs/git-merge) the branch back into master and push it to the upstream repo.
+    2. If several people are collaborating in a project, you *want* to create a [pull request](https://help.github.com/articles/about-pull-requests/) for that branch. The change can then be discussed, changes made and, when approved, you can merge the pull request.
+4. Rinse and repeat.
+
+You also may want to consider the possibility of using [forks](https://help.github.com/articles/fork-a-repo/) if you are planning on doing a large-scope change to the code.
+
+
 ## TODO / Questions
 
 - Licensing: should SDSS adopt a default license?
