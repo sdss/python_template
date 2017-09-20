@@ -28,7 +28,7 @@ That will force you to use `import`, `print`, and division in a way that is Pyth
 
 Some resources that can be useful to write code that is Python 2 and 3-compatible, and to port code from 2 to 3:
 
-- A [cheat sheet](http://python-future.org/compatible_idioms.html) with advice to write code compatible with Puthon 2 and 3.
+- A [cheat sheet](http://python-future.org/compatible_idioms.html) with advice to write code compatible with Python 2 and 3.
 - The [six](https://pythonhosted.org/six/#) library provides functions to write code that will work in Python 2 and 3.
 - If converting code from Python 2 to 3, consider using [2to3](https://docs.python.org/2/library/2to3.html) as the starting point. It works very well for most files, and even for those files that require manual interaction, it paves most of the way.
 
