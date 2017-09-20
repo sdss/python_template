@@ -6,6 +6,25 @@ So you want to write some Python code. Congratulations, you've gotten to the rig
 
 While this document deals with Python product, and some of the solutions and services suggested are specific for it, much of what is written here is general good advice for developing software in any platform.
 
+## Table of Contents
+
+* [Python 2 vs Python 3: which one to choose?](#python-2-vs-python-3-which-one-to-choose)
+* [Code storage and ownership.](#code-storage-and-ownership)
+* [Versioning and change logs.](#versioning-and-change-logs)
+* [Deployment](#deployment)
+* [Coding style](#coding-style)
+    * [Docstrings](#docstrings)
+    * [Linters](#linters)
+    * [General advice](#general-advice)
+* [Testing](#testing)
+    * [Unit testing](#unit-testing)
+    * [Continuous integration and coverage](#continuous-integration-and-coverage)
+* [Automatic documentation generation](#automatic-documentation-generation)
+    * [Read the Docs](#read-the-docs)
+* [Git workflow](#git-workflow)
+* [TODO / Questions](#todo--questions)
+
+
 ## Python 2 vs Python 3: which one to choose?
 
 SDSS has made the decision to transition to Python 3 by 2020. That means that all new code must *at least* be compatible with Python 3. There is, however, a very significant amount of ancillary code that is still Python 2-only and that will not be ported to Python 3 for some time.
