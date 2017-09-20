@@ -109,6 +109,27 @@ Do update the `.flake8` or `.pylintrc` files in your project with your specific 
 
 ## Testing
 
+Do test your code. Do test your code. Do test your code. As a repository owner, you are the ultimate responsible for making sure your code does what it is supposed to do, and to avoid that new features break current functionality.
+
+Modern testing standards are based on two cornerstones: [unit testing](https://en.wikipedia.org/wiki/Unit_testing), and [continuous integration](https://en.wikipedia.org/wiki/Continuous_integration) (CI).
+
+### Unit testing
+
+Unit testing advocates for breaking your code into small "units" that you can write tests for (and then actually write the tests!) There are multiple tutorials and manuals online, [this one](http://docs.python-guide.org/en/latest/writing/tests/) is a good starting point.
+
+Many libraries and frameworks for testing exist for Python. The basic (but powerful) one is called [unittest](https://docs.python.org/3/library/unittest.html) and is a standard Python library. [nose2](http://nose2.readthedocs.io/en/latest/) provides additional features, and a nicer interface. [pytest](https://docs.pytest.org/en/latest/) includes all those extra features plus a number of extremely convenient and powerful features, as well as many third-party addons. On the other hand, its learning curve may be a bit steep.
+
+So, what library should you use? If your code and testing needs are very simple, `unittest` is a good option.
+
+For larger projects, SDSS recommends using `pytest`. Features such as [parametrising tests](https://docs.pytest.org/en/latest/parametrize.html#pytest-mark-parametrize-parametrizing-test-functions) and [fixtures](https://docs.pytest.org/en/latest/fixture.html) are excellent to make sure your code gets a wide test coverage. This template includes a simple [pytest setup](./python/python_template/test). You can also look at the [Marvin test suite](https://github.com/sdss/marvin/tree/master/python/marvin/tests) for a more complete example.
+
+### Continuous integration and coverage
+
+It is critical that you not only write test but run them, and do so in a suite of environments (different OS, Python versions, etc). Doing that in your local computer can be convoluted, so we recommend the use of [Travis CI](https://travis-ci.org/). Travis gets integrated with a GitHub repository and is triggered every time you commit, make a pull request, or create a branch. On trigger, you can configure what happens before the tests are run (e.g, download files, create a database), and the platforms they run on. For an example of a full Travis setup see the [Marvin travis configuration](https://github.com/sdss/marvin/blob/master/.travis.yml).
+
+In addition to running tests, you will want to keep an eye on test coverage, i.e., what percentage of your code gets "activated" and tested with your unit tests. Increasing your test coverage should always be a goal, as it is to make sure that any new feature or bug fix gets associated tests. You can check your coverage using [pytest-cov](https://pypi.python.org/pypi/pytest-cov). [Coveralls](https://coveralls.io/) is another CI service that can be configured to run after Travis and that provides a nice HTML display of your coverage and missing lines.
+
+
 ## Automatic documentation generation
 
 As a software developer, it is part of your responsibility to document your code and keep that documentation up to date. Documentation takes two forms: inline documentation in the form of comments and docstrings; and explicit documentation, tutorials, plain-text explanations, etc.
@@ -133,10 +154,9 @@ Deploying your Sphinx documentation is critical. SDSS uses [Rad the Docs](https:
     - Travis
     - Tox
     - Coverall
-- Sphinx
-    - Readthedocs
 - Bibliography / tutorials.
 - File headers: should we agree on a template?
 - Travis configuration file.
 - Zenodo
 - test directory at the top level?
+- Add a template logging system.
