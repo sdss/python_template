@@ -114,7 +114,7 @@ For docstrings, follow [PEP257](https://www.python.org/dev/peps/pep-0257/). In o
     - Coverall
 - Sphinx
     - Readthedocs
-- General documentation / tutorials.
+- Bibliography / tutorials.
 - File headers: should we agree on a template?
 - Travis configuration file.
 - Zenodo
