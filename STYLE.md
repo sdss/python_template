@@ -163,11 +163,7 @@ You also may want to consider the possibility of using [forks](https://help.gith
 
 - Licensing: should SDSS adopt a default license?
 - Should we keep the python directory?
-- Testing
-    - pytest
-    - Travis
-    - Tox
-    - Coverall
+- Tox
 - Bibliography / tutorials.
 - File headers: should we agree on a template?
 - Travis configuration file.
