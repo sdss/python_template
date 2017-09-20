@@ -1,0 +1,7 @@
+
+# numpy
+# astropy
+pyyaml
+pygments
+
+# sphinx
