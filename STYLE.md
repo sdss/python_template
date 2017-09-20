@@ -26,14 +26,14 @@ from __future__ import absolute_import
 
 That will force you to use `import`, `print`, and division in a way that is Python 2 and 3-compatible.
 
-Some resources that can be useful to write code that is Python 2 and 3-compatible, and to port code from 2 to 3.
+Some resources that can be useful to write code that is Python 2 and 3-compatible, and to port code from 2 to 3:
 
-- TODO: link to a web with advice to write code for 2 and 3.
-- TODO: description and link to `six.py`.
-- TODO: description and link to `2to3`.
+- A [cheat sheet](http://python-future.org/compatible_idioms.html) with advice to write code compatible with Puthon 2 and 3.
+- The [six](https://pythonhosted.org/six/#) library provides functions to write code that will work in Python 2 and 3.
+- If converting code from Python 2 to 3, consider using [2to3](https://docs.python.org/2/library/2to3.html) as the starting point. It works very well for most files, and even for those files that require manual interaction, it paves most of the way.
 
 
-## Code storage, versioning, and changelogs.
+## Code storage, versioning, and change logs.
 
 All code must be version controlled using [git](https://git-scm.com/). Older code, still under the SVN repository, can be maintained using Subversion until it has been ported to Git.
 
@@ -103,7 +103,7 @@ For docstrings, follow [PEP257](https://www.python.org/dev/peps/pep-0257/). In o
 
 ### Readthedocs
 
-## TODO:
+## TODO / Questions
 
 - Licensing: should SDSS adopt a default license?
 - Should we keep the python directory?
@@ -118,3 +118,4 @@ For docstrings, follow [PEP257](https://www.python.org/dev/peps/pep-0257/). In o
 - File headers: should we agree on a template?
 - Travis configuration file.
 - Zenodo
+- test directory at the top level?
