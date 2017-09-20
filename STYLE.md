@@ -52,7 +52,7 @@ Some resources that can be useful to write code that is Python 2 and 3-compatibl
 - When converting code from Python 2 to 3, consider using [2to3](https://docs.python.org/2/library/2to3.html) as the starting point. It works very well for most files, and even for those files that require manual interaction, it paves most of the way.
 
 
-## Code storage and ownership.
+## Code storage and ownership
 
 All code must be version controlled using [git](https://git-scm.com/). Older code, still under the SVN repository, can be maintained using Subversion until it has been ported to Git.
 
@@ -61,7 +61,7 @@ All code must live in the [SDSS GitHub organisation](https://www.github.com/sdss
 All code must have *at least* one owner, who is ultimately responsible for keeping the code working and making editorial decisions. Owners can make decision on which code standards to follow (within the requirements listed in this document), such as maximum line length, linter, or testing framework. The owner(s) names should be obvious in the README of the repo and in the `setup.py` file.
 
 
-## Versioning and change logs.
+## Versioning and change logs
 
 Software versions should follow the convention `X.Y.Z` (e.g., `1.2.5`) where X indicates the major version (large, maybe non-backwards compatible changes), Y is for minor changes and additions (backwards compatible), and Z is for bug fixes (no added functionality). Suffixes to the version, such as `dev`, `alpha`, `beta`, are accepted. Do not use a hyphen between version and suffix (`1.2.5dev` is ok, `1.2.5-dev` is not).
 
