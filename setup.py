@@ -29,7 +29,7 @@ install_requires = [line.strip().replace('==', '>=') for line in open(requiremen
                     if not line.strip().startswith('#') and line.strip() != '']
 
 NAME = 'python_template'
-VERSION = '0.2.0dev'
+VERSION = '0.1.0'
 
 
 def run(packages):
