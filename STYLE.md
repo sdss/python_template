@@ -174,9 +174,9 @@ Working with Git and GitHub provides a series of extremely useful tools to write
 3. Once your branch is ready and well tested, and your are ready to integrate your changes, you have two options:
     1. If you are the owner of the repo and no other people are contributing code at the time (or your changes are **very** small and non-controversial) you can simple [merge](https://git-scm.com/docs/git-merge) the branch back into master and push it to the upstream repo.
     2. If several people are collaborating in a project, you *want* to create a [pull request](https://help.github.com/articles/about-pull-requests/) for that branch. The change can then be discussed, changes made and, when approved, you can merge the pull request.
-4. Rinse and repeat.
+4. GOTO 2
 
-You also may want to consider the possibility of using [forks](https://help.github.com/articles/fork-a-repo/) if you are planning on doing a large-scope change to the code.
+You may want to consider the possibility of using [forks](https://help.github.com/articles/fork-a-repo/) if you are planning on doing a large-scope change to the code.
 
 
 ## TODO / Questions
