@@ -97,7 +97,7 @@ It is beyond the scope of this document to summarise the PEP8 conventions, but h
 - No trailing spaces. You can configure your editor to strip the lines automatically for you.
 - Imports go on the top of the file. Do **not** import more than one package in the same line (`import os, sys`). Maintain the namespace, do **not** import all functions in a package (`from os import *`). You can import multiple functions from the same package at the same time (`from os.path import dirname, basename`).
 - Use single quotes for strings. Double quotes must be reserved for docstrings and string blocks.
-- For inline comments, at least two spaces between the statement and the beginning of the comment (`a = 1  # This is a comment about a`).
+- For inline comments, at least two spaces between the statement and the beginning of the comment (`a = 1­­  # This is a comment about a`).
 - Class names must be in camelcase (`class MyClass`). Function, method, and variable names should be all lowercase separated by underscores for legibility (`def a_function_that_does_something`, `my_variable = 1`). For the latter ones, PEP8 allows some flexibility. The general rule of thumb is to make your function, method, and variable names descriptive and readable (avoid multiple words in all lowercase). As such, if you prefer to use camelcase (`aFunctionThatDoesSomething`, `myVariable = 1`) for your project that is accepted, as long as you are consistent throughout the project. When modifying somebody else's code, stick to their naming decisions.
 - Use `is` for comparisons with `None`, `True`, or `False`: `if foo is not None:`.
 
