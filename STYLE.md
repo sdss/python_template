@@ -162,7 +162,7 @@ It is beyond the purpose of this document to explain how to use Sphinx, but [its
 
 ### Read the Docs
 
-Deploying your Sphinx documentation is critical. SDSS uses [Rad the Docs](https://readthedocs.org) to automatically build and deploy documentation. Read the Docs can be added as a plugin to your GitHub repo for continuous integration so that documentation is built on each commit. SDSS owns a Read the Docs account. Contact [XXX](mailto:me@email.com) to deploy your documentation there.
+Deploying your Sphinx documentation is critical. SDSS uses [Read the Docs](https://readthedocs.org) to automatically build and deploy documentation. Read the Docs can be added as a plugin to your GitHub repo for continuous integration so that documentation is built on each commit. SDSS owns a Read the Docs account. Contact [XXX](mailto:me@email.com) to deploy your documentation there.
 
 
 ## Git workflow
