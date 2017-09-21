@@ -112,7 +112,7 @@ For docstrings, follow [PEP257](https://www.python.org/dev/peps/pep-0257/). In o
 - A complete docstring should start with a single line describing the general purpose of the function or class. Then a blank line and and in-depth description of the function or class in one or more paragraphs. A list of the input parameters (arguments and keywords) follows, and a description of the values returned, if any. If the class or function merits it, you should include an example of use.
 - The docstring for the `__init__()` method in a class goes just after the declaration of the class and it explains the general use for the class, in addition to the list of parameters accepted by `__init__()`.
 - Private methods and functions (those that start with an underscore) may not have a docstring **only** if their purpose is really obvious.
-- In general, we prefer [Numpy style](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html#example-numpy) docstrings over [Google style](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google) docstrings, but you are free to choose one as long as you stick with it across all the product. Avoid styles such as `param path: The path of the file to wrap` which are difficult to read.
+- In general, we prefer [Google style](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google) docstrings over [Numpy style](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html#example-numpy) ones, but you are free to choose one as long as you stick with it across all the product. Avoid styles such as `param path: The path of the file to wrap` which are difficult to read.
 
 ### Linters
 
