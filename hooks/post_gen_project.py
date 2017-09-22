@@ -19,20 +19,26 @@ except ImportError as e:
 REPONAME = '{{ cookiecutter.repo_name }}'
 PKGNAME = '{{ cookiecutter.package_name }}'
 
-ROOTDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
+CURRENTDIR = os.path.abspath(os.curdir)
+PYTHONDIR = os.path.join(CURRENTDIR, 'python')
 
 
 @invoke.task
 def install(ctx):
     ''' Cleans and installs the new repo '''
 
-    pkgdir = os.path.join(ROOTDIR, REPONAME)
-    os.chdir(pkgdir)
+    os.chdir(CURRENTDIR)
     print('Installing {0}'.format(PKGNAME))
     ctx.run("python setup.py clean")
-    ctx.run("sudo python setup.py install")
-    os.chdir(ROOTDIR)
+    ctx.run("python setup.py install")
 
 
-if invoke:
-    invoke.tasks.Call(install)
+pyinstall = '{{ cookiecutter.install_package_at_end }}'
+if pyinstall in ['yes', 'y']:
+    if invoke:
+        col = invoke.Collection(install)
+        ex = invoke.executor.Executor(col)
+        ex.execute('install')
+else:
+    print('Please add {0} into your PYTHONPATH!'.format(PYTHONDIR))
+
