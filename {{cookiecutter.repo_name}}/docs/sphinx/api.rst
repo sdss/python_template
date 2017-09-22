@@ -1,4 +1,4 @@
-python_template Reference
+{{cookiecutter.package_title}} Reference
 =========================
 
 .. _api-main:
@@ -6,7 +6,7 @@ python_template Reference
 Main
 ----
 
-.. automodule:: python_template.main
+.. automodule:: {{cookiecutter.package_name}}.main
    :members:
    :undoc-members:
    :show-inheritance:
