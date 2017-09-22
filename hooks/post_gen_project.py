@@ -43,8 +43,10 @@ def addgit(ctx):
     ctx.run("git init .")
     ctx.run("git add .")
     ctx.run("git commit -m 'Initial skeleton.'")
-    ctx.run("git remote add origin git@github.com:{0}/{1}.git".format(GITUSER, REPONAME))
-    ctx.run("git push -u origin master")
+    addgithub = '{{cookiecutter.add_to_github}}'
+    if addgithub in ['yes', 'y']:
+        ctx.run("git remote add origin git@github.com:{0}/{1}.git".format(GITUSER, REPONAME))
+        ctx.run("git push -u origin master")
 
 
 if invoke:
@@ -64,8 +66,8 @@ else:
 
 
 # setup intial git repo
-addgit = '{{ cookiecutter.add_to_github }}'
-if addgit in ['yes', 'y']:
+creategit = '{{ cookiecutter.create_git_repo }}'
+if creategit in ['yes', 'y']:
     if invoke:
         ex.execute('addgit')
     else:

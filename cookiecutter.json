@@ -9,6 +9,7 @@
     "year": "2017",
     "short_description": "Simple Template package for creating SDSS Python projects",
     "install_package_at_end": "yes",
+    "create_git_repo": "yes",
     "add_to_github": "no"
 }
 
