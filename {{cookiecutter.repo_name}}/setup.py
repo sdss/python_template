@@ -28,9 +28,9 @@ requirements_file = os.path.join(os.path.dirname(__file__), 'requirements.txt')
 install_requires = [line.strip().replace('==', '>=') for line in open(requirements_file)
                     if not line.strip().startswith('#') and line.strip() != '']
 
-NAME = 'python_template'
-VERSION = '0.1.0'
-
+NAME = '{{cookiecutter.package_name}}'
+VERSION = '{{cookiecutter.version}}'
+RELEASE = 'dev' in VERSION
 
 def run(packages):
 
@@ -39,10 +39,10 @@ def run(packages):
           license='BSD3',
           description='Description of your project.',
           long_description=convert_md_to_rst('README.md'),
-          author='Your name here',
-          author_email='address@email.com',
+          author='{{cookiecutter.full_name}}',
+          author_email='{{cookiecutter.email}}',
           keywords='astronomy software',
-          url='https://github.com/sdss',
+          url='https://github.com/{{cookiecutter.github_username}}',
           include_package_data=True,
           packages=packages,
           # install_requires=install_requires,
