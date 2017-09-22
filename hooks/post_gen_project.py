@@ -46,7 +46,11 @@ def addgit(ctx):
     addgithub = '{{cookiecutter.add_to_github}}'
     if addgithub in ['yes', 'y']:
         ctx.run("git remote add origin git@github.com:{0}/{1}.git".format(GITUSER, REPONAME))
-        ctx.run("git push -u origin master")
+        try:
+            print('Pushing to github ..')
+            ctx.run("git push -u origin master")
+        except Exception as e:
+            print('Could not push to github.  ERROR: Repository not found.')
 
 
 if invoke:
