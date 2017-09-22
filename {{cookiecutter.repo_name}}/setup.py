@@ -42,7 +42,7 @@ def run(packages):
           author='{{cookiecutter.full_name}}',
           author_email='{{cookiecutter.email}}',
           keywords='astronomy software',
-          url='https://github.com/{{cookiecutter.github_username}}',
+          url='https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.repo_name}}',
           include_package_data=True,
           packages=packages,
           # install_requires=install_requires,

@@ -8,6 +8,7 @@
     "version": "0.1.0",
     "year": "2017",
     "short_description": "Simple Template package for creating SDSS Python projects",
-    "install_package_at_end": "yes"
+    "install_package_at_end": "yes",
+    "add_to_github": "no"
 }
 

@@ -16,6 +16,7 @@ except ImportError as e:
 #
 #
 
+GITUSER = '{{ cookiecutter.github_username }}'
 REPONAME = '{{ cookiecutter.repo_name }}'
 PKGNAME = '{{ cookiecutter.package_name }}'
 
@@ -33,12 +34,43 @@ def install(ctx):
     ctx.run("python setup.py install")
 
 
+@invoke.task
+def addgit(ctx):
+    ''' Cleans and installs the new repo '''
+
+    os.chdir(CURRENTDIR)
+    print('Initializing git repo {0}'.format(REPONAME))
+    ctx.run("git init .")
+    ctx.run("git add .")
+    ctx.run("git commit -m 'Initial skeleton.'")
+    ctx.run("git remote add origin git@github.com:{0}/{1}.git".format(GITUSER, REPONAME))
+    ctx.run("git push -u origin master")
+
+
+if invoke:
+    col = invoke.Collection(install, addgit)
+    ex = invoke.executor.Executor(col)
+
+
+# run python setup.py install or not
 pyinstall = '{{ cookiecutter.install_package_at_end }}'
 if pyinstall in ['yes', 'y']:
     if invoke:
-        col = invoke.Collection(install)
-        ex = invoke.executor.Executor(col)
         ex.execute('install')
+    else:
+        print('Invoke not installed.  Please run "python setup.py install" manually.')
 else:
     print('Please add {0} into your PYTHONPATH!'.format(PYTHONDIR))
+
+
+# setup intial git repo
+addgit = '{{ cookiecutter.add_to_github }}'
+if addgit in ['yes', 'y']:
+    if invoke:
+        ex.execute('addgit')
+    else:
+        print('Invoke not installed.  Please setup the git repo manually.')
+
+
+
 
