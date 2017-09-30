@@ -194,3 +194,7 @@ You may want to consider the possibility of using [forks](https://help.github.co
 - reStructured vs markdown.
 - Cookiecutter
 - CLI: argparse vs click vs invoke?
+- Use inline docstring for attributes or section in header docstring?
+- Add rst files in template for changelog and config.
+- Use click CSS.
+- Set default_directive
