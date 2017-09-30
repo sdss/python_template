@@ -178,6 +178,10 @@ Working with Git and GitHub provides a series of extremely useful tools to write
 
 You may want to consider the possibility of using [forks](https://help.github.com/articles/fork-a-repo/) if you are planning on doing a large-scope change to the code.
 
+## Further reading
+
+- Python's own [documentation style guide](https://docs.python.org/devguide/documenting.html) is a good resource to learn to write good documentation.
+
 
 ## TODO / Questions
 
