@@ -14,10 +14,11 @@
 # the second line if needed, but most products should
 # leave this alone.
 #
-proc ModulesHelp {{ }} {{
+proc ModulesHelp {{"{{ }} {{"}}
     global product version
-    puts stderr "This module adds $product/$version to your environment."
-}}
+    puts stderr {{'This module adds $product/$version to your environment.'}}
+
+{{"}}"}}
 #
 # These variables are used below.  The product variable should be set to
 # the name of the product and never changed.  The version variable will
@@ -27,13 +28,13 @@ proc ModulesHelp {{ }} {{
 #
 set product {name}
 set version {version}
-conflict $product
+# conflict $product
 #
 # The line below is another part of the Modules help system.  You can
 # modify the part in quotes if you really need to, but most products should
 # leave this alone.
 #
-module-whatis "Sets up $product/$version in your environment."
+module-whatis {{"Sets up $product/$version in your environment."}}
 #
 # DEPENDENCIES SECTION
 #
@@ -42,8 +43,9 @@ module-whatis "Sets up $product/$version in your environment."
 # A mandatory dependency is a module load command followed by a prereq
 # command.  An optional dependency is not followed by a prereq statement.
 #
-# module load module
-# prereq module
+
+
+
 #
 # ENVIRONMENT SECTION
 #
@@ -70,3 +72,6 @@ setenv [string toupper $product]_DIR $PRODUCT_DIR
 #
 # Add any non-standard Module code below this point.
 #
+
+
+

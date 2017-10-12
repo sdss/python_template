@@ -18,7 +18,7 @@ from pygments.formatters import TerminalFormatter
 from .misc.color_print import color_text
 
 
-NAME = 'python_template'
+NAME = '{{cookiecutter.package_name}}'
 
 # Loads config
 config = yaml.load(open(os.path.dirname(__file__) + '/../../etc/{0}.cfg'.format(NAME)))
@@ -48,4 +48,4 @@ def custom_except_hook(type, value, tb):
     sys.stderr.write(highlight(tbtext, lexer, formatter))
 
 
-__version__ = '0.1.0'
+__version__ = '{{cookiecutter.version}}'

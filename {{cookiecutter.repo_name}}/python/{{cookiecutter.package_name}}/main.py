@@ -35,7 +35,7 @@ def math(arg1, arg2, arith_operator='+'):
 
     Example:
       >>> math(2, 2, arith_operator='*')
-      4
+      >>> 4
 
     """
 

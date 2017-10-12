@@ -10,7 +10,7 @@ from __future__ import absolute_import
 
 from pytest import mark
 
-from python_template.main import math
+from {{cookiecutter.package_name}}.main import math
 
 
 class TestMath(object):

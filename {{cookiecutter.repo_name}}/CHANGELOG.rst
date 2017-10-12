@@ -1,4 +1,4 @@
-.. _python_template-changelog:
+.. _{{cookiecutter.package_name}}-changelog:
 
 ==========
 Change Log

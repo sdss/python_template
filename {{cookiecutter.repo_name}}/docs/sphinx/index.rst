@@ -1,9 +1,11 @@
 
 ===============================
-Welcome to python_template's documentation!
+Welcome to {{cookiecutter.package_title}}'s documentation!
 ===============================
 
-- :ref:`What's new in 0.1.0? <python_template-changelog>`
+This is the Sphinx documentation for the Python product {{cookiecutter.package_name}}
+
+- :ref:`What's new in {{cookiecutter.version}}? <{{cookiecutter.package_name}}-changelog>`
 
 A description of the package can go here.
 
