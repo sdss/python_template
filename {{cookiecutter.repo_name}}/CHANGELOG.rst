@@ -4,10 +4,10 @@
 Change Log
 ==========
 
-This document records the main changes to the python_templates code.
+This document records the main changes to the {{cookiecutter.package_name}} code.
 
 .. _changelog-0.1.0:
-0.1.0 (2017-10-01)
+0.1.0 (unreleased)
 ------------------
 
 Added

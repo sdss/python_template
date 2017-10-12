@@ -10,4 +10,3 @@
 
 This README describes the {{cookiecutter.package_name}} Python package.  It should include things like a general description, installation
 instructions, and requirements.  It should also include information badges for other services or packages used, e.g., Travis-CI and Coveralls, ReadtheDocs, Astropy, etc.
-
