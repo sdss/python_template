@@ -56,6 +56,3 @@ Before you start writing your code, make sure to read and digest the [SDSS codin
 - reStructured vs markdown. Should we adopt rst for readmes and style?
 - CLI: argparse vs click vs invoke?
 - Use inline docstring for attributes or section in header docstring?
-- Add rst files in template for changelog and config.
-- Use click CSS.
-- Set default_directive
