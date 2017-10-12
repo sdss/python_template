@@ -6,10 +6,7 @@
 
 from __future__ import print_function, division, absolute_import
 import os
-try:
-    import invoke
-except ImportError as e:
-    invoke = None
+import invoke
 
 #
 # This script runs after the cookiecutter template has been installed
@@ -53,18 +50,14 @@ def addgit(ctx):
             print('Could not push to github.  ERROR: Repository not found.')
 
 
-if invoke:
-    col = invoke.Collection(install, addgit)
-    ex = invoke.executor.Executor(col)
+col = invoke.Collection(install, addgit)
+ex = invoke.executor.Executor(col)
 
 
 # run python setup.py install or not
 pyinstall = '{{ cookiecutter.install_package_at_end }}'
 if pyinstall in ['yes', 'y']:
-    if invoke:
-        ex.execute('install')
-    else:
-        print('Invoke not installed.  Please run "python setup.py install" manually.')
+    ex.execute('install')
 else:
     print('Please add {0} into your PYTHONPATH!'.format(PYTHONDIR))
 
@@ -72,11 +65,4 @@ else:
 # setup intial git repo
 creategit = '{{ cookiecutter.create_git_repo }}'
 if creategit in ['yes', 'y']:
-    if invoke:
-        ex.execute('addgit')
-    else:
-        print('Invoke not installed.  Please setup the git repo manually.')
-
-
-
-
+    ex.execute('addgit')
