@@ -33,6 +33,14 @@ def build_docs(ctx):
 
 
 @task
+def show_docs(ctx):
+    """Shows the Sphinx docs"""
+    print('Showing the docs')
+    os.chdir('docs/sphinx/_build/html')
+    ctx.run('open ./index.html')
+
+
+@task
 def clean(ctx):
     ''' Cleans up the crap before a Pip build '''
     print('Cleaning')
@@ -56,6 +64,5 @@ ns = Collection(clean, deploy)
 docs = Collection('docs')
 docs.add_task(build_docs, 'build')
 docs.add_task(clean_docs, 'clean')
+docs.add_task(show_docs, 'show')
 ns.add_collection(docs)
-
-
