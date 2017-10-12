@@ -122,6 +122,28 @@ While `pylint` is a more fully fleshed library, and provides estimates on code c
 
 Do update the `.flake8` or `.pylintrc` files in your project with the specific configuration you want to use in for that product. That is critical for other people to contribute to the code while keeping your coding style choices.
 
+### File headers
+
+Include a header in each Python file describing the author, license, etc. We suggest
+
+```python
+#!/usr/bin/env python
+# encoding: utf-8
+#
+# @Author:
+# @Date:
+# @Filename:
+# @License:
+# @Copyright:
+
+
+from __future__ import division
+from __future__ import print_function
+from __future__ import absolute_import
+```
+
+In general, do not include comments about when you last modified the file. Instead, use the [changelog](./CHANGELOG.rst) and atomic git commits.
+
 ### General advice
 
 - Blank lines take only one byte; there is no reason for you not to use them frequently and improve legibility.
@@ -181,24 +203,3 @@ You may want to consider the possibility of using [forks](https://help.github.co
 ## Further reading
 
 - Python's own [documentation style guide](https://docs.python.org/devguide/documenting.html) is a good resource to learn to write good documentation.
-
-
-## TODO / Questions
-
-- Section on how to use this template?
-- Licensing: should SDSS adopt a default license?
-- Should we keep the python directory?
-- Tox
-- Bibliography / tutorials.
-- File headers: should we agree on a template?
-- Travis configuration file.
-- Zenodo
-- test directory at the top level?
-- Add a template logging system.
-- reStructured vs markdown.
-- Cookiecutter
-- CLI: argparse vs click vs invoke?
-- Use inline docstring for attributes or section in header docstring?
-- Add rst files in template for changelog and config.
-- Use click CSS.
-- Set default_directive
