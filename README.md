@@ -43,3 +43,19 @@ Now edit as one normally does.  To test the cookiecutter package locally, run:
 ## Coding standards
 
 Before you start writing your code, make sure to read and digest the [SDSS coding standards](./STYLE.md).
+
+## TODO / Questions
+
+- Licensing: should SDSS adopt a default license?
+- Should we keep the python directory?
+- Tox
+- Bibliography / tutorials.
+- Travis configuration file.
+- Zenodo
+- test directory at the top level?
+- reStructured vs markdown. Should we adopt rst for readmes and style?
+- CLI: argparse vs click vs invoke?
+- Use inline docstring for attributes or section in header docstring?
+- Add rst files in template for changelog and config.
+- Use click CSS.
+- Set default_directive
