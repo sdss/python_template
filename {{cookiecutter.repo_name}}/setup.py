@@ -32,6 +32,7 @@ NAME = '{{cookiecutter.package_name}}'
 VERSION = '{{cookiecutter.version}}'
 RELEASE = 'dev' in VERSION
 
+
 def run(packages):
 
     setup(name=NAME,
