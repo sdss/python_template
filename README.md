@@ -1,6 +1,6 @@
 # cookiecutter-python
 
-This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for creating Python packages that adhere to the SDSS standard.
+This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for creating Python packages that adhere to the [SDSS standard](./STYLE.md).
 
 ## Installation
 
