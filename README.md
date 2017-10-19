@@ -1,6 +1,6 @@
 # cookiecutter-python
 
-This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for creating Python packages that adhere to the [SDSS standard](./\{\{cookiecutter.package\}\}/STYLE.md).
+This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for creating Python packages that adhere to the [SDSS standard](./\{\{cookiecutter.repo_name\}\}/STYLE.md).
 
 ## Installation
 
@@ -42,7 +42,7 @@ Now edit as one normally does.  To test the cookiecutter package locally, run:
 
 ## Coding standards
 
-Before you start writing your code, make sure to read and digest the [SDSS coding standards](./\{\{cookiecutter.package\}\}/STYLE.md).
+Before you start writing your code, make sure to read and digest the [SDSS coding standards](./\{\{cookiecutter.repo_name\}\}/STYLE.md).
 
 ## TODO / Questions
 
