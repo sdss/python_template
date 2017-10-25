@@ -7,6 +7,7 @@
 from __future__ import print_function, division, absolute_import
 import os
 import invoke
+from invoke.exceptions import UnexpectedExit
 
 #
 # This script runs after the cookiecutter template has been installed
@@ -28,7 +29,14 @@ def install(ctx):
     os.chdir(CURRENTDIR)
     print('Installing {0}'.format(PKGNAME))
     ctx.run("python setup.py clean")
-    ctx.run("python setup.py install")
+    try:
+        ctx.run("python -d setup.py install", hide='both')
+    except UnexpectedExit as e:
+        print('Unexpected failure during install:\n {0}'.format(e.result.stderr))
+        permden = '[Errno 13] Permission denied' in e.result.stderr
+        if permden:
+            print('Permission denied during install.  Trying again with sudo')
+            ctx.run('sudo python -d setup.py install')
 
 
 @invoke.task

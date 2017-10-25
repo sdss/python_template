@@ -6,7 +6,7 @@
 # @Author: Brian Cherinka
 # @Date:   2017-09-27 11:08:07
 # @Last modified by:   Brian Cherinka
-# @Last Modified time: 2017-09-27 11:20:46
+# @Last Modified time: 2017-10-25 11:22:49
 
 from __future__ import print_function, division, absolute_import
 import os
@@ -32,7 +32,7 @@ def build_docs(ctx):
     ctx.run("make html")
 
 
-@task
+@task(build_docs)
 def show_docs(ctx):
     """Shows the Sphinx docs"""
     print('Showing the docs')

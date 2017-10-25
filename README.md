@@ -45,7 +45,7 @@ It is good practice to test install the package locally before you commit any ch
 * Pytest Testing Framework
 * Tox for Multiple Python Environment Testing
 * Improved Logging
-* Versioning with BumpVersion
+* [Versioning with BumpVersion](https://github.com/peritus/bumpversion)
 * Continuous Integration with Travis
 * Code Coverage with Coveralls
 * Module File
