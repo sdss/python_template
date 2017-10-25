@@ -11,17 +11,6 @@ from __future__ import absolute_import
 from setuptools import setup, find_packages
 
 import os
-import warnings
-
-
-def convert_md_to_rst(fp):
-    try:
-        import pypandoc
-        output = pypandoc.convert_file(fp, 'rst')
-        return output
-    except ImportError:
-        warnings.warn('cannot import pypandoc.', UserWarning)
-        return open(fp).read()
 
 
 requirements_file = os.path.join(os.path.dirname(__file__), 'requirements.txt')
@@ -39,7 +28,7 @@ def run(packages):
           version=VERSION,
           license='BSD3',
           description='Description of your project.',
-          long_description=convert_md_to_rst('README.md'),
+          long_description=open('README.rst').read,
           author='{{cookiecutter.full_name}}',
           author_email='{{cookiecutter.email}}',
           keywords='astronomy software',
