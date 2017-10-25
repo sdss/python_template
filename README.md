@@ -57,7 +57,6 @@ Before you start writing your code, make sure to read and digest the [SDSS codin
 
 ## TODO / Questions
 
-- Licensing: should SDSS adopt a default license?
 - Should we keep the python directory?
 - Tox
 - Bibliography / tutorials.
