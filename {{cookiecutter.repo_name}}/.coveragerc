@@ -1,0 +1,8 @@
+[run]
+branch = true
+
+[report]
+omit =
+    python/{{cookiecutter.package_name}}/etc/*
+    python/{{cookiecutter.package_name}}/misc/*
+    python/{{cookiecutter.package_name}}/test/*
