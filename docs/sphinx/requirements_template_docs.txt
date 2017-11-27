@@ -1,0 +1,2 @@
+sphinx_bootstrap_theme>=0.4.12
+ipython>=5.0.0
