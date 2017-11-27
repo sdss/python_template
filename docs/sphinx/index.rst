@@ -54,7 +54,7 @@ This will increase your version from ``X.Y.Z`` to ``X.Y.(Z+1)dev0`` (e.g., ``1.2
 
     bumpversion release
 
-to remove the ``dev`` suffix. You can also do ``bumpversion bugfix release`` to release a new bugfix version without passign through the ``dev`` step.
+to remove the ``dev`` suffix. You can also do ``bumpversion bugfix release`` to release a new bugfix version without passing through the ``dev`` step.
 
 .. Indices and tables
 .. ==================
