@@ -48,13 +48,19 @@ Bumping a version
 
 The python template you cookiecut uses `bumpversion <https://github.com/peritus/bumpversion>`_ to increase the version of your product. The bumpversion configuration is defined in the `.bumpversion.cfg <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/.bumpversion.cfg>`_ file in your new product. You should read the bumpversion documentation for details, but usually your workflow will be as follows: once you are ready to start working on a new version do ::
 
-    bumpversion bugfix
+    bumpversion patch
 
-This will increase your version from ``X.Y.Z`` to ``X.Y.(Z+1)dev0`` (e.g., ``1.2.3`` to ``1.2.4dev0``) everywhere in your product and commit the changes. You can alternatively do ``bumpversion minor`` or ``bumpversion major`` to change the minor or major version. Once you are ready to release the version, do ::
+This will increase your version from ``X.Y.Z`` to ``X.Y.(Z+1)dev`` (e.g., ``1.2.3`` to ``1.2.4dev``) everywhere in your product and commit the changes. You can alternatively do ``bumpversion minor`` or ``bumpversion major`` to change the minor or major version. Once you are ready to release the version, do ::
 
     bumpversion release
 
-to remove the ``dev`` suffix. You can also do ``bumpversion bugfix release`` to release a new bugfix version without passing through the ``dev`` step.
+to remove the ``dev`` suffix. You can also do ``bumpversion patch release`` to release a new patch version without passing through the ``dev`` step.
+
+
+Connecting your product to Travis
+---------------------------------
+
+The template includes a basic configuration for `Travis CI <https://travis-ci.org/>`_ and `Coveralls <https://coveralls.io/>`. The configuration is defined in the ``
 
 .. Indices and tables
 .. ==================
