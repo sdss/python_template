@@ -3,4 +3,4 @@
 Coding Standards
 ================
 
-The coding standards go here.
+.. include:: ../../STYLE.rst
