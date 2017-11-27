@@ -42,6 +42,20 @@ If you did not setup GitHub during the cookiecutter installation, no worries. Cr
 
 in your local product.
 
+
+Bumping a version
+-----------------
+
+The python template you cookiecut uses `bumpversion <https://github.com/peritus/bumpversion>`_ to increase the version of your product. The bumpversion configuration is defined in the `.bumpversion.cfg <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/.bumpversion.cfg>`_ file in your new product. You should read the bumpversion documentation for details, but usually your workflow will be as follows: once you are ready to start working on a new version do ::
+
+    bumpversion bugfix
+
+This will increase your version from ``X.Y.Z`` to ``X.Y.(Z+1)dev0`` (e.g., ``1.2.3`` to ``1.2.4dev0``) everywhere in your product and commit the changes. You can alternatively do ``bumpversion minor`` or ``bumpversion major`` to change the minor or major version. Once you are ready to release the version, do ::
+
+    bumpversion release
+
+to remove the ``dev`` suffix. You can also do ``bumpversion bugfix release`` to release a new bugfix version without passign through the ``dev`` step.
+
 .. Indices and tables
 .. ==================
 ..
