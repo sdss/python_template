@@ -82,3 +82,17 @@ The product configuration for Read The Docs can be found in `readthedocs.yml <ht
 
 Using invoke
 ------------
+
+The product includes several macros to automate frequent tasks using `invoke <http://www.pyinvoke.org/>`_. To get a list of all the available tasks, from the root of your cookiecut project, do ::
+
+    invoke -l
+
+The documentation can be compiled by doing ``invoke docs.build`` and then shown in your browser with ``invoke docs.show``. Another useful macro, ``invoke deploy``, automates the process of deploying a new version by creating new distribution packages and uploading them to PyPI (see deploying_).
+
+You can add new tasks to the `tasks.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/tasks.py>`_ file.
+
+
+.. _deploying:
+
+Deploying your product
+----------------------
