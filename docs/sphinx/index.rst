@@ -5,6 +5,11 @@ Welcome to SDSS Python Template documentation!
 
 This page describes the `SDSS Python Template <https://github.com/sdss/python_template>`_ as well as the :doc:`coding standards <standards>`.
 
+Screencast
+----------
+
+**[A screencast showing how to use the cookiecut product]**
+
 User Installation
 -----------------
 
@@ -64,8 +69,27 @@ The template includes a basic setup for `Travis CI <https://travis-ci.org/>`_ an
 
 Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`_ account and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same thing for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
 
-**[Is this complete? Add more details]**
+**[Is this correct? Add more details]**
 
+
+Connecting your product to Read The Docs
+----------------------------------------
+
+The cookiecut product documentation is ready to be built and integrated with Read The Docs. As with Travis and Coveralls above, you will need to commit the products to a GitHub repository first. SDSS has a `Read The Docs <http://readthedocs.io/>`_ account that is the preferred place to integrate the documentation. If you have access to the account, just go there and add the repository. Probably you will receive a message saying that the integration of the product is not complete and that you need to set up a webhook. To do that, got to the admin setting of the new Read The Docs project. In ``Intergations`` add a new integration and copy the link to the webhook. Then go to the GitHub repository settings and in the ``Webhooks`` section add a new webhook with the URL you just copied. Once you submit, any push to the master branch of the GitHub repo should produce a new built of the documentation. You can find more details on the webhook set up `here <https://docs.readthedocs.io/en/latest/webhooks.html>`_.
+
+The product configuration for Read The Docs can be found in `readthedocs.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/readthedocs.yml>`_. By default, the Sphinx documentation will be built using Python 3.5 and using the requirements specified in `requirements_doc.txt <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/requirements_doc.txt>`_. You can change those settings easily.
+
+
+Using invoke
+------------
+
+The product includes several macros to automate frequent tasks using `invoke <http://www.pyinvoke.org/>`_. To get a list of all the available tasks, from the root of your cookiecut project, do ::
+
+    invoke -l
+
+The documentation can be compiled by doing ``invoke docs.build`` and then shown in your browser with ``invoke docs.show``. Another useful macro, ``invoke deploy``, automates the process of deploying a new version by creating new distribution packages and uploading them to PyPI (see deploying_).
+
+You can add new tasks to the `tasks.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/tasks.py>`_ file.
 
 
 How to build Sphinx Documentation
@@ -84,7 +108,6 @@ With make.  Inside your python package's `docs/sphinx/` directory, type::
 This will build your documetation, converting the rst files into html files.  The output html files live in the `sphinx/_build` subdirectory.  You can view your documentation locally by navigating to `sphinx/_build/html/index.html` from your local browser.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.
 
 
-
 How to modify this template
 ---------------------------
 
@@ -100,9 +123,8 @@ Now you have the development version of this template.  The two main components 
 Upon installation of the template by a user, the variables defined in the `cookiecutter.json` file, or by the user during install, get substituted into their respective reference places.
 
 
-.. Indices and tables
-.. ==================
-..
-.. * :ref:`genindex`
-.. .. * :ref:`modindex`
-.. * :ref:`search`
+.. _deploying:
+
+=======
+Deploying your product
+----------------------
