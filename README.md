@@ -41,9 +41,9 @@ It is good practice to test install the package locally before you commit any ch
 
 * Python 2/3 compatibility
 * Pip-ready product
-* Sphinx Documentation with ReadtheDocs hook
+* Sphinx Documentation with Read The Docs integration
 * Pytest Testing Framework
-* Tox for Multiple Python Environment Testing
+* Tox for Multiple Python Environment Testing (in a future versions)
 * Improved Logging
 * [Versioning with BumpVersion](https://github.com/peritus/bumpversion)
 * Continuous Integration with Travis
@@ -57,12 +57,12 @@ Before you start writing your code, make sure to read and digest the [SDSS codin
 
 ## TODO / Questions
 
-- Should we keep the python directory?
+- Should we keep the python directory? Note: we agreed on keeping the python directory for the template but not make it a SDSS requirement.
 - Tox
 - Bibliography / tutorials.
 - Travis configuration file.
-- Zenodo
-- test directory at the top level?
+- Zenodo. Note: Brian will write a section for the style guide.
+- test directory at the top level? Note: same as for the python directory.
 - reStructured vs markdown. Should we adopt rst for readmes and style?
 - CLI: argparse vs click vs invoke?
 - Use inline docstring for attributes or section in header docstring?
