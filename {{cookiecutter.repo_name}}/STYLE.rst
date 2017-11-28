@@ -44,6 +44,10 @@ Table of Contents
    -  `Read the Docs <#read-the-docs>`__
 
 -  `Git workflow <#git-workflow>`__
+-  `Software Citation <#software-citation>`__
+   - `Zenodo <#zenodo>`__
+   - `Astrophysical Source Code Library <#ascl>`__
+
 -  `TODO / Questions <#todo--questions>`__
 
 Python 2 vs Python 3: which one to choose?
@@ -481,6 +485,27 @@ version of a typical Git workflow you should follow:
 You may want to consider the possibility of using
 `forks <https://help.github.com/articles/fork-a-repo/>`__ if you are
 planning on doing a large-scope change to the code.
+
+Software Citation
+-----------------
+
+All software should be archived and citable in some way by anyone who uses it.  The AAS now has a
+policy for `software citation <http://journals.aas.org/policy/software.html>`_, that SDSS should adopt
+for all pieces of code it produces.  This policy should be adopted by internal SDSS collaborators
+as well as astronomers outside SDSS using SDSS software.
+
+Zenodo
+^^^^^^
+
+Zenodo allows you to generate a unique digital object identifier (DOI) for any piece of software code in a Github
+repository.  DOI's are citable snippets, and allow your software code to be identified by tools.  See `Making Your Code Citable <https://guides.github.com/activities/citable-code/>`_ for how to connect your Github repository to Zenodo.  Once your Github repo is connected to Zenodo, every new Github tag or release gets a new DOI from Zenodo.  Zenodo provides a citable formats for mutiple journals as well as export to a Bibtex file.  You can customize
+
+Astrophysical Source Code Library
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The `ASCL <http://ascl.net/>`_ is a registry of open-source astronomy software, indexed by the
+`SAO/NASA Astrophysics Data System <http://ads.harvard.edu/>`_ (ADS).  The process for submission
+to the ASCL is outlined `here <http://ascl.net/submissions>`_.
 
 Further reading
 ---------------
