@@ -32,7 +32,7 @@ During the installation, you will be asked a series of prompts to specify option
 Using the template
 ------------------
 
-Once cookiecut, the resulting directory is a totally functional, if very simple, Python package. It can be installed by running ``python setup.py install``. Alternatively, you can add the path to the template ``python`` directory to your ``$PYTHONPATH`` environment variable.
+Once cookiecutter, the resulting directory is a totally functional, if very simple, Python package.  If during the setup you told cookiecutter to install the new python package, then your new package should already be importable in python, and ready to use.  If you answered no, then it can be installed by running ``python setup.py install``. Alternatively, you can add the path to the template ``python`` directory to your ``$PYTHONPATH`` environment variable.
 
 If during the setup you told cookiecutter to connect the new product to GitHub, your git remote should already be set. You can confirm it by doing ``git remote -a``. You still need to create the GitHub repository. To do so, got to https://github.com/sdss/ (or any other organisation where you want to upload your code) and create a new repository with the name of the new product.
 
@@ -65,6 +65,40 @@ The template includes a basic setup for `Travis CI <https://travis-ci.org/>`_ an
 Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`_ account and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same thing for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
 
 **[Is this complete? Add more details]**
+
+
+
+How to build Sphinx Documentation
+---------------------------------
+
+This template includes `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ documentation, written using the `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ format.  The documentation is located inside your python package, in a `docs/sphinx/` directory.  You can build the existing Sphinx documentation in two ways:
+
+Using invoke::
+
+    invoke docs.build
+
+With make.  Inside your python package's `docs/sphinx/` directory, type::
+
+    make html
+
+This will build your documetation, converting the rst files into html files.  The output html files live in the `sphinx/_build` subdirectory.  You can view your documentation locally by navigating to `sphinx/_build/html/index.html` from your local browser.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.
+
+
+
+How to modify this template
+---------------------------
+
+To add content to or expand this template, you must first check out the main template product using git::
+
+    git clone https://github.com/sdss/python_template
+
+Now you have the development version of this template.  The two main components need are a `cookiecutter.json` file and a `{{cookiecutter.repo_name}}` directory.  Cookiecutter templates use the `Jinja2 <http://jinja.pocoo.org/docs/2.10/>`_ templating language to define variable substitution, using double bracket notation, e.g. `{{variable_name}}`.  All customizable content to be inserted by the user is defined using this notation.
+
+* **{{cookiecutter.repo_name}}**: the top-level directory defining the installed python package.  Everything below this directory belongs to the Python package that gets installed by the user.
+* **cookiecutter.json**: A JSON file containing a dictionary of key:value pairs of variables defined in the template, with their default values.  These keys are referenced throughout the template with `{{cookiecutter.key}}`.
+
+Upon installation of the template by a user, the variables defined in the `cookiecutter.json` file, or by the user during install, get substituted into their respective reference places.
+
 
 .. Indices and tables
 .. ==================
