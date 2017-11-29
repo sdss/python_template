@@ -23,9 +23,21 @@ What you get with this template
 Directory Contents
 ^^^^^^^^^^^^^^^^^^
 
-* **cextern**
-
-
+* **cextern**: The directory for placing C code to be compiled
+* **docs**: The directory for Sphinx documentation and other docu-related files
+* **etc**: The directory containing your SDSS modulefile and other etc
+* **python**: Your new python package directory
+* **CHANGELOG.rst**: A file documenting changes to your code, e.g. new features, fixed issues, or bug-fixes.
+* **README.rst**: A file describing your package.  This will be the main display on Github.
+* **STYLE.rst**: The SDSS style guide for best coding practices.
+* **LICENSE.md**: The open source license for your product.  DO NOT DELETE.
+* **setup.py**: The setup for your pip-deployable product.  Also used when installing manually with `python setup.py install`.
+* **tasks.py**: A list of all invoke tasks available.
+* **requirements[_xxx].txt**: These files list all Python packages that are dependencies for your product.  Needed by pip.
+* **readthedocs.yml**: The configuration file for Read The Docs.
+* **.travis.yml**:  The configuration file for Travis CI.
+* **.bumpversion.cfg**: The configuration file for Bumpversion.
+* **.coveragerc**: The configuration file for python code coverage and Coveralls.
 
 Creating a new product
 ----------------------
