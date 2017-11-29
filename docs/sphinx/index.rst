@@ -115,22 +115,20 @@ You can add new tasks to the `tasks.py <https://github.com/sdss/python_template/
 How to build Sphinx Documentation
 ---------------------------------
 
-This template includes `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ documentation, written using the `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ format.  The documentation is located inside your python package, in a `docs/sphinx/` directory.  You can build the existing Sphinx documentation in two ways:
+This template includes `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ documentation, written using the `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ format.  The documentation is located inside your python package, in a `docs/sphinx/` directory.  You can build the existing Sphinx documentation with::
 
 Using invoke::
 
     invoke docs.build
 
-With make.  Inside your python package's `docs/sphinx/` directory, type::
-
-    make html
-
-This will build your documetation, converting the rst files into html files.  The output html files live in the `sphinx/_build` subdirectory.  To both build and display the documentation, type::
+This will build your documentation, converting the rst files into html files.  The output html files live in the `sphinx/_build` subdirectory.  To both build and display the documentation, type::
 
     # builds and displays
     invoke docs.show
 
-The main page of your documentation lives at `sphinx/_build/html/index.html`.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.
+The main page of your documentation lives at `sphinx/_build/html/index.html`.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.  The manual alternative to running `invoke docs.build` is to use make.  Inside your python package's `docs/sphinx/` directory, type::
+
+    make html
 
 
 .. _rtd:
