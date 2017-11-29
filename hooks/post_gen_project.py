@@ -54,7 +54,7 @@ def addgit(ctx):
         print('Pushing to github ..')
         ctx.run("git push -u origin master")
     except Exception as e:
-        print('Could not push to github.  ERROR: Repository not found.')
+        print('Could not push to github.  ERROR: Repository not found.  Make sure to add the repo to your github account. ')
 
 
 col = invoke.Collection(install, addgit)

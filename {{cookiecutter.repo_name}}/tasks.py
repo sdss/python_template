@@ -6,7 +6,7 @@
 # @Author: Brian Cherinka
 # @Date:   2017-09-27 11:08:07
 # @Last modified by:   Brian Cherinka
-# @Last Modified time: 2017-10-25 11:22:49
+# @Last Modified time: 2017-11-29 00:08:57
 
 from __future__ import print_function, division, absolute_import
 import os
@@ -36,7 +36,7 @@ def build_docs(ctx):
 def show_docs(ctx):
     """Shows the Sphinx docs"""
     print('Showing the docs')
-    os.chdir('docs/sphinx/_build/html')
+    os.chdir('_build/html')
     ctx.run('open ./index.html')
 
 
