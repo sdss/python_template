@@ -19,7 +19,6 @@ To install and initialize the template:
 
     pip install invoke
     pip install cookiecutter
-    pip install bumpversion
     cookiecutter https://github.com/sdss/python_template.git
 
 or to optionally install a specific branch:
@@ -52,7 +51,11 @@ in your local product.
 Bumping a version
 -----------------
 
-The python template you cookiecut uses `bumpversion <https://github.com/peritus/bumpversion>`_ to increase the version of your product. The bumpversion configuration is defined in the `.bumpversion.cfg <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/.bumpversion.cfg>`_ file in your new product. You should read the bumpversion documentation for details, but usually your workflow will be as follows: once you are ready to start working on a new version do ::
+The python template you cookiecut uses `bumpversion <https://github.com/peritus/bumpversion>`_ to increase the version of your product. First, you need to install ``bumpversion`` by doing ::
+
+    pip install bumpversion
+
+The bumpversion configuration is defined in the `.bumpversion.cfg <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/.bumpversion.cfg>`_ file in your new product. You should read the bumpversion documentation for details, but usually your workflow will be as follows: once you are ready to start working on a new version do ::
 
     bumpversion patch
 
@@ -129,7 +132,7 @@ Upon installation of the template by a user, the variables defined in the `cooki
 Deploying your product
 ----------------------
 
-This section explains how to deploy a new version of your product to `PyPI <https://pypi.python.org/pypi>`_ so that it becomes `pip <https://pip.pypa.io/en/stable/>`_-installable. All SDSS products should be deployed to the SDSS dedicated PyPI account, access to which can be requested to XXX@sdss.org. First you will need to create a ``~/.pypirc`` file with the following content ::
+This section explains how to deploy a new version of your product to `PyPI <https://pypi.python.org/pypi>`_ so that it becomes `pip <https://pip.pypa.io/en/stable/>`_-installable. All SDSS products should be deployed to the SDSS dedicated PyPI account, access to which can be requested to **XXX@sdss.org**. First you will need to create a ``~/.pypirc`` file with the following content ::
 
     [distutils]
     index-servers=
@@ -140,4 +143,15 @@ This section explains how to deploy a new version of your product to `PyPI <http
     username = sdss
     password = [request this password]
 
-To deploy a new release,
+To deploy a new release you will need `twine <https://pypi.python.org/pypi/twine>`_. To install it ::
+
+    pip install twine
+
+Then, from the root of your product, run ::
+
+    invoke deploy
+
+which will create source and `wheel <https://pythonwheels.com/>`_ distributions of your package and upload them to PyPI. The command above is equivalent to running ::
+
+    python setup.py sdist bdist_wheel --universal
+    twine upload dist/*
