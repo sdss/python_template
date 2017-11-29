@@ -48,6 +48,20 @@ If you did not setup GitHub during the cookiecutter installation, no worries. Cr
 in your local product.
 
 
+What you get in this template
+-----------------------------
+
+* Python 2/3 compatibility
+* Pip-ready product
+* `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ Documentation with Read The Docs integration
+* Pytest Testing Framework
+* `Versioning with BumpVersion <https://github.com/peritus/bumpversion>`_
+* Continuous Integration with `Travis <https://travis-ci.org/>`_
+* Code Coverage with `Coveralls <https://coveralls.io/>`_
+* Module File
+* `Invoke <http://www.pyinvoke.org/>`_ for shell tasks
+
+
 Bumping a version
 -----------------
 

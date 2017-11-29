@@ -1,16 +1,14 @@
 {
     "full_name": "John Doe",
     "email": "myemail@here.com",
-    "github_username": "sdss",
+    "github_username": "",
     "repo_name": "python_template",
     "package_name": "mypython",
-    "package_title": "MyPython",
     "version": "0.1.0",
     "year": "2017",
     "short_description": "Simple Template package for creating SDSS Python projects",
-    "install_package_at_end": "no",
-    "create_git_repo": "yes",
-    "add_to_github": "no",
+    "install_package_at_end": ["yes", "no"],
+    "create_git_repo": ["yes", "no"],
     "_copy_without_render": [
         "*/_templates/*.html"
     ]

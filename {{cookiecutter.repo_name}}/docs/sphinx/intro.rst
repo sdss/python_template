@@ -1,4 +1,4 @@
-Introduction to {{cookiecutter.package_title}}
+Introduction to {{cookiecutter.package_name}}
 ===============================
 
 We should write an introduction here.

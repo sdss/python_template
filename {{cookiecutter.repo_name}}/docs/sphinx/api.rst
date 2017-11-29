@@ -1,4 +1,4 @@
-{{cookiecutter.package_title}} Reference
+{{cookiecutter.package_name}} Reference
 =========================
 
 .. _api-main:

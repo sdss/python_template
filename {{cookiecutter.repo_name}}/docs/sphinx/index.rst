@@ -1,9 +1,9 @@
 .. role:: header_no_toc
   :class: class_header_no_toc
 
-.. title:: Welcome to {{cookiecutter.package_title}}'s documentation!
+.. title:: Welcome to {{cookiecutter.package_name}}'s documentation!
 
-.. rubric:: :header_no_toc:`Welcome to {{cookiecutter.package_title}}'s documentation!`
+.. rubric:: :header_no_toc:`Welcome to {{cookiecutter.package_name}}'s documentation!`
 
 This is the Sphinx documentation for the Python product {{cookiecutter.package_name}}
 

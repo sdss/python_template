@@ -45,6 +45,7 @@ Table of Contents
 
 -  `Git workflow <#git-workflow>`__
 -  `Software Citation <#software-citation>`__
+
    - `Zenodo <#zenodo>`__
    - `Astrophysical Source Code Library <#ascl>`__
 
@@ -495,13 +496,13 @@ for all pieces of code it produces.  This policy should be adopted by internal S
 as well as astronomers outside SDSS using SDSS software.
 
 Zenodo
-^^^^^^
+~~~~~~
 
 Zenodo allows you to generate a unique digital object identifier (DOI) for any piece of software code in a Github
-repository.  DOI's are citable snippets, and allow your software code to be identified by tools.  See `Making Your Code Citable <https://guides.github.com/activities/citable-code/>`_ for how to connect your Github repository to Zenodo.  Once your Github repo is connected to Zenodo, every new Github tag or release gets a new DOI from Zenodo.  Zenodo provides a citable formats for mutiple journals as well as export to a Bibtex file.  You can customize
+repository.  DOI's are citable snippets, and allow your software code to be identified by tools.  See `Making Your Code Citable <https://guides.github.com/activities/citable-code/>`_ for how to connect your Github repository to Zenodo.  Once your Github repo is connected to Zenodo, every new Github tag or release gets a new DOI from Zenodo.  Zenodo provides a citable formats for mutiple journals as well as export to a Bibtex file.
 
 Astrophysical Source Code Library
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The `ASCL <http://ascl.net/>`_ is a registry of open-source astronomy software, indexed by the
 `SAO/NASA Astrophysics Data System <http://ads.harvard.edu/>`_ (ADS).  The process for submission
