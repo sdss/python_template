@@ -19,6 +19,7 @@ To install and initialize the template:
 
     pip install invoke
     pip install cookiecutter
+    pip install bumpversion
     cookiecutter https://github.com/sdss/python_template.git
 
 or to optionally install a specific branch:
@@ -99,17 +100,13 @@ This template includes `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ document
 
 Using invoke::
 
-    # builds the documentation
     invoke docs.build
 
-    # displays the documentation
-    invoke docs.show
-
-Manually with make.  Inside your python package's `docs/sphinx/` directory, type::
+With make.  Inside your python package's `docs/sphinx/` directory, type::
 
     make html
 
-This will build your documentation, converting the rst files into html files.  The output html files live in the `sphinx/_build` subdirectory.  You can view your documentation locally by navigating to `sphinx/_build/html/index.html` from your local browser.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.
+This will build your documetation, converting the rst files into html files.  The output html files live in the `sphinx/_build` subdirectory.  You can view your documentation locally by navigating to `sphinx/_build/html/index.html` from your local browser.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.
 
 
 How to modify this template
@@ -119,7 +116,7 @@ To add content to or expand this template, you must first check out the main tem
 
     git clone https://github.com/sdss/python_template
 
-Now you have the development version of this template.  The two main components need are a **cookiecutter.json** file and a **{{cookiecutter.repo_name}}** directory.  Cookiecutter templates use the `Jinja2 <http://jinja.pocoo.org/docs/2.10/>`_ templating language to define variable substitution, using double bracket notation, e.g. **{{variable_name}}**.  All customizable content to be inserted by the user is defined using this notation.
+Now you have the development version of this template.  The two main components need are a `cookiecutter.json` file and a `{{cookiecutter.repo_name}}` directory.  Cookiecutter templates use the `Jinja2 <http://jinja.pocoo.org/docs/2.10/>`_ templating language to define variable substitution, using double bracket notation, e.g. `{{variable_name}}`.  All customizable content to be inserted by the user is defined using this notation.
 
 * **{{cookiecutter.repo_name}}**: the top-level directory defining the installed python package.  Everything below this directory belongs to the Python package that gets installed by the user.
 * **cookiecutter.json**: A JSON file containing a dictionary of key:value pairs of variables defined in the template, with their default values.  These keys are referenced throughout the template with `{{cookiecutter.key}}`.
@@ -129,6 +126,18 @@ Upon installation of the template by a user, the variables defined in the `cooki
 
 .. _deploying:
 
-=======
 Deploying your product
 ----------------------
+
+This section explains how to deploy a new version of your product to `PyPI <https://pypi.python.org/pypi>`_ so that it becomes `pip <https://pip.pypa.io/en/stable/>`_-installable. All SDSS products should be deployed to the SDSS dedicated PyPI account, access to which can be requested to XXX@sdss.org. First you will need to create a ``~/.pypirc`` file with the following content ::
+
+    [distutils]
+    index-servers=
+    pypi
+
+    [pypi]
+    repository = https://pypi.python.org/pypi
+    username = sdss
+    password = [request this password]
+
+To deploy a new release,
