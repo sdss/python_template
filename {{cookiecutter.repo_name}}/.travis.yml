@@ -34,7 +34,7 @@ install:
 - python setup.py install
 
 script:
-- pytest python/{{cookiecutter.package_name}}/test --cov python/{{cookiecutter.package_name}} --cov-report html
+- pytest python/{{cookiecutter.package_name}}/tests --cov python/{{cookiecutter.package_name}} --cov-report html
 
 # branches:
 #   except:
