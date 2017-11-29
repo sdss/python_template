@@ -14,11 +14,6 @@ import os
 import argparse
 import sys
 
-
-# requirements_file = os.path.join(os.path.dirname(__file__), 'requirements.txt')
-# install_requires = [line.strip().replace('==', '>=') for line in open(requirements_file)
-#                     if not line.strip().startswith('#') and line.strip() != '']
-
 NAME = '{{cookiecutter.package_name}}'
 VERSION = '{{cookiecutter.version}}'
 RELEASE = 'dev' in VERSION
