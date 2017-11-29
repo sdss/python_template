@@ -7,6 +7,7 @@
     "year": "2017",
     "short_description": "Simple Template package for creating SDSS Python projects",
     "create_git_repo": ["yes", "no"],
+    "exists_on_github": ["no", "yes"],
     "github_username": "",
     "_copy_without_render": [
         "*/_templates/*.html"

@@ -49,23 +49,36 @@ def addgit(ctx):
     ctx.run("git add .")
     ctx.run("git commit -m 'Initial skeleton.'")
 
+
+@invoke.task
+def addremote(ctx):
+    ''' Adds a new remote to your git repo and pushes to Github '''
+
     if GITUSER:
-        ctx.run("git remote add origin git@github.com:{0}/{1}.git".format(GITUSER, REPONAME))
+        ctx.run("git remote add origin https://github.com:{0}/{1}.git".format(GITUSER, REPONAME))
         try:
             print('Pushing to github ..')
             ctx.run("git push -u origin master")
         except Exception as e:
             print('Could not push to github.  ERROR: Repository not found.  Make sure to add the repo to your github account. ')
+    else:
+        print('No GitHub username specified during setup')
 
 
-col = invoke.Collection(install, addgit)
+col = invoke.Collection(install, addgit, addremote)
 ex = invoke.executor.Executor(col)
-
-
-print('Please add {0} into your PYTHONPATH!'.format(PYTHONDIR))
 
 
 # setup intial git repo
 creategit = '{{ cookiecutter.create_git_repo }}'
 if creategit in ['yes', 'y']:
     ex.execute('addgit')
+
+# exists on Github?
+exists_github = '{{ cookiecutter.exists_on_github }}'
+if exists_github in ['yes', 'y']:
+    ex.execute('addremote')
+
+
+print('Please add {0} into your PYTHONPATH!'.format(PYTHONDIR))
+

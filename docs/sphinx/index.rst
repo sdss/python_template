@@ -50,20 +50,27 @@ To install and initialize a new product from the template run
     pip install cookiecutter
     cookiecutter https://github.com/sdss/python_template.git
 
-During the installation you will be asked a series of prompts to specify options and variable names, e.g. your name, the repository name, the package name (which can be identical to the repository name), etc. These definitions will be inserted into the package in designated places. The final prompt asks ::
+During the installation you will be asked a series of prompts to specify options and variable names, e.g. your name, the repository/folder name, the package name (which can be identical to the repository name), etc. These definitions will be inserted into the package in designated places.
 
-    * do you want to create a git repository out of your new package?
+The `create_git_repo` prompt ask ::
 
-If you answer ``yes``, the product will be initialised as a git repository. The new product can be installed in your system by running ``python setup.py install``. For development, however, it is usually better to add the product path to your ``PYTHONPATH``. In bash add the following line to your ``~/.bashrc`` (modify accordingly for csh or other shells) ::
+    do you want to create a git repository out of your new package?
 
-    export PYTHONPATH=/path/to/your/product/python:$PYTHONPATH
+If you answer ``yes``, the product will be initialised as a git repository.  The final prompts ask ::
 
-Once you are ready to push your product, create a GitHub repository (either at the `SDSS organisation <https://github.com/sdss>`_ or in your personal account) and copy the URL provided by GitHub. In the root of your local product run ::
+    did you already create a new repository on Github?
+    what is your Github username?
+
+If you answer ``yes``, and specify a name, a remote origin will be added to your new git repository and will be pushed to Github.  If not, `create a GitHub repository <https://help.github.com/articles/creating-a-new-repository/>`_ (either at the `SDSS organisation <https://github.com/sdss>`_ or in your personal account) and copy the URL provided by GitHub. In the root of your local product run ::
 
     git remote add origin GITHUB_URL
     git push
 
-Now now have a totally functional, if very simple, Python package connected to a GitHub repository. The following sections explain how to use the features included in the template and how to connect it with different online services. Before you continue, this may be a good time to read the :doc:`SDSS coding standards <standards>` and make sure your code complies with them.
+The new product can be installed in your system by running ``python setup.py install``. For development, however, it is usually better to add the product path to your ``PYTHONPATH``. In bash add the following line to your ``~/.bashrc`` (modify accordingly for csh or other shells) ::
+
+    export PYTHONPATH=/path/to/your/product/python:$PYTHONPATH
+
+Now you have a totally functional, if very simple, Python package connected to a GitHub repository. The following sections explain how to use the features included in the template and how to connect it with different online services. Before you continue, this may be a good time to read the :doc:`SDSS coding standards <standards>` and make sure your code complies with them.
 
 
 .. _bumpversion:
