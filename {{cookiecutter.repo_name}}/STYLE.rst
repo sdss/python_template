@@ -241,6 +241,8 @@ conventions, but here are some of the most salient points:
 -  Use ``is`` for comparisons with ``None``, ``True``, or ``False``:
    ``if foo is not None:``.
 
+.. _style-docstring:
+
 Docstrings
 ~~~~~~~~~~
 

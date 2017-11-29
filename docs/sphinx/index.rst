@@ -119,14 +119,25 @@ Using invoke::
 
     invoke docs.build
 
-This will build your documentation, converting the rst files into html files.  The output html files live in the `sphinx/_build` subdirectory.  To both build and display the documentation, type::
+Alternatively, navigate to your python package's `docs/sphinx/` directory and type::
+
+    make html
+
+This will build your documentation, converting the rst files into html files.  The output html files live in the `docs/sphinx/_build` subdirectory.  To both build and display the documentation, type::
 
     # builds and displays
     invoke docs.show
 
-The main page of your documentation lives at `sphinx/_build/html/index.html`.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.  The manual alternative to running `invoke docs.build` is to use make.  Inside your python package's `docs/sphinx/` directory, type::
+The main page of your documentation lives at `docs/sphinx/_build/html/index.html`.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.
 
-    make html
+The template includes an example on how to automatically document the docstrings in your code. In `docs/sphinx/api.rst` you'll see the lines ::
+
+    .. automodule:: mypython.main
+       :members:
+       :undoc-members:
+       :show-inheritance:
+
+You can add similar blocks of code for other modules. See the Sphinx `autodoc <http://www.sphinx-doc.org/en/stable/ext/autodoc.html>`_ for more details. The :ref:`coding standards <style-docstring>` include a section on how to write good docstrings to document your code.
 
 
 .. _rtd:
