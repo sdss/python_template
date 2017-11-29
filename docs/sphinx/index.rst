@@ -176,3 +176,5 @@ Now you have the development version of this template.  The two main components 
 * **cookiecutter.json**: A JSON file containing a dictionary of key:value pairs of variables defined in the template, with their default values.  These keys are referenced throughout the template with `{{cookiecutter.key}}`.
 
 Upon installation of the template by a user, the variables defined in the `cookiecutter.json` file, or by the user during install, get substituted into their respective reference places.
+
+Please, *do not* modify the master branch directly, unless otherwise instructed. Instead, develop your changes in a branch and, when ready to merge, create a pull request.
