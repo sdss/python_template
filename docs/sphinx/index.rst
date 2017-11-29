@@ -53,13 +53,16 @@ What you get in this template
 
 * Python 2/3 compatibility
 * Pip-ready product
-* `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ Documentation with Read The Docs integration
-* Pytest Testing Framework
+* `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ Documentation with `Read The Docs <http://readthedocs.io/>`_ integration
+* `Pytest <https://docs.pytest.org/en/latest/>`_ Testing Framework
 * `Versioning with BumpVersion <https://github.com/peritus/bumpversion>`_
 * Continuous Integration with `Travis <https://travis-ci.org/>`_
 * Code Coverage with `Coveralls <https://coveralls.io/>`_
-* Module File
 * `Invoke <http://www.pyinvoke.org/>`_ for shell tasks
+* Module File
+
+Directory Contents
+^^^^^^^^^^^^^^^^^^
 
 
 Bumping a version
@@ -123,7 +126,12 @@ With make.  Inside your python package's `docs/sphinx/` directory, type::
 
     make html
 
-This will build your documetation, converting the rst files into html files.  The output html files live in the `sphinx/_build` subdirectory.  You can view your documentation locally by navigating to `sphinx/_build/html/index.html` from your local browser.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.
+This will build your documetation, converting the rst files into html files.  The output html files live in the `sphinx/_build` subdirectory.  To both build and display the documentation, type::
+
+    # builds and displays
+    invoke docs.show
+
+The main page of your documentation lives at `sphinx/_build/html/index.html`.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.
 
 
 How to modify this template
