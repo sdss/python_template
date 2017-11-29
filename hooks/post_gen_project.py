@@ -61,12 +61,7 @@ col = invoke.Collection(install, addgit)
 ex = invoke.executor.Executor(col)
 
 
-# run python setup.py install or not
-pyinstall = '{{ cookiecutter.install_package_at_end }}'
-if pyinstall in ['yes', 'y']:
-    ex.execute('install')
-else:
-    print('Please add {0} into your PYTHONPATH!'.format(PYTHONDIR))
+print('Please add {0} into your PYTHONPATH!'.format(PYTHONDIR))
 
 
 # setup intial git repo
