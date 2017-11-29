@@ -2,6 +2,8 @@
 
 This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for creating Python packages that adhere to the [SDSS standard](./\{\{cookiecutter.repo_name\}\}/STYLE.md).
 
+The full documentation on how to use this template can be found [here](http://sdss-python-template.readthedocs.io/en/latest/).
+
 ## User Installation
 
 To install and initialize this template:
