@@ -25,7 +25,7 @@ def run(packages, install_requires):
           version=VERSION,
           license='BSD3',
           description='Description of your project.',
-          long_description=open('README.rst').read,
+          long_description=open('README.rst').read(),
           author='{{cookiecutter.full_name}}',
           author_email='{{cookiecutter.email}}',
           keywords='astronomy software',
@@ -78,12 +78,15 @@ def remove_args(parser):
         if arg in sys.argv:
             sys.argv.remove(arg)
 
+
 if __name__ == '__main__':
 
     # Custom parser to decide whether which requirements to install
     parser = argparse.ArgumentParser(prog=os.path.basename(sys.argv[0]))
-    parser.add_argument('-d', '--dev', dest='dev', default=False, action='store_true', help='Install all packages for development')
-    parser.add_argument('-o', '--doc', dest='doc', default=False, action='store_true', help='Install only core + documentation packages')
+    parser.add_argument('-d', '--dev', dest='dev', default=False, action='store_true',
+                        help='Install all packages for development')
+    parser.add_argument('-o', '--doc', dest='doc', default=False, action='store_true',
+                        help='Install only core + documentation packages')
 
     # We use parse_known_args because we want to leave the remaining args for distutils
     args = parser.parse_known_args()[0]
