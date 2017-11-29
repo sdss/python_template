@@ -93,9 +93,7 @@ Connecting your product to Travis
 
 The template includes a basic setup for `Travis CI <https://travis-ci.org/>`_ and `Coveralls <https://coveralls.io/>`_. The configuration is defined in the `.travis.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/.travis.yml>`_ and `.coveragerc <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/.coveragerc>`_ files.
 
-Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`_ account and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same thing for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
-
-**[Is this correct? Add more details]**
+Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`_ account (create one if you don't have it) and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
 
 
 .. _invoke:
@@ -188,3 +186,5 @@ Now you have the development version of this template.  The two main components 
 * **cookiecutter.json**: A JSON file containing a dictionary of key:value pairs of variables defined in the template, with their default values.  These keys are referenced throughout the template with `{{cookiecutter.key}}`.
 
 Upon installation of the template by a user, the variables defined in the `cookiecutter.json` file, or by the user during install, get substituted into their respective reference places.
+
+Please, *do not* modify the master branch directly, unless otherwise instructed. Instead, develop your changes in a branch and, when ready to merge, create a pull request.
