@@ -10,16 +10,21 @@ What you get with this template
 -------------------------------
 
 * Python 2/3 compatibility
-* Improved Logging
-* Pytest testing framework
-* Continuous Integration with :ref:`Travis <travis>` and Coveralls
-* SDSS-compliant `license file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/LICENSE.md>`_.
-* `Module file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/etc/%7B%7Bcookiecutter.package_name%7D%7D.module>`_.
-* Package configuration file
+* `Pytest <https://docs.pytest.org/en/latest/>`_ testing framework
+* Continuous Integration with :ref:`Travis <travis>` and `Coveralls <https://coveralls.io/>`_
 * :ref:`Pip <deploying>`-ready product
 * :ref:`Sphinx Documentation <sphinx>` with :ref:`Read The Docs <rtd>` integration
 * Versioning with :ref:`BumpVersion <bumpversion>`.
-* Invoke for shell tasks
+* :ref:`Invoke <invoke>` for shell tasks
+* SDSS-compliant `license file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/LICENSE.md>`_.
+* `Module file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/etc/%7B%7Bcookiecutter.package_name%7D%7D.module>`_.
+* Package configuration file
+
+Directory Contents
+^^^^^^^^^^^^^^^^^^
+
+* **cextern**
+
 
 
 Creating a new product
@@ -51,23 +56,6 @@ Now now have a totally functional, if very simple, Python package connected to a
 
 .. _bumpversion:
 
-What you get in this template
------------------------------
-
-* Python 2/3 compatibility
-* Pip-ready product
-* `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ Documentation with `Read The Docs <http://readthedocs.io/>`_ integration
-* `Pytest <https://docs.pytest.org/en/latest/>`_ Testing Framework
-* `Versioning with BumpVersion <https://github.com/peritus/bumpversion>`_
-* Continuous Integration with `Travis <https://travis-ci.org/>`_
-* Code Coverage with `Coveralls <https://coveralls.io/>`_
-* `Invoke <http://www.pyinvoke.org/>`_ for shell tasks
-* Module File
-
-Directory Contents
-^^^^^^^^^^^^^^^^^^
-
-
 Bumping a version
 -----------------
 
@@ -96,6 +84,20 @@ The template includes a basic setup for `Travis CI <https://travis-ci.org/>`_ an
 Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`_ account and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same thing for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
 
 **[Is this correct? Add more details]**
+
+
+.. _invoke:
+
+Using invoke
+------------
+
+The product includes several macros to automate frequent tasks using `Invoke <http://www.pyinvoke.org/>`_. To get a list of all the available tasks, from the root of your cookiecut project, do ::
+
+    invoke -l
+
+The documentation can be compiled by doing ``invoke docs.build`` and then shown in your browser with ``invoke docs.show``. Another useful macro, ``invoke deploy``, automates the process of deploying a new version by creating new distribution packages and uploading them to PyPI (see deploying_).
+
+You can add new tasks to the `tasks.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/tasks.py>`_ file.
 
 
 .. _sphinx:
@@ -131,18 +133,6 @@ The cookiecut product documentation is ready to be built and integrated with Rea
 The product configuration for Read The Docs can be found in `readthedocs.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/readthedocs.yml>`_. By default, the Sphinx documentation will be built using Python 3.5 and using the requirements specified in `requirements_doc.txt <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/requirements_doc.txt>`_. You can change those settings easily.
 
 
-Using invoke
-------------
-
-The product includes several macros to automate frequent tasks using `invoke <http://www.pyinvoke.org/>`_. To get a list of all the available tasks, from the root of your cookiecut project, do ::
-
-    invoke -l
-
-The documentation can be compiled by doing ``invoke docs.build`` and then shown in your browser with ``invoke docs.show``. Another useful macro, ``invoke deploy``, automates the process of deploying a new version by creating new distribution packages and uploading them to PyPI (see deploying_).
-
-You can add new tasks to the `tasks.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/tasks.py>`_ file.
-
-
 .. _deploying:
 
 Deploying your product
@@ -176,7 +166,7 @@ which will create source and `wheel <https://pythonwheels.com/>`_ distributions 
 How to modify this template
 ---------------------------
 
-To add content to or expand this template, you must first check out the main template product using git::
+This template is built using `Cookiecutter <https://cookiecutter.readthedocs.io/en/latest/>`_.  To add content to or expand this template, you must first check out the main template product using git::
 
     git clone https://github.com/sdss/python_template
 
