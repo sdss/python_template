@@ -5,15 +5,27 @@ Welcome to SDSS Python Template documentation!
 
 This page describes the `SDSS Python Template <https://github.com/sdss/python_template>`_ as well as the :doc:`coding standards <standards>`.
 
-Screencast
-----------
 
-**[A screencast showing how to use the cookiecut product]**
+What you get with this template
+-------------------------------
 
-User Installation
------------------
+* Python 2/3 compatibility
+* Improved Logging
+* Pytest testing framework
+* Continuous Integration with :ref:`Travis <travis>` and Coveralls
+* SDSS-compliant `license file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/LICENSE.md>`_.
+* `Module file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/etc/%7B%7Bcookiecutter.package_name%7D%7D.module>`_.
+* Package configuration file
+* :ref:`Pip <deploying>`-ready product
+* :ref:`Sphinx Documentation <sphinx>` with :ref:`Read The Docs <rtd>` integration
+* Versioning with :ref:`BumpVersion <bumpversion>`.
+* Invoke for shell tasks
 
-To install and initialize the template:
+
+Creating a new product
+----------------------
+
+To install and initialize a new product from the template run
 
 .. code-block:: bash
 
@@ -21,32 +33,23 @@ To install and initialize the template:
     pip install cookiecutter
     cookiecutter https://github.com/sdss/python_template.git
 
-or to optionally install a specific branch:
+During the installation you will be asked a series of prompts to specify options and variable names, e.g. your name, the repository name, the package name (which can be identical to the repository name), etc. These definitions will be inserted into the package in designated places. The final prompt asks ::
 
-.. code-block:: bash
-
-    cookiecutter https://github.com/sdss/python_template.git --checkout [branchname]
-
-During the installation, you will be asked a series of prompts to specify options and variable names, e.g. your name, the desired package name, etc. These definitions will be inserted into the package in designated places.  The final prompts ask ::
-
-    * do you want to install the new python package with python setup.py install?
     * do you want to create a git repository out of your new package?
-    * do you want to connect your new git repo to an account on github?
+
+If you answer ``yes``, the product will be initialised as a git repository. The new product can be installed in your system by running ``python setup.py install``. For development, however, it is usually better to add the product path to your ``PYTHONPATH``. In bash add the following line to your ``~/.bashrc`` (modify accordingly for csh or other shells) ::
+
+    export PYTHONPATH=/path/to/your/product/python:$PYTHONPATH
+
+Once you are ready to push your product, create a GitHub repository (either at the `SDSS organisation <https://github.com/sdss>`_ or in your personal account) and copy the URL provided by GitHub. In the root of your local product run ::
+
+    git remote add origin GITHUB_URL
+    git push
+
+Now now have a totally functional, if very simple, Python package connected to a GitHub repository. The following sections explain how to use the features included in the template and how to connect it with different online services. Before you continue, this may be a good time to read the :doc:`SDSS coding standards <standards>` and make sure your code complies with them.
 
 
-Using the template
-------------------
-
-Once cookiecutter, the resulting directory is a totally functional, if very simple, Python package.  If during the setup you told cookiecutter to install the new python package, then your new package should already be importable in python, and ready to use.  If you answered no, then it can be installed by running ``python setup.py install``. Alternatively, you can add the path to the template ``python`` directory to your ``$PYTHONPATH`` environment variable.
-
-If during the setup you told cookiecutter to connect the new product to GitHub, your git remote should already be set. You can confirm it by doing ``git remote -a``. You still need to create the GitHub repository. To do so, got to https://github.com/sdss/ (or any other organisation where you want to upload your code) and create a new repository with the name of the new product.
-
-If you did not setup GitHub during the cookiecutter installation, no worries. Create the GitHub repository, copy the remote URL and then, run ::
-
-    git remote add origin https://github.com/sdss/your_product
-
-in your local product.
-
+.. _bumpversion:
 
 What you get in this template
 -----------------------------
@@ -80,6 +83,8 @@ This will increase your version from ``X.Y.Z`` to ``X.Y.(Z+1)dev`` (e.g., ``1.2.
 to remove the ``dev`` suffix. You can also do ``bumpversion patch release`` to release a new patch version without passing through the ``dev`` step.
 
 
+.. _travis:
+
 Connecting your product to Travis
 ---------------------------------
 
@@ -89,6 +94,26 @@ Once you have created the GitHub repository for the product, you can go to your 
 
 **[Is this correct? Add more details]**
 
+
+.. _sphinx:
+
+How to build Sphinx Documentation
+---------------------------------
+
+This template includes `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ documentation, written using the `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ format.  The documentation is located inside your python package, in a `docs/sphinx/` directory.  You can build the existing Sphinx documentation in two ways:
+
+Using invoke::
+
+    invoke docs.build
+
+With make.  Inside your python package's `docs/sphinx/` directory, type::
+
+    make html
+
+This will build your documetation, converting the rst files into html files.  The output html files live in the `sphinx/_build` subdirectory.  You can view your documentation locally by navigating to `sphinx/_build/html/index.html` from your local browser.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.
+
+
+.. _rtd:
 
 Connecting your product to Read The Docs
 ----------------------------------------
@@ -108,37 +133,6 @@ The product includes several macros to automate frequent tasks using `invoke <ht
 The documentation can be compiled by doing ``invoke docs.build`` and then shown in your browser with ``invoke docs.show``. Another useful macro, ``invoke deploy``, automates the process of deploying a new version by creating new distribution packages and uploading them to PyPI (see deploying_).
 
 You can add new tasks to the `tasks.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/tasks.py>`_ file.
-
-
-How to build Sphinx Documentation
----------------------------------
-
-This template includes `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ documentation, written using the `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ format.  The documentation is located inside your python package, in a `docs/sphinx/` directory.  You can build the existing Sphinx documentation in two ways:
-
-Using invoke::
-
-    invoke docs.build
-
-With make.  Inside your python package's `docs/sphinx/` directory, type::
-
-    make html
-
-This will build your documetation, converting the rst files into html files.  The output html files live in the `sphinx/_build` subdirectory.  You can view your documentation locally by navigating to `sphinx/_build/html/index.html` from your local browser.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.
-
-
-How to modify this template
----------------------------
-
-To add content to or expand this template, you must first check out the main template product using git::
-
-    git clone https://github.com/sdss/python_template
-
-Now you have the development version of this template.  The two main components need are a `cookiecutter.json` file and a `{{cookiecutter.repo_name}}` directory.  Cookiecutter templates use the `Jinja2 <http://jinja.pocoo.org/docs/2.10/>`_ templating language to define variable substitution, using double bracket notation, e.g. `{{variable_name}}`.  All customizable content to be inserted by the user is defined using this notation.
-
-* **{{cookiecutter.repo_name}}**: the top-level directory defining the installed python package.  Everything below this directory belongs to the Python package that gets installed by the user.
-* **cookiecutter.json**: A JSON file containing a dictionary of key:value pairs of variables defined in the template, with their default values.  These keys are referenced throughout the template with `{{cookiecutter.key}}`.
-
-Upon installation of the template by a user, the variables defined in the `cookiecutter.json` file, or by the user during install, get substituted into their respective reference places.
 
 
 .. _deploying:
@@ -169,3 +163,18 @@ which will create source and `wheel <https://pythonwheels.com/>`_ distributions 
 
     python setup.py sdist bdist_wheel --universal
     twine upload dist/*
+
+
+How to modify this template
+---------------------------
+
+To add content to or expand this template, you must first check out the main template product using git::
+
+    git clone https://github.com/sdss/python_template
+
+Now you have the development version of this template.  The two main components need are a `cookiecutter.json` file and a `{{cookiecutter.repo_name}}` directory.  Cookiecutter templates use the `Jinja2 <http://jinja.pocoo.org/docs/2.10/>`_ templating language to define variable substitution, using double bracket notation, e.g. `{{variable_name}}`.  All customizable content to be inserted by the user is defined using this notation.
+
+* **{{cookiecutter.repo_name}}**: the top-level directory defining the installed python package.  Everything below this directory belongs to the Python package that gets installed by the user.
+* **cookiecutter.json**: A JSON file containing a dictionary of key:value pairs of variables defined in the template, with their default values.  These keys are referenced throughout the template with `{{cookiecutter.key}}`.
+
+Upon installation of the template by a user, the variables defined in the `cookiecutter.json` file, or by the user during install, get substituted into their respective reference places.
