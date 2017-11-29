@@ -5,7 +5,7 @@
 
 .. rubric:: :header_no_toc:`Welcome to {{cookiecutter.package_name}}'s documentation!`
 
-This is the Sphinx documentation for the Python product {{cookiecutter.package_name}}
+This is the Sphinx documentation for the SDSS Python product {{cookiecutter.package_name}}
 
 - :ref:`What's new in {{cookiecutter.package_name}}? <changelog>`
 

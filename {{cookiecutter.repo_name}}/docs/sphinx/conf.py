@@ -135,7 +135,7 @@ html_sidebars = {}
 # documentation.
 html_theme_options = {
     # Navigation bar title. (Default: ``project`` value)
-    'navbar_title': "SDSS Python Template",
+    'navbar_title': "SDSS: {0}".format(project),
 
     # Tab name for entire site. (Default: "Site")
     'navbar_site_name': "Site",
