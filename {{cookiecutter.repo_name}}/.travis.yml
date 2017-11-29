@@ -36,10 +36,5 @@ install:
 script:
 - pytest python/{{cookiecutter.package_name}}/tests --cov python/{{cookiecutter.package_name}} --cov-report html
 
-# branches:
-#   except:
-#     - new_datamodel
-#     - mpl6_clean_tools
-
 after_success:
 - coveralls

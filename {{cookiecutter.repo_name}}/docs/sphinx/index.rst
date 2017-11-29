@@ -3,6 +3,8 @@
 
 .. title:: Welcome to {{cookiecutter.package_name}}'s documentation!
 
+:tocdepth: 2
+
 .. rubric:: :header_no_toc:`Welcome to {{cookiecutter.package_name}}'s documentation!`
 
 This is the Sphinx documentation for the SDSS Python product {{cookiecutter.package_name}}
@@ -23,5 +25,4 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-.. * :ref:`modindex`
-* :ref:`search`
+* :ref:`modindex`
