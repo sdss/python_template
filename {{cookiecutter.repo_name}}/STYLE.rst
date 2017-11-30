@@ -94,7 +94,7 @@ Some resources that can be useful to write code that is Python 2 and
 -  The `six <https://pythonhosted.org/six/#>`__ library provides
    functions to write code that will work in Python 2 and 3.
 -  When converting code from Python 2 to 3, consider using
-   `2to3 <https://docs.python.org/2/library/2to3.html>`__ as the
+   `python-futurize <http://python-future.org/overview.html#automatic-conversion-to-py2-3-compatible-code>`__ as the
    starting point. It works very well for most files, and even for those
    files that require manual interaction, it paves most of the way.
 
