@@ -268,7 +268,7 @@ general:
    your code. **TODO: actually PEP237 recommends to use 72 characters.
    Do we follow that?**
 -  A complete docstring should start with a single line describing the
-   general purpose of the function or class. Then a blank line and and
+   general purpose of the function or class. Then a blank line and an
    in-depth description of the function or class in one or more
    paragraphs. A list of the input parameters (arguments and keywords)
    follows, and a description of the values returned, if any. If the
