@@ -167,7 +167,7 @@ for more information on using requirements.txt files. Consider using
 multiple requirements.txt files (e.g, ``requirements.txt``,
 ``requirements_dev.txt``, ``requirements_docs.txt``) for different
 pieces of functionality. Additionally, you must maintain the
-`module <etc/python_template.module>`__ file for your product. If you
+`module <etc/{{cookiecutter.package_name}}.module>`__ file for your product. If you
 package depends on SDSS-specific, non pip-installable packages, use the
 module file to load the necessary dependencies.
 
