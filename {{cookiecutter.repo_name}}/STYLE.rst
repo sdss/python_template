@@ -104,10 +104,10 @@ Code storage and ownership
 All code must be version controlled using
 `git <https://git-scm.com/>`__. Older code, still under the SVN
 repository, can be maintained using Subversion until it has been ported
-to Git.
+to Git. Large data-only repositories that use SVN do not need to be ported.
 
 All code must live in the `SDSS GitHub
-organisation <https://www.github.com/sdss>`__. When starting a new
+organisation <https://www.github.com/sdss>`__. Code that is specific to Apache Point Observatory and it is shared with other on-site telescopes should be put in `their own <https://github.com/ApachePointObservatory>`__ organisation. When starting a new
 product, start a new repository in the GitHub organisation (you can
 choose to make it public or private) and follow the instructions to
 clone it to your computer. Feel free to create forks of the repositories
@@ -116,7 +116,7 @@ code lives in the organisation repo.
 
 All code must have *at least* one owner, who is ultimately responsible
 for keeping the code working and making editorial decisions. Owners can
-make decision on which code standards to follow (within the requirements
+make decisions on which code standards to follow (within the requirements
 listed in this document), such as maximum line length, linter, or
 testing framework. The owner(s) names should be obvious in the README of
 the repo and in the ``setup.py`` file.
