@@ -336,7 +336,7 @@ etc. We suggest
     from __future__ import absolute_import
 
 In general, do not include comments about when you last modified the
-file. Instead, use the `changelog <./CHANGELOG.rst>`__ and atomic git
+file since those become out of date really fast. Instead, use the `changelog <./CHANGELOG.rst>`__ and atomic git
 commits.
 
 General advice
