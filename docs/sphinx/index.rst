@@ -11,17 +11,18 @@ What you get with this template
 
 * Python 2/3 compatibility
 * `Pytest <https://docs.pytest.org/en/latest/>`_ testing framework
-* Continuous Integration with :ref:`Travis <travis>` and `Coveralls <https://coveralls.io/>`_
-* :ref:`Pip <deploying>`-ready product
-* :ref:`Sphinx Documentation <sphinx>` with :ref:`Read The Docs <rtd>` integration
-* Versioning with :ref:`BumpVersion <bumpversion>`.
-* :ref:`Invoke <invoke>` for shell tasks
+* Continuous Integration with :ref:`Travis <travis-section>` and `Coveralls <https://coveralls.io/>`_
+* :ref:`Pip <deploying-section>`-ready product
+* :ref:`Sphinx Documentation <sphinx-section>` with :ref:`Read The Docs <rtd-section>` integration
+* Versioning with :ref:`BumpVersion <bumpversion-section>`.
+* :ref:`Invoke <invoke-section>` for shell tasks
 * SDSS-compliant `license file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/LICENSE.md>`_.
 * `Module file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/etc/%7B%7Bcookiecutter.package_name%7D%7D.module>`_.
 * Package configuration file
 
+
 Directory Contents
-^^^^^^^^^^^^^^^^^^
+------------------
 
 * **cextern**: The directory for placing C code to be compiled
 * **docs**: The directory for Sphinx documentation and other docu-related files
@@ -38,6 +39,7 @@ Directory Contents
 * **.travis.yml**:  The configuration file for Travis CI.
 * **.bumpversion.cfg**: The configuration file for Bumpversion.
 * **.coveragerc**: The configuration file for python code coverage and Coveralls.
+
 
 Creating a new product
 ----------------------
@@ -64,7 +66,7 @@ The new product can be installed in your system by running ``python setup.py ins
 Now you have a totally functional, if very simple, Python package connected to a GitHub repository. The following sections explain how to use the features included in the template and how to connect it with different online services. Before you continue, this may be a good time to read the :doc:`SDSS coding standards <standards>` and make sure your code complies with them.
 
 
-.. _bumpversion:
+.. _bumpversion-section:
 
 Bumping a version
 -----------------
@@ -94,17 +96,17 @@ This will create a new tag locally with the new bumped version as the tag name. 
 If you release and tag a new version, don't forget to do ``bumpversion patch`` to increment to the next `dev` version.
 
 
-.. _travis:
+.. _travis-section:
 
 Connecting your product to Travis
 ---------------------------------
 
-The template includes a basic setup for `Travis CI <https://travis-ci.org/>`_ and `Coveralls <https://coveralls.io/>`_. The configuration is defined in the `.travis.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/.travis.yml>`_ and `.coveragerc <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/.coveragerc>`_ files.
+The template includes a basic setup for `Travis CI <https://travis-ci.org/>`__ and `Coveralls <https://coveralls.io/>`_. The configuration is defined in the `.travis.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/.travis.yml>`_ and `.coveragerc <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/.coveragerc>`_ files.
 
-Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`_ account (create one if you don't have it) and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
+Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`__ account (create one if you don't have it) and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
 
 
-.. _invoke:
+.. _invoke-section:
 
 Using invoke
 ------------
@@ -113,12 +115,12 @@ The product includes several macros to automate frequent tasks using `Invoke <ht
 
     invoke -l
 
-The documentation can be compiled by doing ``invoke docs.build`` and then shown in your browser with ``invoke docs.show``. Another useful macro, ``invoke deploy``, automates the process of deploying a new version by creating new distribution packages and uploading them to PyPI (see deploying_).
+The documentation can be compiled by doing ``invoke docs.build`` and then shown in your browser with ``invoke docs.show``. Another useful macro, ``invoke deploy``, automates the process of deploying a new version by creating new distribution packages and uploading them to PyPI (see deploying-section_).
 
-You can add new tasks to the `tasks.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/tasks.py>`_ file.
+You can add new tasks to the `tasks.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/tasks.py>`__ file.
 
 
-.. _sphinx:
+.. _sphinx-section:
 
 How to build Sphinx Documentation
 ---------------------------------
@@ -150,7 +152,7 @@ The template includes an example on how to automatically document the docstrings
 You can add similar blocks of code for other modules. See the Sphinx `autodoc <http://www.sphinx-doc.org/en/stable/ext/autodoc.html>`_ for more details. The :ref:`coding standards <style-docstring>` include a section on how to write good docstrings to document your code.
 
 
-.. _rtd:
+.. _rtd-section:
 
 Connecting your product to Read The Docs
 ----------------------------------------
@@ -160,7 +162,7 @@ The cookiecut product documentation is ready to be built and integrated with Rea
 The product configuration for Read The Docs can be found in `readthedocs.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/readthedocs.yml>`_. By default, the Sphinx documentation will be built using Python 3.5 and using the requirements specified in `requirements_doc.txt <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/requirements_doc.txt>`_. You can change those settings easily.
 
 
-.. _deploying:
+.. _deploying-section:
 
 Deploying your product
 ----------------------
