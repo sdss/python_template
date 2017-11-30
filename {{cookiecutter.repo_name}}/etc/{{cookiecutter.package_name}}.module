@@ -28,7 +28,7 @@ proc ModulesHelp {{"{{ }} {{"}}
 #
 set product {name}
 set version {version}
-# conflict $product
+conflict $product
 #
 # The line below is another part of the Modules help system.  You can
 # modify the part in quotes if you really need to, but most products should
@@ -72,6 +72,3 @@ setenv [string toupper $product]_DIR $PRODUCT_DIR
 #
 # Add any non-standard Module code below this point.
 #
-
-
-
