@@ -72,6 +72,8 @@ which are its dependencies:
    possible, so that when those dependencies are upgraded you can
    upgrade your code easily.
 
+- If your code is intended for a large user base, Python 2 and 3 compatibility is recommended, but the focus should be put into Python 3.
+
 Whenever you create a new Python file, make sure to add the following
 lines at the top of the file
 
