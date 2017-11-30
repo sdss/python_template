@@ -87,6 +87,12 @@ The default configuration of bumpversion is to always perform a commit whenever 
 
     bumpversion patch --tag
 
+This will create a new tag locally with the new bumped version as the tag name.  You can push the tag to Github with::
+
+    git push origin [tagname]
+
+If you release and tag a new version, don't forget to do ``bumpversion patch`` to increment to the next `dev` version.
+
 
 .. _travis:
 
