@@ -203,6 +203,33 @@ the code above would return ::
     print(mypython.config['option1']['suboption2'])
     >>> 'a different text'
 
+The package also includes a logging object built around Python's `logging <https://docs.python.org/3/library/logging.html>`__ module. Our custom logger allows to file and screen at the same time and provides more colourful tracebacks and warnings. From anywhere in your code you can do ::
+
+    from mypython import log
+    log.info('Some information that we want to log')
+    >>> [INFO]: Some information that we want to log
+
+Available levels are ``.debug``, ``.info``, ``.error``, and ``.critical``. For warnings, use `warnings <https://docs.python.org/3/library/warnings.html>`__ module.
+
+By default, the file logger is not enabled. To start logging to file do ::
+
+    log.start_file_logger('~/.mypython/mypython.log')
+
+where ``'~/.mypython/mypython.log'`` is the path of the file to which we want to log. If the file exists, the previous file is backed up by adding a timestamp to the extension. File logs are automatically backed up at midnight (see `TimedRotatingFileHandler <https://docs.python.org/2/library/logging.handlers.html>`__).
+
+On initialisation, the screen logger will only show messages with level ``INFO`` or above. The file logger default level is ``DEBUG``. Levels can be changed in runtime ::
+
+    # Sets the screen minimum level to DEBUG
+    import logging
+    log.sh.setLevel(logging.DEBUG)
+
+    # Sets the file level to CRITICAL
+    log.fh.setLevel(logging.CRITICAL)
+
+The current log can be saved as ::
+
+    log.save_log('~/Downloads/copy_of_log.log')
+
 
 .. _deploying-section:
 
