@@ -1,10 +1,6 @@
 SDSS Python template and coding standards
 =========================================
 
-**Important: this is a pre-alpha version of this document. Please, look
-throughout the text and at the end of the document for a list of
-TODO/missing parts.**
-
 So you want to write some Python code. Congratulations, you've gotten to
 the right place! This repository has a dual purpose: it provides a
 template for a basic, but complete, Python package; and lists the coding
