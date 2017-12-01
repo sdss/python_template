@@ -93,9 +93,9 @@ em.property {
 } */
 
 .rubric > .class-header-no-toc {
-  font-size: 200%;
-  font-weight: 120;
-  padding-bottom: 20px;
+  font-size: 240%;
+  font-weight: 400;
+  /* padding-bottom: 20px; */
   display: inline-block;
 }
 
