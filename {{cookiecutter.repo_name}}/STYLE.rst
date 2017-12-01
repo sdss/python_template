@@ -268,8 +268,7 @@ general:
    methods should have a docstring.
 -  Use double quotes for docstrings; reserve single quotes for normal
    strings.
--  Limit your docstrings lines to the same line length you are using for
-   your code. While PEP257 recommends limiting the docstrings lines to 72 characters, we do not enforce that convention.
+-  Limit your docstrings lines to 72 characters. This convention can be a bit constraining for some developers; it is ok to ignore it and use the line length you are using for your code (79 or 99 characters).
 -  A complete docstring should start with a single line describing the
    general purpose of the function or class. Then a blank line and an
    in-depth description of the function or class in one or more
