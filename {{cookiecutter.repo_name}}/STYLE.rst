@@ -269,8 +269,7 @@ general:
 -  Use double quotes for docstrings; reserve single quotes for normal
    strings.
 -  Limit your docstrings lines to the same line length you are using for
-   your code. **TODO: actually PEP237 recommends to use 72 characters.
-   Do we follow that?**
+   your code. While PEP257 recommends limiting the docstrings lines to 72 characters, we do not enforce that convention.
 -  A complete docstring should start with a single line describing the
    general purpose of the function or class. Then a blank line and an
    in-depth description of the function or class in one or more
@@ -350,11 +349,9 @@ All executable files should live in the ``bin/`` directory. For those files, add
 General advice
 ~~~~~~~~~~~~~~
 
--  Blank lines take only one byte; there is no reason for you not to use
-   them frequently and improve legibility.
--  Remember the `Zen of
-   Python <https://www.python.org/dev/peps/pep-0020/>`__. Explicit is
-   better than implicit. Simple is better than complex.
+- Blank lines only add one byte to your file size; use them prolifically to improve legibility.
+- Read the `Zen of Python <https://www.python.org/dev/peps/pep-0020/>`__. Explicit is better than implicit. Simple is better than complex.
+- Know when ignore these standards if there is a good reason or it improves readability (but don't use that as an excuse to just not follow the standards).
 
 Testing
 -------
