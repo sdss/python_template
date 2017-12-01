@@ -181,7 +181,7 @@ The product configuration for Read The Docs can be found in `readthedocs.yml <ht
 Configuration file and logging
 ------------------------------
 
-Your new product contains a `YAML <http://yaml.org/>`_ configuration file in the `python/[product_name]/etc/` directory. When you import the package, the configuration can be accessed as a dictionary using the ``config`` attribute. For example ::
+Your new product contains a `YAML <http://yaml.org/>`_ configuration file in the `python/[product_name]/etc/` directory. YAML is significantly superior to other alternatives such as `configparser <https://docs.python.org/3/library/configparser.html>`__; it provides typed values, a clear data structure, and powerful parsing libraries. When you import the package, the configuration can be accessed as a dictionary using the ``config`` attribute. For example ::
 
     import mypython
     print(mypython.config['option1']['suboption1'])
