@@ -1,13 +1,13 @@
 SDSS Python template and coding standards
 =========================================
 
-So you want to write some Python code. Congratulations, you've gotten to
+So you want to write some Python code. Congratulations, you've arrived at
 the right place! This repository has a dual purpose: it provides a
 template for a basic, but complete, Python package; and lists the coding
 standards and recommendations for developing code for SDSS. Please, read
 this document carefully. If you decide to develop your product based on
-this template, feel free to replace the ``README.md`` with a description
-of your project, but keep the ``STYLE.md`` file as a reminder of the
+this template, feel free to replace `<README.rst>`__ with a description
+of your project, but keep the `<STYLE.rst>`__ file as a reminder of the
 coding conventions.
 
 While this document deals with Python product, and some of the solutions
@@ -45,7 +45,6 @@ Table of Contents
    - `Zenodo <#zenodo>`__
    - `Astrophysical Source Code Library <#ascl>`__
 
--  `TODO / Questions <#todo--questions>`__
 
 Python 2 vs Python 3: which one to choose?
 ------------------------------------------
