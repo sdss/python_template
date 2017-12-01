@@ -8,7 +8,7 @@
 # @Last modified by:   Brian Cherinka
 # @Last Modified time: 2017-11-29 00:08:57
 
-from __future__ import print_function, division, absolute_import
+from __future__ import print_function, division, absolute_import, unicode_literals
 import os
 from invoke import Collection, task
 

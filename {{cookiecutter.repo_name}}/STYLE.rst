@@ -82,6 +82,7 @@ lines at the top of the file
     from __future__ import division
     from __future__ import print_function
     from __future__ import absolute_import
+    from __future__ import unicode_literals
 
 That will force you to use ``import``, ``print``, and division in a way
 that is Python 2 and 3-compatible.
@@ -334,6 +335,7 @@ etc. We suggest
     from __future__ import division
     from __future__ import print_function
     from __future__ import absolute_import
+    from __future__ import unicode_literals
 
 In general, do not include comments about when you last modified the
 file since those become out of date really fast. Instead, use the `changelog <./CHANGELOG.rst>`__ and atomic git
