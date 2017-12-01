@@ -3,7 +3,7 @@ SDSS Python template and coding standards
 
 So you want to write some Python code. Congratulations, you've arrived at
 the right place! This repository has a dual purpose: it provides a
-template for a basic, but complete, Python package; and lists the coding
+`template <sdss-python-template.readthedocs.io/en/latest/>`__ for a basic but complete Python package; and lists the coding
 standards and recommendations for developing code for SDSS. Please, read
 this document carefully. If you decide to develop your product based on
 this template, feel free to replace `<README.rst>`__ with a description
