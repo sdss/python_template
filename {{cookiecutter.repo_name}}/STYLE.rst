@@ -322,7 +322,6 @@ etc. We suggest
 
 .. code:: python
 
-    #!/usr/bin/env python
     # encoding: utf-8
     #
     # @Author:
@@ -340,6 +339,10 @@ etc. We suggest
 In general, do not include comments about when you last modified the
 file since those become out of date really fast. Instead, use the `changelog <./CHANGELOG.rst>`__ and atomic git
 commits.
+
+All executable files should live in the ``bin/`` directory. For those files, add a shebang at the beginning of the header ::
+
+   #!/usr/bin/env python
 
 General advice
 ~~~~~~~~~~~~~~
