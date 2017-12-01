@@ -18,7 +18,7 @@ What you get with this template
 * :ref:`Invoke <invoke-section>` for shell tasks
 * SDSS-compliant `license file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/LICENSE.md>`_.
 * `Module file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/etc/%7B%7Bcookiecutter.package_name%7D%7D.module>`_.
-* Package configuration file
+* :ref:`Configuration file <conf-log-section>` and improved :ref:`logging <conf-log-section>`.
 
 
 Directory Contents
@@ -28,6 +28,9 @@ Directory Contents
 * **docs**: The directory for Sphinx documentation and other docu-related files
 * **etc**: The directory containing your SDSS modulefile and other etc
 * **python**: Your new python package directory
+* **python/package_name/etc**: An etc directory with text files that will be installed with the product. Contains a YAML configuration file that is ready by the package when imported.
+* **python/package_name/misc**: General-use tools, including a custom logger and colour printing routines.
+* **python/package_name/tests**: The directory containing the tests for the package. Includes a ``conftest.py`` file with basic configuration using `pytest <https://docs.pytest.org/en/latest/>`_.
 * **CHANGELOG.rst**: A file documenting changes to your code, e.g. new features, fixed issues, or bug-fixes.
 * **README.rst**: A file describing your package.  This will be the main display on Github.
 * **STYLE.rst**: The SDSS style guide for best coding practices.
@@ -49,10 +52,11 @@ To install and initialize a new product from the template run
 .. code-block:: bash
 
     pip install invoke
+    pip install bumpversion
     pip install cookiecutter
     cookiecutter https://github.com/sdss/python_template.git
 
-During the installation you will be asked a series of prompts to specify options and variable names, e.g. your name, the repository/folder name, the package name (which can be identical to the repository name), etc. These definitions will be inserted into the package in designated places.
+During the installation `cookiecutter <https://github.com/audreyr/cookiecutter>`__ will ask you a series of prompts to specify options and variable names, e.g. your name, the repository/folder name, the package name (which can be identical to the repository name), etc. These definitions will be inserted into the package in designated places to customise it for you.
 
 The **create_git_repo** prompt asks ``do you want to create a git repository out of your new package?``.  If you answer ``yes``, the product will be initialised as a git repository.  The final prompts ask ``did you already create a new repository on Github?`` and ``what is your Github username?``.  If you answer ``yes``, and specify a name, a remote origin will be added to your new git repository and will be pushed to Github.  If not, `create a GitHub repository <https://help.github.com/articles/creating-a-new-repository/>`_ (either at the `SDSS organisation <https://github.com/sdss>`_ or in your personal account) and copy the URL provided by GitHub. In the root of your local product run ::
 
@@ -94,6 +98,16 @@ This will create a new tag locally with the new bumped version as the tag name. 
     git push origin [tagname]
 
 If you release and tag a new version, don't forget to do ``bumpversion patch`` to increment to the next `dev` version.
+
+
+.. _tests-section:
+
+Writing and running tests
+-------------------------
+
+The ``tests`` directory contains some examples on how to write and run tests for your package using `pytest`_. Use the `conftest.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/python/%7B%7Bcookiecutter.package_name%7D%7D/tests/conftest.py>`_ file to define `fixtures <https://docs.pytest.org/en/latest/fixture.html>`__ and other `pytest`_-specific features. cd'ing to the ``tests`` directory and typing ``pytest`` will recursively run all the tests in files whose filename starts with ``test_``.
+
+If you prefer to use `unittest <https://docs.python.org/3/library/unittest.html>`_ or `nose <https://nose2.readthedocs.io/en/latest/getting_started.html>`_ feel free to remove those files.
 
 
 .. _travis-section:
@@ -160,6 +174,34 @@ Connecting your product to Read The Docs
 The cookiecut product documentation is ready to be built and integrated with Read The Docs. As with Travis and Coveralls above, you will need to commit the products to a GitHub repository first. SDSS has a `Read The Docs <http://readthedocs.io/>`_ account that is the preferred place to integrate the documentation. If you have access to the account, just go there and add the repository. Probably you will receive a message saying that the integration of the product is not complete and that you need to set up a webhook. To do that, got to the admin setting of the new Read The Docs project. In ``Intergations`` add a new integration and copy the link to the webhook. Then go to the GitHub repository settings and in the ``Webhooks`` section add a new webhook with the URL you just copied. Once you submit, any push to the master branch of the GitHub repo should produce a new built of the documentation. You can find more details on the webhook set up `here <https://docs.readthedocs.io/en/latest/webhooks.html>`_.
 
 The product configuration for Read The Docs can be found in `readthedocs.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/readthedocs.yml>`_. By default, the Sphinx documentation will be built using Python 3.5 and using the requirements specified in `requirements_doc.txt <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/requirements_doc.txt>`_. You can change those settings easily.
+
+
+.. _conf-log-section:
+
+Configuration file and logging
+------------------------------
+
+Your new product contains a `YAML <http://yaml.org/>`_ configuration file in the `python/[product_name]/etc/` directory. When you import the package, the configuration can be accessed as a dictionary using the ``config`` attribute. For example ::
+
+    import mypython
+    print(mypython.config['option1']['suboption1'])
+    >>> 2.0
+    print(mypython.config['option1']['suboption2'])
+    >>> 'some text'
+
+If the user creates a custom configuration file in ``~/.mypython/mypython.yml``, the contents of that file will be used to update the default options. For instance, if you create a file with the contents
+
+.. code-block:: yaml
+
+    option1:
+        suboption2: "a different text"
+
+the code above would return ::
+
+    print(mypython.config['option1']['suboption1'])
+    >>> 2.0
+    print(mypython.config['option1']['suboption2'])
+    >>> 'a different text'
 
 
 .. _deploying-section:
