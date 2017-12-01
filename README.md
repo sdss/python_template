@@ -56,15 +56,3 @@ It is good practice to test install the package locally before you commit any ch
 ## Coding standards
 
 Before you start writing your code, make sure to read and digest the [SDSS coding standards](./\{\{cookiecutter.repo_name\}\}/STYLE.rst).
-
-## TODO / Questions
-
-- Should we keep the python directory? Note: we agreed on keeping the python directory for the template but not make it a SDSS requirement.
-- Tox
-- Bibliography / tutorials.
-- Travis configuration file.
-- Zenodo. Note: Brian will write a section for the style guide.
-- test directory at the top level? Note: same as for the python directory.
-- reStructured vs markdown. Should we adopt rst for readmes and style?
-- CLI: argparse vs click vs invoke?
-- Use inline docstring for attributes or section in header docstring?
