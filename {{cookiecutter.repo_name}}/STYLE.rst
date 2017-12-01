@@ -508,8 +508,8 @@ as well as astronomers outside SDSS using SDSS software.
 Zenodo
 ~~~~~~
 
-Zenodo allows you to generate a unique digital object identifier (DOI) for any piece of software code in a Github
-repository.  DOI's are citable snippets, and allow your software code to be identified by tools.  See `Making Your Code Citable <https://guides.github.com/activities/citable-code/>`_ for how to connect your Github repository to Zenodo.  Once your Github repo is connected to Zenodo, every new Github tag or release gets a new DOI from Zenodo.  Zenodo provides a citable formats for multiple journals as well as export to a Bibtex file.
+Zenodo allows you to generate a unique digital object identifier (DOI) for any piece of software code in a GitHub
+repository.  DOI's are citable snippets, and allow your software code to be identified by tools.  See `Making Your Code Citable <https://guides.github.com/activities/citable-code/>`_ for how to connect your GitHub repository to Zenodo.  Once your GitHub repo is connected to Zenodo, every new GitHub tag or release gets a new DOI from Zenodo.  Zenodo provides a citable formats for multiple journals as well as export to a Bibtex file.
 
 Astrophysical Source Code Library
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
