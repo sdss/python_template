@@ -110,6 +110,8 @@ clone it to your computer. Feel free to create forks of the repositories
 to your own GitHub account, but make sure the production version of the
 code lives in the organisation repo.
 
+If your code is already in GitHub, move it to the SDSS GitHub organisation as soon as it is ready to be shared. This can be done easily by creating a new repository in the SDSS GitHub, adding it as a new remote to your local checkout, and pushing to the new remote.
+
 All code must have *at least* one owner, who is ultimately responsible
 for keeping the code working and making editorial decisions. Owners can
 make decisions on which code standards to follow (within the requirements
