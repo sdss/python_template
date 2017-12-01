@@ -20,7 +20,7 @@ Table of Contents
 -  `Python 2 vs Python 3: which one to
    choose? <#python-2-vs-python-3-which-one-to-choose>`__
 -  `Code storage and ownership. <#code-storage-and-ownership>`__
--  `Versioning and change logs. <#versioning-and-change-logs>`__
+-  `Tagging, versioning and change logs. <#versioning-and-change-logs>`__
 -  `Deployment <#deployment>`__
 -  `Coding style <#coding-style>`__
 
@@ -117,8 +117,10 @@ listed in this document), such as maximum line length, linter, or
 testing framework. The owner(s) names should be obvious in the README of
 the repo and in the ``setup.py`` file.
 
-Versioning and change logs
---------------------------
+Tagging, versioning and change logs
+-----------------------------------
+
+**All production software must run from tagged versions.** The only exception to this rule is when debugging new code during engineering or test runs.
 
 Software versions should follow the convention ``X.Y.Z`` (e.g.,
 ``1.2.5``) where X indicates the major version (large, maybe
@@ -127,6 +129,10 @@ non-backwards compatible changes), Y is for minor changes and additions
 Suffixes to the version, such as ``dev``, ``alpha``, ``beta``, are
 accepted. Do not use a hyphen between version and suffix (``1.2.5dev``
 is ok, ``1.2.5-dev`` is not).
+
+For products that already have tagged versions using the old SDSS versioning standards (e.g., ``v1_2_3``), tag new versions using the new convention (e.g., ``1.2.4``) but do not rename or retag previous versions.
+
+Python packages must return its version via the ``__version__`` attribute. All other products, including metadata and datamodels, must also be versioned in a clear and obvious way. When tagging using git, prefer `annotated tags <https://git-scm.com/docs/git-tag>`__.
 
 Version tracking may be complicated so we recommend using
 ``bumpversion`` (see `here <https://github.com/peritus/bumpversion>`__
@@ -138,7 +144,9 @@ to the product. You can go to the root of the package and run
 ``bumpversion minor``. This will update the version to ``0.6.0dev``
 everywhere needed, and will commit the changes. When you are ready to
 release, you can do ``bumpversion release`` to change the version to
-``0.6.0``.
+``0.6.0``. See the `template documentation <http://sdss-python-template.readthedocs.io/en/latest/index.html#bumpversion-section>`__ for more details.
+
+All files must include in their metadata the version of the software that produced them, along with the versions of all relevant dependencies. For instance, data FITS must include the version of the pipeline in the header.
 
 All changes should be logged in a ``CHANGELOG.rst`` or ``CHANGELOG.md``
 file. See `the template CHANGELOG.rst <./CHANGELOG.rst>`__ for an
