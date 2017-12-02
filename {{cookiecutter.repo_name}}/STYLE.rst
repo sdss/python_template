@@ -50,7 +50,7 @@ Python 2 vs Python 3: which one to choose?
 ------------------------------------------
 
 SDSS has made the decision to transition to Python 3 by 2020. That means
-that all new code must *at least* be compatible with Python 3. There is,
+that all new code must *at least* be compatible with Python 3.6. There is,
 however, a very significant amount of ancillary code that is still
 Python 2-only and that will not be ported to Python 3 for some time.
 
