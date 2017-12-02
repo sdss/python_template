@@ -9,6 +9,7 @@ The full documentation on how to use this template can be found [here](http://sd
 To install and initialize this template:
 
     pip install invoke
+    pip install bumpversion
     pip install cookiecutter
     cookiecutter https://github.com/sdss/python_template.git
 
