@@ -275,4 +275,4 @@ Now you have the development version of this template.  The two main components 
 
 Upon installation of the template by a user, the variables defined in the `cookiecutter.json` file, or by the user during install, get substituted into their respective reference places.
 
-Please, *do not* modify the master branch directly, unless otherwise instructed. Instead, develop your changes in a branch and, when ready to merge, create a pull request.
+Please, *do not* modify the master branch directly unless otherwise instructed. Instead, develop your changes in a branch and, when ready to merge, create a pull request.
