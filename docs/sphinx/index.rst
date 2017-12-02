@@ -83,6 +83,10 @@ This will increase your version from ``X.Y.Z`` to ``X.Y.(Z+1)dev`` (e.g., ``1.2.
 
 to remove the ``dev`` suffix. You can also do ``bumpversion patch release`` to release a new patch version without passing through the ``dev`` step.
 
+It is recommended to always do a dry run of your bump before the real thing to make sure it will go smoothly.  You can do it with::
+
+    bumpversion patch --dry-run --verbose
+
 The default configuration of bumpversion is to always perform a commit whenever you bump to the next version.  You can specify to also create a new tag of your version with::
 
     bumpversion patch --tag
