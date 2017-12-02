@@ -524,3 +524,4 @@ Further reading
 -  Python's own `documentation style
    guide <https://docs.python.org/devguide/documenting.html>`__ is a
    good resource to learn to write good documentation.
+- Astropy's `coding standards <http://docs.astropy.org/en/stable/development/codeguide.html>`__ and `documentation guide <http://docs.astropy.org/en/stable/development/docguide.html>`__ are good resources.
