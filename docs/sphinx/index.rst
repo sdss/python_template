@@ -47,9 +47,7 @@ Directory Contents
 Creating a new product
 ----------------------
 
-To install and initialize a new product from the template run
-
-.. code-block:: bash
+To install and initialize a new product from the template run ::
 
     pip install invoke
     pip install bumpversion
