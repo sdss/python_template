@@ -20,7 +20,7 @@ Table of Contents
 -  `Python 2 vs Python 3: which one to
    choose? <#python-2-vs-python-3-which-one-to-choose>`__
 -  `Code storage and ownership. <#code-storage-and-ownership>`__
--  `Tagging, versioning and change logs. <#versioning-and-change-logs>`__
+-  `Tagging, versioning, and change logs. <#tagging-versioning-and-change-logs>`__
 -  `Deployment <#deployment>`__
 -  `Coding style <#coding-style>`__
 
@@ -119,7 +119,7 @@ listed in this document), such as maximum line length, linter, or
 testing framework. The owner(s) names should be obvious in the README of
 the repo and in the ``setup.py`` file.
 
-Tagging, versioning and change logs
+Tagging, versioning, and change logs
 -----------------------------------
 
 **All production software must run from tagged versions.** The only exception to this rule is when debugging new code during engineering or test runs.
