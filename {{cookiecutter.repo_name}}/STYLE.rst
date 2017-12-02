@@ -1,17 +1,13 @@
 SDSS Python template and coding standards
 =========================================
 
-**Important: this is a pre-alpha version of this document. Please, look
-throughout the text and at the end of the document for a list of
-TODO/missing parts.**
-
-So you want to write some Python code. Congratulations, you've gotten to
+So you want to write some Python code. Congratulations, you've arrived at
 the right place! This repository has a dual purpose: it provides a
-template for a basic, but complete, Python package; and lists the coding
+`template <sdss-python-template.readthedocs.io/en/latest/>`__ for a basic but complete Python package; and lists the coding
 standards and recommendations for developing code for SDSS. Please, read
 this document carefully. If you decide to develop your product based on
-this template, feel free to replace the ``README.md`` with a description
-of your project, but keep the ``STYLE.md`` file as a reminder of the
+this template, feel free to replace `<README.rst>`__ with a description
+of your project, but keep the `<STYLE.rst>`__ file as a reminder of the
 coding conventions.
 
 While this document deals with Python product, and some of the solutions
@@ -24,7 +20,7 @@ Table of Contents
 -  `Python 2 vs Python 3: which one to
    choose? <#python-2-vs-python-3-which-one-to-choose>`__
 -  `Code storage and ownership. <#code-storage-and-ownership>`__
--  `Versioning and change logs. <#versioning-and-change-logs>`__
+-  `Tagging, versioning, and change logs. <#tagging-versioning-and-change-logs>`__
 -  `Deployment <#deployment>`__
 -  `Coding style <#coding-style>`__
 
@@ -49,13 +45,12 @@ Table of Contents
    - `Zenodo <#zenodo>`__
    - `Astrophysical Source Code Library <#ascl>`__
 
--  `TODO / Questions <#todo--questions>`__
 
 Python 2 vs Python 3: which one to choose?
 ------------------------------------------
 
 SDSS has made the decision to transition to Python 3 by 2020. That means
-that all new code must *at least* be compatible with Python 3. There is,
+that all new code must *at least* be compatible with Python 3.6. There is,
 however, a very significant amount of ancillary code that is still
 Python 2-only and that will not be ported to Python 3 for some time.
 
@@ -72,6 +67,8 @@ which are its dependencies:
    possible, so that when those dependencies are upgraded you can
    upgrade your code easily.
 
+- If your code is intended for a large user base, Python 2 and 3 compatibility is recommended, but the focus should be put into Python 3.
+
 Whenever you create a new Python file, make sure to add the following
 lines at the top of the file
 
@@ -80,6 +77,7 @@ lines at the top of the file
     from __future__ import division
     from __future__ import print_function
     from __future__ import absolute_import
+    from __future__ import unicode_literals
 
 That will force you to use ``import``, ``print``, and division in a way
 that is Python 2 and 3-compatible.
@@ -92,7 +90,7 @@ Some resources that can be useful to write code that is Python 2 and
 -  The `six <https://pythonhosted.org/six/#>`__ library provides
    functions to write code that will work in Python 2 and 3.
 -  When converting code from Python 2 to 3, consider using
-   `2to3 <https://docs.python.org/2/library/2to3.html>`__ as the
+   `python-futurize <http://python-future.org/overview.html#automatic-conversion-to-py2-3-compatible-code>`__ as the
    starting point. It works very well for most files, and even for those
    files that require manual interaction, it paves most of the way.
 
@@ -102,33 +100,41 @@ Code storage and ownership
 All code must be version controlled using
 `git <https://git-scm.com/>`__. Older code, still under the SVN
 repository, can be maintained using Subversion until it has been ported
-to Git.
+to Git. Large data-only repositories that use SVN do not need to be ported.
 
 All code must live in the `SDSS GitHub
-organisation <https://www.github.com/sdss>`__. When starting a new
+organisation <https://www.github.com/sdss>`__. Code that is specific to Apache Point Observatory and it is shared with other on-site telescopes should be put in `their own <https://github.com/ApachePointObservatory>`__ organisation. When starting a new
 product, start a new repository in the GitHub organisation (you can
 choose to make it public or private) and follow the instructions to
 clone it to your computer. Feel free to create forks of the repositories
 to your own GitHub account, but make sure the production version of the
 code lives in the organisation repo.
 
+If your code is already in GitHub, move it to the SDSS GitHub organisation as soon as it is ready to be shared. This can be done easily by creating a new repository in the SDSS GitHub, adding it as a new remote to your local checkout, and pushing to the new remote.
+
 All code must have *at least* one owner, who is ultimately responsible
 for keeping the code working and making editorial decisions. Owners can
-make decision on which code standards to follow (within the requirements
+make decisions on which code standards to follow (within the requirements
 listed in this document), such as maximum line length, linter, or
 testing framework. The owner(s) names should be obvious in the README of
 the repo and in the ``setup.py`` file.
 
-Versioning and change logs
---------------------------
+Tagging, versioning, and change logs
+-----------------------------------
 
-Software versions should follow the convention ``X.Y.Z`` (e.g.,
+**All production software must run from tagged versions.** The only exception to this rule is when debugging new code during engineering or test runs.
+
+Following `PEP 440 <https://www.python.org/dev/peps/pep-0440/>`__, software versions should use the convention ``X.Y.Z`` (e.g.,
 ``1.2.5``) where X indicates the major version (large, maybe
 non-backwards compatible changes), Y is for minor changes and additions
 (backwards compatible), and Z is for bug fixes (no added functionality).
 Suffixes to the version, such as ``dev``, ``alpha``, ``beta``, are
 accepted. Do not use a hyphen between version and suffix (``1.2.5dev``
-is ok, ``1.2.5-dev`` is not).
+is ok, ``1.2.5-dev`` is not). Note that `PEP 440 <https://www.python.org/dev/peps/pep-0440/>`__ recommends separating suffixes with a period (``1.2.5.dev``) but we have found that sometimes causes problems with pip.
+
+For products that already have tagged versions using the old SDSS versioning standards (e.g., ``v1_2_3``), tag new versions using the new convention (e.g., ``1.2.4``) but do not rename or retag previous versions.
+
+Python packages must return its version via the ``__version__`` attribute. All other products, including metadata and datamodels, must also be versioned in a clear and obvious way. When tagging using git, prefer `annotated tags <https://git-scm.com/docs/git-tag>`__.
 
 Version tracking may be complicated so we recommend using
 ``bumpversion`` (see `here <https://github.com/peritus/bumpversion>`__
@@ -140,7 +146,9 @@ to the product. You can go to the root of the package and run
 ``bumpversion minor``. This will update the version to ``0.6.0dev``
 everywhere needed, and will commit the changes. When you are ready to
 release, you can do ``bumpversion release`` to change the version to
-``0.6.0``.
+``0.6.0``. See the `template documentation <http://sdss-python-template.readthedocs.io/en/latest/index.html#bumpversion-section>`__ for more details.
+
+All files must include in their metadata the version of the software that produced them, along with the versions of all relevant dependencies. For instance, data FITS must include the version of the pipeline in the header.
 
 All changes should be logged in a ``CHANGELOG.rst`` or ``CHANGELOG.md``
 file. See `the template CHANGELOG.rst <./CHANGELOG.rst>`__ for an
@@ -167,7 +175,7 @@ for more information on using requirements.txt files. Consider using
 multiple requirements.txt files (e.g, ``requirements.txt``,
 ``requirements_dev.txt``, ``requirements_docs.txt``) for different
 pieces of functionality. Additionally, you must maintain the
-`module <etc/python_template.module>`__ file for your product. If you
+`module <etc/{{cookiecutter.package_name}}.module>`__ file for your product. If you
 package depends on SDSS-specific, non pip-installable packages, use the
 module file to load the necessary dependencies.
 
@@ -262,11 +270,9 @@ general:
    methods should have a docstring.
 -  Use double quotes for docstrings; reserve single quotes for normal
    strings.
--  Limit your docstrings lines to the same line length you are using for
-   your code. **TODO: actually PEP237 recommends to use 72 characters.
-   Do we follow that?**
+-  Limit your docstrings lines to 72 characters. This convention can be a bit constraining for some developers; it is ok to ignore it and use the line length you are using for your code (79 or 99 characters).
 -  A complete docstring should start with a single line describing the
-   general purpose of the function or class. Then a blank line and and
+   general purpose of the function or class. Then a blank line and an
    in-depth description of the function or class in one or more
    paragraphs. A list of the input parameters (arguments and keywords)
    follows, and a description of the values returned, if any. If the
@@ -319,7 +325,6 @@ etc. We suggest
 
 .. code:: python
 
-    #!/usr/bin/env python
     # encoding: utf-8
     #
     # @Author:
@@ -332,19 +337,22 @@ etc. We suggest
     from __future__ import division
     from __future__ import print_function
     from __future__ import absolute_import
+    from __future__ import unicode_literals
 
 In general, do not include comments about when you last modified the
-file. Instead, use the `changelog <./CHANGELOG.rst>`__ and atomic git
+file since those become out of date really fast. Instead, use the `changelog <./CHANGELOG.rst>`__ and atomic git
 commits.
+
+All executable files should live in the ``bin/`` directory. For those files, add a shebang at the beginning of the header ::
+
+   #!/usr/bin/env python
 
 General advice
 ~~~~~~~~~~~~~~
 
--  Blank lines take only one byte; there is no reason for you not to use
-   them frequently and improve legibility.
--  Remember the `Zen of
-   Python <https://www.python.org/dev/peps/pep-0020/>`__. Explicit is
-   better than implicit. Simple is better than complex.
+- Blank lines only add one byte to your file size; use them prolifically to improve legibility.
+- Read the `Zen of Python <https://www.python.org/dev/peps/pep-0020/>`__. Explicit is better than implicit. Simple is better than complex.
+- Know when ignore these standards if there is a good reason or it improves readability (but don't use that as an excuse to just not follow the standards).
 
 Testing
 -------
@@ -500,8 +508,8 @@ as well as astronomers outside SDSS using SDSS software.
 Zenodo
 ~~~~~~
 
-Zenodo allows you to generate a unique digital object identifier (DOI) for any piece of software code in a Github
-repository.  DOI's are citable snippets, and allow your software code to be identified by tools.  See `Making Your Code Citable <https://guides.github.com/activities/citable-code/>`_ for how to connect your Github repository to Zenodo.  Once your Github repo is connected to Zenodo, every new Github tag or release gets a new DOI from Zenodo.  Zenodo provides a citable formats for mutiple journals as well as export to a Bibtex file.
+Zenodo allows you to generate a unique digital object identifier (DOI) for any piece of software code in a GitHub
+repository.  DOI's are citable snippets, and allow your software code to be identified by tools.  See `Making Your Code Citable <https://guides.github.com/activities/citable-code/>`_ for how to connect your GitHub repository to Zenodo.  Once your GitHub repo is connected to Zenodo, every new GitHub tag or release gets a new DOI from Zenodo.  Zenodo provides a citable formats for multiple journals as well as export to a Bibtex file.
 
 Astrophysical Source Code Library
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -516,3 +524,4 @@ Further reading
 -  Python's own `documentation style
    guide <https://docs.python.org/devguide/documenting.html>`__ is a
    good resource to learn to write good documentation.
+- Astropy's `coding standards <http://docs.astropy.org/en/stable/development/codeguide.html>`__ and `documentation guide <http://docs.astropy.org/en/stable/development/docguide.html>`__ are good resources.

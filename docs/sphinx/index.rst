@@ -11,22 +11,26 @@ What you get with this template
 
 * Python 2/3 compatibility
 * `Pytest <https://docs.pytest.org/en/latest/>`_ testing framework
-* Continuous Integration with :ref:`Travis <travis>` and `Coveralls <https://coveralls.io/>`_
-* :ref:`Pip <deploying>`-ready product
-* :ref:`Sphinx Documentation <sphinx>` with :ref:`Read The Docs <rtd>` integration
-* Versioning with :ref:`BumpVersion <bumpversion>`.
-* :ref:`Invoke <invoke>` for shell tasks
+* Continuous Integration with :ref:`Travis <travis-section>` and `Coveralls <https://coveralls.io/>`_
+* :ref:`Pip <deploying-section>`-ready product
+* :ref:`Sphinx Documentation <sphinx-section>` with :ref:`Read The Docs <rtd-section>` integration
+* Versioning with :ref:`BumpVersion <bumpversion-section>`.
+* :ref:`Invoke <invoke-section>` for shell tasks
 * SDSS-compliant `license file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/LICENSE.md>`_.
 * `Module file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/etc/%7B%7Bcookiecutter.package_name%7D%7D.module>`_.
-* Package configuration file
+* :ref:`Configuration file <conf-log-section>` and improved :ref:`logging <conf-log-section>`.
+
 
 Directory Contents
-^^^^^^^^^^^^^^^^^^
+------------------
 
 * **cextern**: The directory for placing C code to be compiled
 * **docs**: The directory for Sphinx documentation and other docu-related files
 * **etc**: The directory containing your SDSS modulefile and other etc
 * **python**: Your new python package directory
+* **python/package_name/etc**: An etc directory with text files that will be installed with the product. Contains a YAML configuration file that is ready by the package when imported.
+* **python/package_name/misc**: General-use tools, including a custom logger and colour printing routines.
+* **python/package_name/tests**: The directory containing the tests for the package. Includes a ``conftest.py`` file with basic configuration using `pytest <https://docs.pytest.org/en/latest/>`_.
 * **CHANGELOG.rst**: A file documenting changes to your code, e.g. new features, fixed issues, or bug-fixes.
 * **README.rst**: A file describing your package.  This will be the main display on Github.
 * **STYLE.rst**: The SDSS style guide for best coding practices.
@@ -39,18 +43,18 @@ Directory Contents
 * **.bumpversion.cfg**: The configuration file for Bumpversion.
 * **.coveragerc**: The configuration file for python code coverage and Coveralls.
 
+
 Creating a new product
 ----------------------
 
-To install and initialize a new product from the template run
-
-.. code-block:: bash
+To install and initialize a new product from the template run ::
 
     pip install invoke
+    pip install bumpversion
     pip install cookiecutter
     cookiecutter https://github.com/sdss/python_template.git
 
-During the installation you will be asked a series of prompts to specify options and variable names, e.g. your name, the repository/folder name, the package name (which can be identical to the repository name), etc. These definitions will be inserted into the package in designated places.
+During the installation `cookiecutter <https://github.com/audreyr/cookiecutter>`__ will ask you a series of prompts to specify options and variable names, e.g. your name, the repository/folder name, the package name (which can be identical to the repository name), etc. These definitions will be inserted into the package in designated places to customise it for you.
 
 The **create_git_repo** prompt asks ``do you want to create a git repository out of your new package?``.  If you answer ``yes``, the product will be initialised as a git repository.  The final prompts ask ``did you already create a new repository on Github?`` and ``what is your Github username?``.  If you answer ``yes``, and specify a name, a remote origin will be added to your new git repository and will be pushed to Github.  If not, `create a GitHub repository <https://help.github.com/articles/creating-a-new-repository/>`_ (either at the `SDSS organisation <https://github.com/sdss>`_ or in your personal account) and copy the URL provided by GitHub. In the root of your local product run ::
 
@@ -64,7 +68,7 @@ The new product can be installed in your system by running ``python setup.py ins
 Now you have a totally functional, if very simple, Python package connected to a GitHub repository. The following sections explain how to use the features included in the template and how to connect it with different online services. Before you continue, this may be a good time to read the :doc:`SDSS coding standards <standards>` and make sure your code complies with them.
 
 
-.. _bumpversion:
+.. _bumpversion-section:
 
 Bumping a version
 -----------------
@@ -98,17 +102,27 @@ This will create a new tag locally with the new bumped version as the tag name. 
 If you release and tag a new version, don't forget to do ``bumpversion patch`` to increment to the next `dev` version.
 
 
-.. _travis:
+.. _tests-section:
+
+Writing and running tests
+-------------------------
+
+The ``tests`` directory contains some examples on how to write and run tests for your package using `pytest`_. Use the `conftest.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/python/%7B%7Bcookiecutter.package_name%7D%7D/tests/conftest.py>`_ file to define `fixtures <https://docs.pytest.org/en/latest/fixture.html>`__ and other `pytest`_-specific features. cd'ing to the ``tests`` directory and typing ``pytest`` will recursively run all the tests in files whose filename starts with ``test_``.
+
+If you prefer to use `unittest <https://docs.python.org/3/library/unittest.html>`_ or `nose <https://nose2.readthedocs.io/en/latest/getting_started.html>`_ feel free to remove those files.
+
+
+.. _travis-section:
 
 Connecting your product to Travis
 ---------------------------------
 
-The template includes a basic setup for `Travis CI <https://travis-ci.org/>`_ and `Coveralls <https://coveralls.io/>`_. The configuration is defined in the `.travis.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/.travis.yml>`_ and `.coveragerc <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/.coveragerc>`_ files.
+The template includes a basic setup for `Travis CI <https://travis-ci.org/>`__ and `Coveralls <https://coveralls.io/>`_. The configuration is defined in the `.travis.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/.travis.yml>`_ and `.coveragerc <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/.coveragerc>`_ files.
 
-Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`_ account (create one if you don't have it) and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
+Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`__ account (create one if you don't have it) and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
 
 
-.. _invoke:
+.. _invoke-section:
 
 Using invoke
 ------------
@@ -117,12 +131,12 @@ The product includes several macros to automate frequent tasks using `Invoke <ht
 
     invoke -l
 
-The documentation can be compiled by doing ``invoke docs.build`` and then shown in your browser with ``invoke docs.show``. Another useful macro, ``invoke deploy``, automates the process of deploying a new version by creating new distribution packages and uploading them to PyPI (see deploying_).
+The documentation can be compiled by doing ``invoke docs.build`` and then shown in your browser with ``invoke docs.show``. Another useful macro, ``invoke deploy``, automates the process of deploying a new version by creating new distribution packages and uploading them to PyPI (see deploying-section_).
 
-You can add new tasks to the `tasks.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/tasks.py>`_ file.
+You can add new tasks to the `tasks.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/tasks.py>`__ file.
 
 
-.. _sphinx:
+.. _sphinx-section:
 
 How to build Sphinx Documentation
 ---------------------------------
@@ -154,7 +168,7 @@ The template includes an example on how to automatically document the docstrings
 You can add similar blocks of code for other modules. See the Sphinx `autodoc <http://www.sphinx-doc.org/en/stable/ext/autodoc.html>`_ for more details. The :ref:`coding standards <style-docstring>` include a section on how to write good docstrings to document your code.
 
 
-.. _rtd:
+.. _rtd-section:
 
 Connecting your product to Read The Docs
 ----------------------------------------
@@ -164,7 +178,62 @@ The cookiecut product documentation is ready to be built and integrated with Rea
 The product configuration for Read The Docs can be found in `readthedocs.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/readthedocs.yml>`_. By default, the Sphinx documentation will be built using Python 3.5 and using the requirements specified in `requirements_doc.txt <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/requirements_doc.txt>`_. You can change those settings easily.
 
 
-.. _deploying:
+.. _conf-log-section:
+
+Configuration file and logging
+------------------------------
+
+Your new product contains a `YAML <http://yaml.org/>`_ configuration file in the `python/[product_name]/etc/` directory. YAML is significantly superior to other alternatives such as `configparser <https://docs.python.org/3/library/configparser.html>`__; it provides typed values, a clear data structure, and powerful parsing libraries. When you import the package, the configuration can be accessed as a dictionary using the ``config`` attribute. For example ::
+
+    import mypython
+    print(mypython.config['option1']['suboption1'])
+    >>> 2.0
+    print(mypython.config['option1']['suboption2'])
+    >>> 'some text'
+
+If the user creates a custom configuration file in ``~/.mypython/mypython.yml``, the contents of that file will be used to update the default options. For instance, if you create a file with the contents
+
+.. code-block:: yaml
+
+    option1:
+        suboption2: "a different text"
+
+the code above would return ::
+
+    print(mypython.config['option1']['suboption1'])
+    >>> 2.0
+    print(mypython.config['option1']['suboption2'])
+    >>> 'a different text'
+
+The package also includes a logging object built around Python's `logging <https://docs.python.org/3/library/logging.html>`__ module. Our custom logger allows to file and screen at the same time and provides more colourful tracebacks and warnings. From anywhere in your code you can do ::
+
+    from mypython import log
+    log.info('Some information that we want to log')
+    >>> [INFO]: Some information that we want to log
+
+Available levels are ``.debug``, ``.info``, ``.error``, and ``.critical``. For warnings, use `warnings <https://docs.python.org/3/library/warnings.html>`__ module.
+
+By default, the file logger is not enabled. To start logging to file do ::
+
+    log.start_file_logger('~/.mypython/mypython.log')
+
+where ``'~/.mypython/mypython.log'`` is the path of the file to which we want to log. If the file exists, the previous file is backed up by adding a timestamp to the extension. File logs are automatically backed up at midnight (see `TimedRotatingFileHandler <https://docs.python.org/2/library/logging.handlers.html>`__).
+
+On initialisation, the screen logger will only show messages with level ``INFO`` or above. The file logger default level is ``DEBUG``. Levels can be changed in runtime ::
+
+    # Sets the screen minimum level to DEBUG
+    import logging
+    log.sh.setLevel(logging.DEBUG)
+
+    # Sets the file level to CRITICAL
+    log.fh.setLevel(logging.CRITICAL)
+
+The current log can be saved as ::
+
+    log.save_log('~/Downloads/copy_of_log.log')
+
+
+.. _deploying-section:
 
 Deploying your product
 ----------------------
@@ -208,4 +277,4 @@ Now you have the development version of this template.  The two main components 
 
 Upon installation of the template by a user, the variables defined in the `cookiecutter.json` file, or by the user during install, get substituted into their respective reference places.
 
-Please, *do not* modify the master branch directly, unless otherwise instructed. Instead, develop your changes in a branch and, when ready to merge, create a pull request.
+Please, *do not* modify the master branch directly unless otherwise instructed. Instead, develop your changes in a branch or fork and, when ready to merge, create a pull request.

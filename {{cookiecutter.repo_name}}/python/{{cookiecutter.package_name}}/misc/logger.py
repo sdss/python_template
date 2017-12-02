@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # encoding: utf-8
 #
 # @Author: José Sánchez-Gallego
@@ -13,6 +12,7 @@
 from __future__ import division
 from __future__ import print_function
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 import datetime
 import logging
@@ -237,17 +237,19 @@ class MyLogger(Logger):
         # Catches exceptions
         sys.excepthook = self._catch_exceptions
 
-    def start_file_logger(self, name, log_file_level=logging.DEBUG, log_file_path='./'):
+    def start_file_logger(self, path, log_file_level=logging.DEBUG):
         """Start file logging."""
 
-        log_file_path = os.path.expanduser(log_file_path) / '{}.log'.format(name)
-        logdir = log_file_path.parent
+        log_file_path = os.path.expanduser(path)
+        logdir = os.path.dirname(log_file_path)
 
         try:
-            logdir.mkdir(parents=True, exist_ok=True)
+
+            if not os.path.exists(logdir):
+                os.mkdir(logdir)
 
             # If the log file exists, backs it up before creating a new file handler
-            if log_file_path.exists():
+            if os.path.exists(log_file_path):
                 strtime = datetime.datetime.utcnow().strftime('%Y-%m-%d_%H:%M:%S')
                 shutil.move(log_file_path, log_file_path + '.' + strtime)
 

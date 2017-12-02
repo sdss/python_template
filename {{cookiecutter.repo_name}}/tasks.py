@@ -1,20 +1,21 @@
-# !usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # Licensed under a 3-clause BSD license.
 #
 # @Author: Brian Cherinka
-# @Date:   2017-09-27 11:08:07
-# @Last modified by:   Brian Cherinka
-# @Last Modified time: 2017-11-29 00:08:57
+# @Date: 2017-09-27
+# @Filename: tasks.py
+# @License: BSD 3-Clause
+# @Copyright: Brian Cherinka
 
-from __future__ import print_function, division, absolute_import
+
+from __future__ import print_function, division, absolute_import, unicode_literals
 import os
 from invoke import Collection, task
 
 
-# This file contains tasks that can be easily run from the shell terminal using the Invoke python package
-# If you do not have invoke, install it with pip install
+# This file contains tasks that can be easily run from the shell terminal using the Invoke
+# python package. If you do not have invoke, install it with pip install
 # To list the tasks available, type invoke --list from the top-level repo directory
 
 @task
