@@ -130,7 +130,7 @@ non-backwards compatible changes), Y is for minor changes and additions
 (backwards compatible), and Z is for bug fixes (no added functionality).
 Suffixes to the version, such as ``dev``, ``alpha``, ``beta``, are
 accepted. Do not use a hyphen between version and suffix (``1.2.5dev``
-is ok, ``1.2.5-dev`` is not). Note that `PEP440`_ recommends separating suffixes with a period (``1.2.5.dev``) but we have found that sometimes causes problems with pip.
+is ok, ``1.2.5-dev`` is not). Note that PEP440_ recommends separating suffixes with a period (``1.2.5.dev``) but we have found that sometimes causes problems with pip.
 
 For products that already have tagged versions using the old SDSS versioning standards (e.g., ``v1_2_3``), tag new versions using the new convention (e.g., ``1.2.4``) but do not rename or retag previous versions.
 
