@@ -15,6 +15,9 @@ import os
 import argparse
 import sys
 
+
+# The NAME variable should be of the format "sdss-{{cookiecutter.package_name}}".
+# Please check your NAME adheres to that format.
 NAME = '{{cookiecutter.package_name}}'
 VERSION = '{{cookiecutter.version}}'
 RELEASE = 'dev' in VERSION

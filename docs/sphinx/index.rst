@@ -262,6 +262,9 @@ which will create source and `wheel <https://pythonwheels.com/>`_ distributions 
     python setup.py sdist bdist_wheel --universal
     twine upload dist/*
 
+The `NAME` argument inside your `setup.py` specifies the name of the package as it appears in `PyPi` and how it will be installed.  To avoid potential conflicts with existing packages, all SDSS package pip-names should adhere to the format ``sdss-[pkgname]``.  E.g. the Python package
+`tree` would be called `sdss-tree`.  The python package `sdss_access` would be called `sdss-access`.
+
 
 How to modify this template
 ---------------------------
