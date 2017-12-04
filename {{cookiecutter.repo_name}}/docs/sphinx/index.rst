@@ -9,16 +9,21 @@
 
 This is the Sphinx documentation for the SDSS Python product {{cookiecutter.package_name}}
 
-- :ref:`What's new in {{cookiecutter.package_name}}? <changelog>`
+Introduction
+------------
 
 A description of the package can go here.
 
+* :ref:`What's new in {{cookiecutter.package_name}}? <changelog>`
+* :ref:`Introduction to {{cookiecutter.package_name}} <intro>`
+
+Reference
+---------
+
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
-   intro
    api
-
 
 
 Indices and tables

@@ -1,3 +1,6 @@
+
+.. _intro:
+
 Introduction to {{cookiecutter.package_name}}
 ===============================
 

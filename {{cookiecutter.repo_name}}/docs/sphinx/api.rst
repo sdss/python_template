@@ -1,3 +1,6 @@
+
+.. _api:
+
 {{cookiecutter.package_name}} Reference
 =========================
 
