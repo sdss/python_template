@@ -19,7 +19,7 @@ What you get with this template
 * SDSS-compliant `license file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/LICENSE.md>`_.
 * `Module file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.repo_name%7D%7D/etc/%7B%7Bcookiecutter.package_name%7D%7D.module>`_.
 * :ref:`Configuration file <conf-log-section>` and improved :ref:`logging <conf-log-section>`.
-
+* the SDSS :ref:`tree and sdss_access <sdsspy>` python packages.
 
 Directory Contents
 ------------------
@@ -281,3 +281,30 @@ Now you have the development version of this template.  The two main components 
 Upon installation of the template by a user, the variables defined in the `cookiecutter.json` file, or by the user during install, get substituted into their respective reference places.
 
 Please, *do not* modify the master branch directly unless otherwise instructed. Instead, develop your changes in a branch or fork and, when ready to merge, create a pull request.
+
+.. _sdsspy:
+
+SDSS tree and sdss_access
+-------------------------
+
+This template includes the SDSS `tree <http://github.com/sdss/tree>`_ and `sdss_access <http://github.com/sdss/sdss_acess>`_ Python packages.  This template adds these products as required dependencies in your installed project's `requirements.txt` file.  We encourage you to use these packages inside your code.  The `tree` package is designed to set up the SDSS SAS environment system dynamically within your Python environment.  The `sdss_access` package is designed to provide local and remote filesystem path generation and downloading.  To use these yourself, you may need to install them::
+
+    pip install sdss-tree
+    pip install sdss-access
+
+See the `tree <http://sdss-tree.readthedocs.io/en/latest/>`_ and `sdss_access <http://sdss-access.readthedocs.io/en/latest/>`_ `readthedocs` for full documentation on each package, but in brief, to use the `tree`::
+
+    # loads the full SAS using the sdsswork configuration.  You only need to do this one per Python session.
+    from tree import Tree
+    my_tree = Tree()
+
+and to use `sdss_access`::
+
+    # generate a local path to a file
+    from sdss_access.path import Path
+    path = Path()
+    filepath = path.full('mangacube', drpver='v2_3_1', plate='8485', '1901')
+
+
+
+
