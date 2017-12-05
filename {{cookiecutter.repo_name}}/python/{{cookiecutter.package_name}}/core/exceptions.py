@@ -6,12 +6,14 @@
 # @Author: Brian Cherinka
 # @Date:   2017-12-05 12:01:21
 # @Last modified by:   Brian Cherinka
-# @Last Modified time: 2017-12-05 12:13:08
+# @Last Modified time: 2017-12-05 12:19:32
 
 from __future__ import print_function, division, absolute_import
 
 
 class {{cookiecutter.package_name|title}}Error(Exception):
+    """A custom core {{cookiecutter.package_name|title}} exception"""
+
     def __init__(self, message=None):
 
         message = 'There has been an error' \
@@ -21,7 +23,7 @@ class {{cookiecutter.package_name|title}}Error(Exception):
 
 
 class {{cookiecutter.package_name|title}}NotImplemented({{cookiecutter.package_name|title}}Error):
-    """A {{cookiecutter.package_name|title}} exception for not yet implemented features."""
+    """A custom exception for not yet implemented features."""
 
     def __init__(self, message=None):
 
@@ -32,6 +34,8 @@ class {{cookiecutter.package_name|title}}NotImplemented({{cookiecutter.package_n
 
 
 class {{cookiecutter.package_name|title}}ApiError({{cookiecutter.package_name|title}}Error):
+    """A custom exception for API errors"""
+
     def __init__(self, message=None):
         if not message:
             message = 'Error with Http Response from {{cookiecutter.package_name|title}} API'
@@ -42,6 +46,7 @@ class {{cookiecutter.package_name|title}}ApiError({{cookiecutter.package_name|ti
 
 
 class {{cookiecutter.package_name|title}}ApiAuthError({{cookiecutter.package_name|title}}APIError):
+    """A custom exception for API authentication errors"""
     pass
 
 
