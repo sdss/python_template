@@ -1,3 +1,3 @@
 .. _standards:
 
-.. include:: ../../STYLE.rst
+.. include:: ../../{{cookiecutter.repo_name}}/STYLE.rst
