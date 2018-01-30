@@ -8,7 +8,6 @@
 
 # Adapted from astropy's logging system.
 
-
 from __future__ import division
 from __future__ import print_function
 from __future__ import absolute_import
@@ -23,6 +22,7 @@ import traceback
 import sys
 import warnings
 
+from logging import PercentStyle
 from logging.handlers import TimedRotatingFileHandler
 # from textwrap import TextWrapper
 
@@ -31,7 +31,6 @@ from pygments.lexers import get_lexer_by_name
 from pygments.formatters import TerminalFormatter
 
 from .color_print import color_text
-
 
 # Adds custom log level for print and twisted messages
 PRINT = 15
@@ -57,11 +56,13 @@ def print_exception_formatted(type, value, tb):
 def colored_formatter(record):
     """Prints log messages with colours."""
 
-    colours = {'info': ('blue', 'normal'),
-               'debug': ('magenta', 'normal'),
-               'warning': ('yellow', 'normal'),
-               'print': ('green', 'normal'),
-               'error': ('red', 'bold')}
+    colours = {
+        'info': ('blue', 'normal'),
+        'debug': ('magenta', 'normal'),
+        'warning': ('yellow', 'normal'),
+        'print': ('green', 'normal'),
+        'error': ('red', 'bold')
+    }
 
     levelname = record.levelname.lower()
 
@@ -70,19 +71,23 @@ def colored_formatter(record):
 
     if levelname.lower() in colours:
         levelname_color = colours[levelname][0]
-        header = color_text('[{}]: '.format(levelname.upper()), levelname_color)
+        header = color_text('[{}]: '.format(levelname.upper()),
+                            levelname_color)
 
     message = '{0}'.format(record.msg)
 
     warning_category = re.match('^(\w+Warning\:).*', message)
     if warning_category is not None:
-        warning_category_colour = color_text(warning_category.groups()[0], 'cyan')
-        message = message.replace(warning_category.groups()[0], warning_category_colour)
+        warning_category_colour = color_text(warning_category.groups()[0],
+                                             'cyan')
+        message = message.replace(warning_category.groups()[0],
+                                  warning_category_colour)
 
     sub_level = re.match('(\[.+\]:)(.*)', message)
     if sub_level is not None:
         sub_level_name = color_text(sub_level.groups()[0], 'red')
-        message = '{}{}'.format(sub_level_name, ''.join(sub_level.groups()[1:]))
+        message = '{}{}'.format(sub_level_name, ''.join(
+            sub_level.groups()[1:]))
 
     # if len(message) > 79:
     #     tw = TextWrapper()
@@ -105,39 +110,36 @@ class MyFormatter(logging.Formatter):
 
     ansi_escape = re.compile(r'\x1b[^m]*m')
 
-    def __init__(self, fmt='%(levelname)s - %(message)s [%(funcName)s @ ' +
-                 '%(filename)s]'):
-        logging.Formatter.__init__(self, fmt, datefmt='%Y-%m-%d %H:%M:%S')
-
     def format(self, record):
 
         # Save the original format configured by the user
         # when the logger formatter was instantiated
-        format_orig = self._fmt
+        # format_orig = self._fmt
 
         # Replace the original format with one customized by logging level
+
         if record.levelno == logging.DEBUG:
-            self._fmt = MyFormatter.info_fmt
+            self._style = PercentStyle(MyFormatter.info_fmt)
 
         elif record.levelno == logging.getLevelName('PRINT'):
-            self._fmt = MyFormatter.info_fmt
+            self._style = PercentStyle(MyFormatter.info_fmt)
 
         elif record.levelno == logging.INFO:
-            self._fmt = MyFormatter.info_fmt
+            self._style = PercentStyle(MyFormatter.info_fmt)
 
         elif record.levelno == logging.ERROR:
-            self._fmt = MyFormatter.info_fmt
+            self._style = PercentStyle(MyFormatter.info_fmt)
 
         elif record.levelno == logging.WARNING:
-            self._fmt = MyFormatter.warning_fmp
+            self._style = PercentStyle(MyFormatter.warning_fmt)
 
-        record.msg = self.ansi_escape.sub('', record.msg)
+        # record.msg = self.ansi_escape.sub('', record.msg)
 
         # Call the original formatter class to do the grunt work
         result = logging.Formatter.format(self, record)
 
         # Restore the original format configured by the user
-        self._fmt = format_orig
+        # self._fmt = format_orig
 
         return result
 
@@ -248,12 +250,13 @@ class MyLogger(Logger):
             if not os.path.exists(logdir):
                 os.mkdir(logdir)
 
-            # If the log file exists, backs it up before creating a new file handler
             if os.path.exists(log_file_path):
-                strtime = datetime.datetime.utcnow().strftime('%Y-%m-%d_%H:%M:%S')
+                strtime = datetime.datetime.utcnow().strftime(
+                    '%Y-%m-%d_%H:%M:%S')
                 shutil.move(log_file_path, log_file_path + '.' + strtime)
 
-            self.fh = TimedRotatingFileHandler(str(log_file_path), when='midnight', utc=True)
+            self.fh = TimedRotatingFileHandler(
+                str(log_file_path), when='midnight', utc=True)
             self.fh.suffix = '%Y-%m-%d_%H:%M:%S'
         except (IOError, OSError) as ee:
             warnings.warn('log file {0!r} could not be opened for writing: '
@@ -263,7 +266,7 @@ class MyLogger(Logger):
             self.addHandler(self.fh)
             self.fh.setLevel(log_file_level)
 
-        self.log_filename = log_file_path
+            self.log_filename = log_file_path
 
 
 logging.setLoggerClass(MyLogger)
