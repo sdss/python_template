@@ -1,4 +1,4 @@
-body { color: #444444 !important; }
+body { color: #444444 !important; font-size: 14px}
 
 div.custom-warning {
     background-color: #f7c589;
@@ -93,15 +93,15 @@ em.property {
 } */
 
 .rubric > .class-header-no-toc {
-  font-size: 200%;
-  font-weight: 120;
-  padding-bottom: 20px;
+  font-size: 240%;
+  font-weight: 400;
+  /* padding-bottom: 20px; */
   display: inline-block;
 }
 
-h1 { font-size: 200%; }
-h2 { font-size: 160%; }
-h3 { font-size: 130%; }
-h4 { font-size: 100%; }
-h5 { font-size: 80%; }
-h6 { font-size: 70%; }
+h1 { font-size: 240%; }
+h2 { font-size: 180%; }
+h3 { font-size: 150%; }
+h4 { font-size: 120%; }
+h5 { font-size: 90%; }
+h6 { font-size: 80%; }
