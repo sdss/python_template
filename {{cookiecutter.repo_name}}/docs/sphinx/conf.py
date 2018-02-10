@@ -22,8 +22,8 @@ from {{cookiecutter.package_name}} import __version__
 from pkg_resources import parse_version
 
 # Importing matplotlib here with agg to prevent tkinter error in readthedocs
-import matplotlib
-matplotlib.use('agg')
+# import matplotlib
+# matplotlib.use('agg')
 
 
 # -- General configuration ------------------------------------------------
