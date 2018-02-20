@@ -1,5 +1,12 @@
+build:
+   image: latest
+
 python:
-   version: 3.5
-   setup_py_install: false
+   version: 3.6
+   setup_py_install: true
 
 requirements_file: docs/sphinx/requirements_template_docs.txt
+
+# Don't build any extra formats
+formats:
+    - none
