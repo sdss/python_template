@@ -194,7 +194,7 @@ you automate much of the packaging and uploading process.
 SDSS has a `PyPI account <https://pypi.org/user/sdss/>`__ that should be
 used to host released version of your pip-installable projects. Do not
 deploy the project in your own account. Instead, contact
-`XXX <mailto:me@email.com>`__ to get access to the PyPI account.
+``admin[at]sdss[dot]org`` to get access to the PyPI account.
 
 Coding style
 ------------
@@ -462,7 +462,7 @@ Docs <https://readthedocs.org>`__ to automatically build and deploy
 documentation. Read the Docs can be added as a plugin to your GitHub
 repo for continuous integration so that documentation is built on each
 commit. SDSS owns a Read the Docs account. Contact
-`XXX <mailto:me@email.com>`__ to deploy your documentation there.
+``admin[at]sdss[dot]org`` to deploy your documentation there. Alternatively, you can deploy your product in your own Read the Docs account and add the user ``sdss`` as a maintainer from the admin menu.
 
 Git workflow
 ------------
