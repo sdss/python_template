@@ -184,6 +184,21 @@ class MyLogger(Logger):
     def save_log(self, path):
         shutil.copyfile(self.log_filename, os.path.expanduser(path))
 
+    def _warn(self, message, category=None, stacklevel=1):
+        """Overrides `warnings.warn`
+
+        Before calling the original `warnings.warn` function it makes sure
+        the warning is redirected to the correct ``showwarning`` function.
+
+        """
+
+        if category is None or not hasattr(category, 'logger'):
+            warnings.showwarning = self._show_warning
+        else:
+            warnings.showwarning = category.logger._show_warning
+
+        warnings._original_warn(message, category=category, stacklevel=stacklevel)
+
     def _show_warning(self, *args, **kwargs):
 
         warning = args[0]
@@ -201,7 +216,7 @@ class MyLogger(Logger):
         if mod_name is not None:
             self.warning(message, extra={'origin': mod_name})
         else:
-            self.warning(message)
+            self.warning(message, extra={'origin': 'no_module'})
 
     def _catch_exceptions(self, exctype, value, tb):
         """Catches all exceptions and logs them."""
@@ -230,7 +245,7 @@ class MyLogger(Logger):
 
         self.sh.setLevel(log_level)
 
-        warnings.showwarning = self._show_warning
+        self.enable_warnings()
 
         # Redirects all stdout to the logger
         if redirect_stdout:
@@ -238,6 +253,20 @@ class MyLogger(Logger):
 
         # Catches exceptions
         sys.excepthook = self._catch_exceptions
+
+    def enable_warnings(self):
+        """Redirects warnings to the log."""
+
+        warnings.showwarning = self._show_warning
+
+        warnings._original_warn = warnings.warn
+        warnings.warn = self._warn
+
+    def disable_warnings(self):
+        """Restores normal warning system."""
+
+        warnings.showwarning = warnings._show_warning
+        warnings.warn = warnings._original_warn
 
     def start_file_logger(self, path, log_file_level=logging.DEBUG):
         """Start file logging."""
