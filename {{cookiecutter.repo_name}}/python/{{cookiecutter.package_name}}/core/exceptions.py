@@ -33,7 +33,7 @@ class {{cookiecutter.package_name|title}}NotImplemented({{cookiecutter.package_n
         super({{cookiecutter.package_name|title}}NotImplemented, self).__init__(message)
 
 
-class {{cookiecutter.package_name|title}}ApiError({{cookiecutter.package_name|title}}Error):
+class {{cookiecutter.package_name|title}}APIError({{cookiecutter.package_name|title}}Error):
     """A custom exception for API errors"""
 
     def __init__(self, message=None):
@@ -73,4 +73,3 @@ class {{cookiecutter.package_name|title}}SkippedTestWarning({{cookiecutter.packa
 class {{cookiecutter.package_name|title}}DeprecationWarning({{cookiecutter.package_name|title}}UserWarning):
     """A warning for deprecated features."""
     pass
-
