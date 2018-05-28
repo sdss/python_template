@@ -104,7 +104,7 @@ def colored_formatter(record):
 
 class MyFormatter(logging.Formatter):
 
-    warning_fmp = '%(asctime)s - %(levelname)s: %(message)s [%(origin)s]'
+    warning_fmt = '%(asctime)s - %(levelname)s: %(message)s [%(origin)s]'
     info_fmt = '%(asctime)s - %(levelname)s - %(message)s [%(funcName)s @ ' + \
         '%(filename)s]'
 
