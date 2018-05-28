@@ -133,7 +133,7 @@ class MyFormatter(logging.Formatter):
         elif record.levelno == logging.WARNING:
             self._style = PercentStyle(MyFormatter.warning_fmt)
 
-        # record.msg = self.ansi_escape.sub('', record.msg)
+        record.msg = self.ansi_escape.sub('', record.msg)
 
         # Call the original formatter class to do the grunt work
         result = logging.Formatter.format(self, record)
