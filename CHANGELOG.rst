@@ -21,6 +21,7 @@ Changed
 * Modified code and readthedocs configuration to use Python 3.6.
 * Better logging of warnings. Custom warning are only used when the warning category is a subclass of the base package warning.
 * The ``package_name`` specified when cookiecutting the template is applied in lowercase when creating the package but in ucfirst case when creating classes.
+* Renamed ``misc`` to ``utils``.
 
 Fixed
 ^^^^^
