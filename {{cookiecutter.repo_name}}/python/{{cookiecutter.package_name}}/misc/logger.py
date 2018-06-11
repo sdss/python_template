@@ -8,29 +8,30 @@
 
 # Adapted from astropy's logging system.
 
-from __future__ import division
-from __future__ import print_function
-from __future__ import absolute_import
-from __future__ import unicode_literals
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import datetime
 import logging
 import os
 import re
 import shutil
-import traceback
 import sys
+import traceback
 import warnings
-
 from logging import PercentStyle
 from logging.handlers import TimedRotatingFileHandler
-# from textwrap import TextWrapper
 
 from pygments import highlight
-from pygments.lexers import get_lexer_by_name
 from pygments.formatters import TerminalFormatter
+from pygments.lexers import get_lexer_by_name
 
+from ..core import exceptions
 from .color_print import color_text
+
+
+# from textwrap import TextWrapper
+
+
 
 # Adds custom log level for print and twisted messages
 PRINT = 15
@@ -184,26 +185,14 @@ class MyLogger(Logger):
     def save_log(self, path):
         shutil.copyfile(self.log_filename, os.path.expanduser(path))
 
-    def _warn(self, message, category=None, stacklevel=1):
-        """Overrides `warnings.warn`
+    def _show_warning(self, message, category, *args, **kwargs):
 
-        Before calling the original `warnings.warn` function it makes sure
-        the warning is redirected to the correct ``showwarning`` function.
+        if not issubclass(category, exceptions.{{cookiecutter.package_name|title}}Warning):
+            warnings._showwarning_orig(message, category, *args, **kwargs)
+            return
 
-        """
-
-        if category is None or not hasattr(category, 'logger'):
-            warnings.showwarning = self._show_warning
-        else:
-            warnings.showwarning = category.logger._show_warning
-
-        warnings._original_warn(message, category=category, stacklevel=stacklevel)
-
-    def _show_warning(self, *args, **kwargs):
-
-        warning = args[0]
-        message = '{0}: {1}'.format(warning.__class__.__name__, args[0])
-        mod_path = args[2]
+        message = '{0}: {1}'.format(message.__class__.__name__, message)
+        mod_path = args[0]
 
         mod_name = None
         mod_path, ext = os.path.splitext(mod_path)
@@ -259,14 +248,10 @@ class MyLogger(Logger):
 
         warnings.showwarning = self._show_warning
 
-        warnings._original_warn = warnings.warn
-        warnings.warn = self._warn
-
     def disable_warnings(self):
         """Restores normal warning system."""
 
         warnings.showwarning = warnings._show_warning
-        warnings.warn = warnings._original_warn
 
     def start_file_logger(self, path, log_file_level=logging.DEBUG):
         """Start file logging."""

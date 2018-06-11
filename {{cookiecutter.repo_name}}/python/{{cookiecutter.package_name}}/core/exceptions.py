@@ -10,8 +10,6 @@
 
 from __future__ import print_function, division, absolute_import
 
-from ..misc.logger import log
-
 
 class {{cookiecutter.package_name|title}}Error(Exception):
     """A custom core {{cookiecutter.package_name|title}} exception"""
@@ -59,8 +57,6 @@ class {{cookiecutter.package_name|title}}MissingDependency({{cookiecutter.packag
 
 class {{cookiecutter.package_name|title}}Warning(Warning):
     """Base warning for {{cookiecutter.package_name|title}}."""
-
-    logger = log
 
 
 class {{cookiecutter.package_name|title}}UserWarning(UserWarning, {{cookiecutter.package_name|title}}Warning):
