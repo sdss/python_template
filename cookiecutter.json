@@ -4,7 +4,7 @@
     "repo_name": "python_template",
     "package_name": "mypython",
     "version": "0.1.0dev",
-    "year": "2017",
+    "year": "2018",
     "short_description": "Simple Template package for creating SDSS Python projects",
     "create_git_repo": ["yes", "no"],
     "exists_on_github": ["no", "yes"],
