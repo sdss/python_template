@@ -32,7 +32,6 @@ from .color_print import color_text
 # from textwrap import TextWrapper
 
 
-
 # Adds custom log level for print and twisted messages
 PRINT = 15
 logging.addLevelName(PRINT, 'PRINT')
