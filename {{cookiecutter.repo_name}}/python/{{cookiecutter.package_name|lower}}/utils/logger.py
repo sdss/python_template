@@ -222,9 +222,6 @@ class MyLogger(Logger):
         for handler in self.handlers[:]:
             self.removeHandler(handler)
 
-        # Set levels
-        self.setLevel(logging.DEBUG)
-
         # Set up the stdout handler
         self.fh = None
         self.sh = logging.StreamHandler()
@@ -280,6 +277,14 @@ class MyLogger(Logger):
             self.fh.setLevel(log_file_level)
 
             self.log_filename = log_file_path
+
+    def setLevel(self, level):
+        """Sets levels for both sh and (if initialised) fh."""
+
+        self.sh.setLevel(level)
+
+        if self.fh:
+            self.fh.setLevel(level)
 
 
 logging.setLoggerClass(MyLogger)
