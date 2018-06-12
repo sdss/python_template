@@ -30,7 +30,7 @@ Directory Contents
 * **python**: Your new python package directory
 * **python/package_name/core**: A directory for high-level core classes used in your product.  Contains a set of custom python Exceptions.
 * **python/package_name/etc**: An etc directory with text files that will be installed with the product. Contains a YAML configuration file that is ready by the package when imported.
-* **python/package_name/misc**: General-use tools, including a custom logger and colour printing routines.
+* **python/package_name/utils**: General-use tools, including a custom logger and colour printing routines.
 * **python/package_name/tests**: The directory containing the tests for the package. Includes a ``conftest.py`` file with basic configuration using `pytest <https://docs.pytest.org/en/latest/>`_.
 * **CHANGELOG.rst**: A file documenting changes to your code, e.g. new features, fixed issues, or bug-fixes.
 * **CODEOWNERS**: A file assigning ownership of the code to the package or components of the package to various users
