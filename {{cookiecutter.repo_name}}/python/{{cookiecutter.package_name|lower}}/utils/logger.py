@@ -186,7 +186,7 @@ class MyLogger(Logger):
 
     def _show_warning(self, message, category, *args, **kwargs):
 
-        if not issubclass(category, exceptions.{{cookiecutter.package_name|title}}Warning):
+        if not issubclass(category, exceptions.cookiecutter.package_name[0:1]|upper ~ cookiecutter.package_name[1:]Warning):
             warnings._showwarning_orig(message, category, *args, **kwargs)
             return
 
