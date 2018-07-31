@@ -13,13 +13,13 @@ master
 
 Added
 ^^^^^
-* Added W0621 to diabled list in pylint.
+* Added W0621 to disabled list in pylint.
 
 Changed
 ^^^^^^^
 * Changed documentation font size.
 * Modified code and readthedocs configuration to use Python 3.6.
-* Better logging of warnings. Custom warning are only used when the warning category is a subclass of the base package warning.
+* Remove logger warning monkeypatching since it conflicted when used with packages that provide a similar monkeypatching. Replaced with a custom ``logging.warning`` method that produces coloured warning output.
 * The ``package_name`` specified when cookiecutting the template is applied in lowercase when creating the package but in ucfirst case when creating classes.
 * Renamed ``misc`` to ``utils``.
 
