@@ -11,6 +11,14 @@ This document records the main changes to the python-template code.
 master
 ------
 
+`View commits since the last tag <https://github.com/sdss/python_template/compare/1.0.0...HEAD>`__.
+
+
+.. _changelog-1.0.1:
+
+1.0.1 (2018-07-30)
+------------------
+
 Added
 ^^^^^
 * Added W0621 to disabled list in pylint.
@@ -29,7 +37,7 @@ Fixed
 * A typo in the definition of the warning format in the logger.
 * A typo in the definition of the API exception.
 
-`View commits <https://github.com/sdss/python_template/compare/1.0.0...HEAD>`__
+`View commits <https://github.com/sdss/python_template/compare/1.0.0...1.0.1>`__.
 
 
 .. _changelog-1.0.0:
@@ -44,4 +52,4 @@ Added
 * Includes a logger and configuration library.
 * Examples for Sphinx documentation and pytest.
 
-`View commits <https://github.com/sdss/python_template/compare/b726b904a601fe051b9db8dfd24fee59f70bc866...1.0.0>`__
+`View commits <https://github.com/sdss/python_template/compare/b726b904a601fe051b9db8dfd24fee59f70bc866...1.0.0>`__.
