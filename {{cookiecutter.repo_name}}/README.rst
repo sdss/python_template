@@ -3,8 +3,7 @@
 
 {{cookiecutter.short_description}}
 
-| |Build Status|
-| |Coverage Status|
+|Build Status| |Coverage Status|
 
 ------------
 
