@@ -55,7 +55,7 @@ def addremote(ctx):
     ''' Adds a new remote to your git repo and pushes to Github '''
 
     if GITUSER:
-        ctx.run("git remote add origin https://github.com:{0}/{1}.git".format(GITUSER, REPONAME))
+        ctx.run("git remote add origin https://github.com/{0}/{1}.git".format(GITUSER, REPONAME))
         try:
             print('Pushing to github ..')
             ctx.run("git push -u origin master")
