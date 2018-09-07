@@ -225,6 +225,9 @@ class MyLogger(Logger):
         for handler in self.handlers[:]:
             self.removeHandler(handler)
 
+        # Set levels
+        self.setLevel(logging.DEBUG)
+
         # Set up the stdout handler
         self.fh = None
         self.sh = logging.StreamHandler()
