@@ -18,6 +18,7 @@ import shutil
 import sys
 import traceback
 import warnings
+from logging import PercentStyle
 from logging.handlers import TimedRotatingFileHandler
 
 from pygments import highlight
@@ -96,23 +97,27 @@ class MyFormatter(logging.Formatter):
 
         # Save the original format configured by the user
         # when the logger formatter was instantiated
-        format_orig = self._fmt
+        # format_orig = self._fmt
 
         # Replace the original format with one customized by logging level
+
         if record.levelno == logging.DEBUG:
-            self._fmt = MyFormatter.base_fmt
+            self._style = PercentStyle(MyFormatter.base_fmt)
 
         elif record.levelno == logging.getLevelName('PRINT'):
-            self._fmt = MyFormatter.base_fmt
+            self._style = PercentStyle(MyFormatter.base_fmt)
+
+        elif record.levelno == logging.getLevelName('IMPORTANT'):
+            self._style = PercentStyle(MyFormatter.base_fmt)
 
         elif record.levelno == logging.INFO:
-            self._fmt = MyFormatter.base_fmt
+            self._style = PercentStyle(MyFormatter.base_fmt)
 
         elif record.levelno == logging.ERROR:
-            self._fmt = MyFormatter.base_fmt
+            self._style = PercentStyle(MyFormatter.base_fmt)
 
         elif record.levelno == logging.WARNING:
-            self._fmt = MyFormatter.base_fmt
+            self._style = PercentStyle(MyFormatter.base_fmt)
 
         record.msg = self.ansi_escape.sub('', record.msg)
 
@@ -120,7 +125,7 @@ class MyFormatter(logging.Formatter):
         result = logging.Formatter.format(self, record)
 
         # Restore the original format configured by the user
-        self._fmt = format_orig
+        # self._fmt = format_orig
 
         return result
 
