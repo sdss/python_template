@@ -11,7 +11,16 @@ This document records the main changes to the python-template code.
 master
 ------
 
-`View commits since the last tag <https://github.com/sdss/python_template/compare/1.0.1...HEAD>`__.
+`View commits since the last tag <https://github.com/sdss/python_template/compare/1.0.2...HEAD>`__.
+
+.. _changelog-1.0.1:
+
+1.0.2 (2018-10-01)
+------------------
+
+Fixed
+^^^^^
+* Remove ``from __future__ import unicode_literals`` that made the package install fail under Python 2. See `#9 <https://github.com/sdss/python_template/issues/9>`__ for details.
 
 
 .. _changelog-1.0.1:
