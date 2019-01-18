@@ -14,6 +14,16 @@ master
 `View commits since the last tag <https://github.com/sdss/python_template/compare/1.0.3...HEAD>`__.
 
 
+.. _changelog-1.0.4:
+
+1.0.4 (unreleased)
+------------------
+
+Fixed
+^^^^^
+* More fixes to quotes in ``module-whatis`` in module file.
+
+
 .. _changelog-1.0.3:
 
 1.0.3 (2018-12-10)
