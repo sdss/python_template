@@ -16,7 +16,7 @@ master
 
 .. _changelog-1.0.4:
 
-1.0.4 (unreleased)
+1.0.4 (2019-01-18)
 ------------------
 
 Changed
