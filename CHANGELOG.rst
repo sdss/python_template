@@ -19,6 +19,10 @@ master
 1.0.4 (unreleased)
 ------------------
 
+Changed
+^^^^^^^
+* Updated year in template to 2019.
+
 Fixed
 ^^^^^
 * More fixes to quotes in ``module-whatis`` in module file.
