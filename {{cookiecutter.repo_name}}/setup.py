@@ -27,7 +27,7 @@ def run(packages, install_requires):
     setup(name=NAME,
           version=VERSION,
           license='BSD3',
-          description='Description of your project.',
+          description='{{cookiecutter.short_description}}',
           long_description=open('README.rst').read(),
           author='{{cookiecutter.full_name}}',
           author_email='{{cookiecutter.email}}',
