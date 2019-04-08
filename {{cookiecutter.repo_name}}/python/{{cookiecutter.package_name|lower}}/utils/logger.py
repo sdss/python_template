@@ -18,7 +18,27 @@ import shutil
 import sys
 import traceback
 import warnings
-from logging import PercentStyle
+try:
+    from logging import PercentStyle
+
+except NameError:
+    # PercentStyle not available in Python 2.7
+
+    class PercentStyle(object):
+
+        default_format = '%(message)s'
+        asctime_format = '%(asctime)s'
+        asctime_search = '%(asctime)'
+
+        def __init__(self, fmt):
+            self._fmt = fmt or self.default_format
+
+        def usesTime(self):
+            return self._fmt.find(self.asctime_search) >= 0
+
+        def format(self, record):
+            return self._fmt.format(**record.__dict__)
+    
 from logging.handlers import TimedRotatingFileHandler
 
 from pygments import highlight
