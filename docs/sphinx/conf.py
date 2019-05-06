@@ -25,7 +25,7 @@ import sphinx_bootstrap_theme
 # ones.
 extensions = [
     'IPython.sphinxext.ipython_console_highlighting',
-    'IPython.sphinxext.ipython_directive']
+    'IPython.sphinxext.ipython_directive', 'sphinx_issues']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -104,6 +104,9 @@ autodoc_member_order = 'groupwise'
 
 napoleon_use_rtype = False
 napoleon_use_ivar = True
+
+# Github repo
+issues_github_path = 'sdss/python_template'
 
 rst_epilog = """
 .. |numpy_array| replace:: Numpy array
