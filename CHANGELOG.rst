@@ -13,6 +13,15 @@ master
 
 `View commits since the last tag <https://github.com/sdss/python_template/compare/1.0.3...HEAD>`__.
 
+.. _changelog-1.0.5:
+
+1.0.5 (2019-04-09)
+------------------
+
+Fixed
+^^^^^
+* Bug causing Python 2.7 templates to fail because ``PercentStyle`` is not available in ``logging`` module.
+
 
 .. _changelog-1.0.4:
 
