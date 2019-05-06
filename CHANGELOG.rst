@@ -15,12 +15,16 @@ master
 
 .. _changelog-1.0.5:
 
-1.0.5 (2019-04-09)
+1.0.5 (unreleased)
 ------------------
+
+Changed
+^^^^^^^
+* Modified logger to deal with warnings. Added critical level printing. Fixes :issue:`12,13`.
 
 Fixed
 ^^^^^
-* Bug causing Python 2.7 templates to fail because ``PercentStyle`` is not available in ``logging`` module.
+* Bug causing Python 2.7 templates to fail because ``PercentStyle`` is not available in ``logging`` module (thanks to :user:`andycasey`).
 
 
 .. _changelog-1.0.4:
