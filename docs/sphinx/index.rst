@@ -5,6 +5,7 @@ Welcome to SDSS Python Template documentation!
 
 This page describes the `SDSS Python Template <https://github.com/sdss/python_template>`_ as well as the :doc:`coding standards <standards>`.
 
+See :doc:`what's new <changelog>`.
 
 What you get with this template
 -------------------------------
