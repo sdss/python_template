@@ -80,6 +80,16 @@ class SDSSFormatter(logging.Formatter):
 
         record.msg = self.ansi_escape.sub('', record.msg)
 
+        # The format of a warnings redirected with warnings.captureWarnings
+        # has the format <path>: <category>: message\n  <some-other-stuff>.
+        # We reorganise that into a cleaner message. For some reason in this
+        # case the message is in record.args instead of in record.msg.
+        if record.levelno == logging.WARNING and len(record.args) > 0:
+            match = re.match(r'^(.*?):\s*?(\w*?Warning): (.*)', record.args[0])
+            if match:
+                message = '{1} - {2} [{0}]'.format(*match.groups())
+                record.args = tuple([message] + list(record.args[1:]))
+
         return logging.Formatter.format(self, record)
 
 
