@@ -196,7 +196,7 @@ Your new product contains a `YAML <http://yaml.org/>`_ configuration file in the
     print(mypython.config['option1']['suboption2'])
     >>> 'some text'
 
-If the user creates a custom configuration file in ``~/.mypython/mypython.yml``, the contents of that file will be used to update the default options. For instance, if you create a file with the contents
+If the user creates a custom configuration file in ``~/.config/mypython/mypython.yml``, the contents of that file will be used to update the default options. For instance, if you create a file with the contents
 
 .. code-block:: yaml
 
@@ -209,6 +209,8 @@ the code above would return ::
     >>> 2.0
     print(mypython.config['option1']['suboption2'])
     >>> 'a different text'
+
+Another possibility is to define an environment variable ``$MYPYTHON_CONFIG_PATH`` pointing to the user configuration file to use. If the environment variable is set, it overrides the default location for the user configuration file.
 
 The package also includes a logging object built around Python's `logging <https://docs.python.org/3/library/logging.html>`__ module. Our custom logger allows to file and screen at the same time and provides more colourful tracebacks and warnings. From anywhere in your code you can do ::
 

@@ -18,6 +18,14 @@ master
 1.0.5 (unreleased)
 ------------------
 
+Backward incompatible changes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* The default path for the user configuration file is now ``~/.config/<name>/<name>.yml``.
+
+Added
+^^^^^
+* Better handling of configuration files. An environment variable ``$<NAME>_CONFIG_PATH`` (e.g., ``$MYPYTHON_CONFIG_PATH``) can be defined to point to the user configuration file. If defined, this path overrides the default location.
+
 Changed
 ^^^^^^^
 * Modified logger to deal with warnings. Added critical level printing. Fixes :issue:`12,13`.
