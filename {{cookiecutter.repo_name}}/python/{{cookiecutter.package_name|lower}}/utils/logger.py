@@ -107,12 +107,11 @@ class SDSSLogger(logging.Logger):
 
     """
 
-    def __init__(self, name, log_level=logging.INFO, capture_warnings=True):
+    def __init__(self, name):
 
         super(SDSSLogger, self).__init__(name)
 
-        if name == 'py.warnings':
-            return
+    def init(self, log_level=logging.INFO, capture_warnings=True):
 
         # Set levels
         self.setLevel(logging.DEBUG)
@@ -131,30 +130,25 @@ class SDSSLogger(logging.Logger):
         sys.excepthook = self._catch_exceptions
 
         self.warnings_logger = None
-        self.capture_warnings(capture_warnings)
+
+        if capture_warnings:
+            self.capture_warnings()
 
     def _catch_exceptions(self, exctype, value, tb):
         """Catches all exceptions and logs them."""
 
         self.error(get_exception_formatted(exctype, value, tb))
 
-    def capture_warnings(self, action):
+    def capture_warnings(self):
         """Capture warnings.
 
-        If ``action`` is `True`, redirects all the warnings to a logger called
-        ``py.warnings``. Handlers are added to that logger. If ``action=False``
-        disable the warning capture.
+        When `logging.captureWarnings` is `True`, all the warnings are
+        redirected to a logger called ``py.warnings``. We add our handlers
+        to the warning logger.
 
         """
 
-        if action is False:
-            logging.captureWarnings(action)
-            self.warnings_logger = None
-            return
-
-        assert self.sh is not None, 'shell handler must'
-
-        logging.captureWarnings(action)
+        logging.captureWarnings(True)
 
         self.warnings_logger = logging.getLogger('py.warnings')
         self.warnings_logger.addHandler(self.sh)
@@ -208,7 +202,7 @@ class SDSSLogger(logging.Logger):
             self.fh.setLevel(level)
 
 
-def get_logger(name):
+def get_logger(name, **kwargs):
     """Gets a new logger."""
 
     orig_logger = logging.getLoggerClass()
@@ -216,6 +210,7 @@ def get_logger(name):
     logging.setLoggerClass(SDSSLogger)
 
     log = logging.getLogger(name)
+    log.init(**kwargs)
 
     logging.setLoggerClass(orig_logger)
 
