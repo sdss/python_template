@@ -11,7 +11,7 @@ This document records the main changes to the python-template code.
 master
 ------
 
-`View commits since the last tag <https://github.com/sdss/python_template/compare/1.0.3...HEAD>`__.
+`View commits since the last tag <https://github.com/sdss/python_template/compare/1.0.5...HEAD>`__.
 
 .. _changelog-1.0.5:
 
