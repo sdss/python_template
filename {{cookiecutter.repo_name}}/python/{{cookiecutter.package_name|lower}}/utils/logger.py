@@ -6,6 +6,7 @@
 # @License: BSD 3-Clause
 # @Copyright: José Sánchez-Gallego
 
+import copy
 import datetime
 import logging
 import os
@@ -78,19 +79,23 @@ class SDSSFormatter(logging.Formatter):
 
     def format(self, record):
 
-        record.msg = self.ansi_escape.sub('', record.msg)
+        # Copy the record so that any modifications we make do not
+        # affect how the record is displayed in other handlers.
+        record_cp = copy.copy(record)
+
+        record_cp.msg = self.ansi_escape.sub('', record_cp.msg)
 
         # The format of a warnings redirected with warnings.captureWarnings
         # has the format <path>: <category>: message\n  <some-other-stuff>.
         # We reorganise that into a cleaner message. For some reason in this
         # case the message is in record.args instead of in record.msg.
-        if record.levelno == logging.WARNING and len(record.args) > 0:
-            match = re.match(r'^(.*?):\s*?(\w*?Warning): (.*)', record.args[0])
+        if record_cp.levelno == logging.WARNING and len(record_cp.args) > 0:
+            match = re.match(r'^(.*?):\s*?(\w*?Warning): (.*)', record_cp.args[0])
             if match:
                 message = '{1} - {2} [{0}]'.format(*match.groups())
-                record.args = tuple([message] + list(record.args[1:]))
+                record_cp.args = tuple([message] + list(record_cp.args[1:]))
 
-        return logging.Formatter.format(self, record)
+        return logging.Formatter.format(self, record_cp)
 
 
 class SDSSLogger(logging.Logger):
