@@ -15,7 +15,7 @@ master
 
 .. _changelog-1.0.5:
 
-1.0.5 (unreleased)
+1.0.5 (2019-05-13)
 ------------------
 
 Backward incompatible changes
