@@ -151,6 +151,13 @@ class SDSSLogger(logging.Logger):
         logging.captureWarnings(True)
 
         self.warnings_logger = logging.getLogger('py.warnings')
+
+        # Only enable the sh handler if none is attached to the warnings
+        # logger yet. Prevents duplicated prints of the warnings.
+        for handler in self.warnings_logger.handlers:
+            if isinstance(handler, logging.StreamHandler):
+                return
+
         self.warnings_logger.addHandler(self.sh)
 
     def save_log(self, path):
