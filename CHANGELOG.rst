@@ -13,6 +13,21 @@ master
 
 `View commits since the last tag <https://github.com/sdss/python_template/compare/1.0.5...HEAD>`__.
 
+
+.. _changelog-1.0.6:
+
+1.0.6 (unreleased)
+------------------
+
+Added
+^^^^^
+* Avoid connecting more than one console handler to the warnings log.
+
+Fixed
+^^^^^
+* Do not modify the record when formatting it, in case that record is also output in other handlers.
+
+
 .. _changelog-1.0.5:
 
 1.0.5 (2019-05-13)
