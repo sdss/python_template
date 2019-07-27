@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "basecam"
+name = "{{cookiecutter.repo_name}}"
 version = "0.1.0dev"
 description = "{{cookiecutter.short_description}}"
 license = "BSD-3-Clause"
