@@ -37,7 +37,7 @@ from pkg_resources import parse_version
 # ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'sphinx.ext.autosummary',
               'sphinx.ext.todo', 'sphinx.ext.viewcode', 'sphinx.ext.mathjax',
-              'sphinx.ext.intersphinx']
+              'sphinx.ext.intersphinx', 'releases']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -123,6 +123,10 @@ rst_epilog = """
 .. |numpy_array| replace:: Numpy array
 .. |HDUList| replace:: :class:`~astropy.io.fits.HDUList`
 """
+
+releases_github_path = '{{cookiecutter.github_username}}/{{cookiecutter.package_name}}'
+releases_document_name = ['changelog']
+releases_unstable_prehistory = True
 
 
 # -- Options for HTML output ----------------------------------------------
