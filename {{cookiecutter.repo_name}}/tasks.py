@@ -76,10 +76,50 @@ def deploy_test(ctx):
     ctx.run('twine upload --repository-url https://test.pypi.org/legacy/ dist/*')
 
 
+@task(name='install-deps')
+def install_deps(ctx, extras=None):
+    """Install only dependencies from setup.cfg."""
+
+    import setuptools
+
+    if not os.path.exists('setup.cfg'):
+        raise RuntimeError('setup.cfg cannot be found. If your project uses '
+                           'requirement files use pip install -r instead.')
+
+    if extras:
+        extras = extras.split(',')
+    else:
+        extras = []
+
+    config = setuptools.config.read_configuration('setup.cfg')
+
+    if not config['options']:
+        return
+
+    options = config['options']
+
+    setup_requires = options.get('setup_requires', [])
+    install_requires = options.get('install_requires', [])
+
+    requires = setup_requires + install_requires
+    requires_str = (' '.join('"' + item + '"' for item in requires))
+    if len(requires) > 0:
+        ctx.run(f'pip install --upgrade {requires_str}', pty=True)
+
+    for extra in extras:
+        print(f'Installing extras={extra}')
+        if 'extras_require' not in options:
+            raise RuntimeError('extras_require is not defined')
+        extra_deps = options['extras_require'].get(extra, [])
+        if len(extra_deps) > 0:
+            extra_deps_str = (' '.join('"' + item + '"' for item in extra_deps))
+            ctx.run(f'pip install --upgrade {extra_deps_str}', pty=True)
+
+
 os.chdir(os.path.dirname(__file__))
 
 # create a collection of tasks
-ns = Collection(clean)
+ns = Collection(clean, install_deps)
 
 # create a sub-collection for the doc tasks
 docs = Collection('docs')
