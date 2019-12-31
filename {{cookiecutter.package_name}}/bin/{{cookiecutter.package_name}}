@@ -3,7 +3,7 @@
 #
 # @Author: José Sánchez-Gallego
 # @Date: Dec 1, 2017
-# @Filename: {{cookiecutter.repo_name}}
+# @Filename: {{cookiecutter.package_name}}
 # @License: BSD 3-Clause
 # @Copyright: José Sánchez-Gallego
 
