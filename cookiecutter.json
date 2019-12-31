@@ -2,7 +2,7 @@
     "full_name": "John Doe",
     "email": "myemail@here.com",
     "package_name": "myproject",
-    "pip_name": "sdss-myproject",
+    "pip_name": "sdss-{{ cookiecutter.project_name }}",
     "version": "0.1.0-alpha.0",
     "year": "{% now 'utc', '%Y' %}",
     "short_description": "Simple Template package for creating SDSS Python projects",
