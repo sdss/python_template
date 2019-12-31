@@ -13,4 +13,4 @@ config = get_config(NAME)
 log = get_logger(NAME)
 
 
-__version__ = get_package_version(path=__file__, package_name={{cookiecutter.pip_name}})
+__version__ = get_package_version(path=__file__, package_name='{{cookiecutter.pip_name}}')
