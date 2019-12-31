@@ -65,9 +65,23 @@ def addremote(ctx):
         print('No GitHub username specified during setup')
 
 
-col = invoke.Collection(install, addgit, addremote)
+@invoke.task
+def install_sdsstools(ctx):
+    """Tries to install sdsstools."""
+
+    try:
+        print('Installing sdsstools[dev]')
+        ctx.run('pip install sdsstools[dev]')
+    except Exception:
+        print('Could install sdsstools. Try running '
+              '"pip install sdsstools[dev]" manually.')
+
+
+col = invoke.Collection(install, addgit, addremote, install_sdsstools)
 ex = invoke.executor.Executor(col)
 
+
+ex.execute('install_sdsstools')
 
 # setup intial git repo
 creategit = '{{ cookiecutter.create_git_repo }}'
