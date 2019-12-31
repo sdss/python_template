@@ -7,12 +7,6 @@
 # @License: BSD 3-Clause
 # @Copyright: José Sánchez-Gallego
 
-
-from __future__ import division
-from __future__ import print_function
-from __future__ import absolute_import
-from __future__ import unicode_literals
-
 import argparse
 import os
 import sys
@@ -24,7 +18,7 @@ if __name__ == '__main__':
 
     # An example of how to write a command line parser that works with the
     # main.math function. For more details on how to use argparse, start with
-    # this tutorial: https://kapeli.com/dash_share?docset_file=Python%203&docset_name=Python%203&path=doc/howto/argparse.html%23id1&platform=python&repo=Main&version=3.6.3
+    # this tutorial: http://bit.ly/2SGDf7h
 
     parser = argparse.ArgumentParser(
         prog=os.path.basename(sys.argv[0]),
