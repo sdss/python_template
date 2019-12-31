@@ -9,18 +9,19 @@
 
 This is the documentation for the SDSS Python product {{cookiecutter.package_name}}. The current version if |{{cookiecutter.package_name}}_version|. You can install the package by doing
 
-.. highlight:: console
+.. code-block:: console
 
-  pip install {{cookiecutter.pip_name}}
+  $ pip install {{cookiecutter.pip_name}}
 
 
-Introduction
-------------
+Contents
+--------
 
-A description of the package can go here.
+.. toctree::
+  :maxdepth: 2
 
-* :ref:`What's new in {{cookiecutter.package_name}}? <changelog>`
-* :ref:`Introduction to {{cookiecutter.package_name}} <intro>`
+  What's new in {{cookiecutter.package_name}}? <CHANGELOG>
+  Introduction to {{cookiecutter.package_name}} <intro>
 
 
 Reference
