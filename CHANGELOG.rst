@@ -23,6 +23,11 @@ master
 Changed
 ^^^^^^^
 * Move style guide to root level.
+* Use ``setup.cfg`` for packaging and configuration of ``pytest``, ``flake8``, ``isort``, and ``coverage``.
+* Replace ``utils`` with `sdsstools <https://github.com/sdss/sdsstools>`.
+* Remove use of ``bumpversion``. Instead, get the package version using ``sdsstools.get_package_version``.
+* Updated the template Sphinx docs.
+* Updated style guide and documentation.
 
 `View commits <https://github.com/sdss/python_template/compare/1.0.6...2.0.0>`__.
 
