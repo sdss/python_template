@@ -12,7 +12,7 @@ from invoke.exceptions import UnexpectedExit
 # This script runs after the cookiecutter template has been installed
 #
 
-GITUSER = '{{ cookiecutter.github_username }}'
+GITUSER = '{{ cookiecutter.github_organisation }}'
 PIPNAME = '{{ cookiecutter.pip_name }}'
 PKGNAME = '{{ cookiecutter.package_name }}'
 
