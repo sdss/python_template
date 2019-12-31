@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 #
-# BMO documentation build configuration file, created by
-# sphinx-quickstart on Fri May  5 01:30:21 2017.
-#
 # This file is execfile()d with the current directory set to its
 # containing dir.
 #
@@ -12,18 +9,22 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+import os
+import sys
+import urllib.request
+
 import sphinx_bootstrap_theme
+from pkg_resources import parse_version
+
+from {{cookiecutter.package_name}} import __version__
+
+
+# Are we building in RTD?
+on_rtd = os.environ.get('READTHEDOCS') == 'True'
 
 # Importing matplotlib here with agg to prevent tkinter error in readthedocs
 # import matplotlib
 # matplotlib.use('agg')
-
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-
-from {{cookiecutter.package_name}} import __version__
-from pkg_resources import parse_version
 
 
 # -- General configuration ------------------------------------------------
@@ -48,9 +49,9 @@ templates_path = ['_templates']
 source_suffix = ['.rst', '.md']
 # source_suffix = '.rst'
 
-source_parsers = {
-    '.md': 'recommonmark.parser.CommonMarkParser',
-}
+# source_parsers = {
+#     '.md': 'recommonmark.parser.CommonMarkParser',
+# }
 
 # The master toctree document.
 master_doc = 'index'
@@ -119,9 +120,10 @@ autodoc_member_order = 'groupwise'
 napoleon_use_rtype = False
 napoleon_use_ivar = True
 
-rst_epilog = """
+rst_epilog = f"""
 .. |numpy_array| replace:: Numpy array
 .. |HDUList| replace:: :class:`~astropy.io.fits.HDUList`
+.. |{{cookiecutter.package_name}}_version| replace:: {__version__}
 """
 
 
@@ -202,12 +204,19 @@ html_theme_options = {
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
-html_favicon = './_static/favicon.ico'
+html_favicon = './_static/favicon_sdssv.ico'
+
+html_logo = "_static/sdssv_logo_small.png"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+
+# See https://github.com/rtfd/readthedocs.org/issues/1776 for why we do this
+if on_rtd:
+    html_static_path = []
+else:
+    html_static_path = ['_static']
 
 
 html_sidebars = {'**': ['localtoc.html']}

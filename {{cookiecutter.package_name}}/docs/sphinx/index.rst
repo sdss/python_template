@@ -7,7 +7,12 @@
 
 .. rubric:: :header_no_toc:`Welcome to {{cookiecutter.package_name}}'s documentation!`
 
-This is the Sphinx documentation for the SDSS Python product {{cookiecutter.package_name}}
+This is the documentation for the SDSS Python product {{cookiecutter.package_name}}. The current version if |{{cookiecutter.package_name}}_version|. You can install the package by doing
+
+.. highlight:: console
+
+  pip install {{cookiecutter.pip_name}}
+
 
 Introduction
 ------------
@@ -16,6 +21,7 @@ A description of the package can go here.
 
 * :ref:`What's new in {{cookiecutter.package_name}}? <changelog>`
 * :ref:`Introduction to {{cookiecutter.package_name}} <intro>`
+
 
 Reference
 ---------
