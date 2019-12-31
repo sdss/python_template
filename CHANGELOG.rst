@@ -6,17 +6,17 @@ Change Log
 
 This document records the main changes to the python-template code.
 
-.. _changelog-master:
+.. _python-template-master:
 
 master
 ------
 
-`View commits since the last tag <https://github.com/sdss/python_template/compare/1.0.5...HEAD>`__.
+`View commits since the last tag <https://github.com/sdss/python_template/compare/1.0.6...HEAD>`__.
 
 
-.. _changelog-1.0.6:
+.. _python-template-1.0.6:
 
-1.0.6 (unreleased)
+1.0.6 (2019-12-31)
 ------------------
 
 Added
@@ -27,8 +27,10 @@ Fixed
 ^^^^^
 * Do not modify the record when formatting it, in case that record is also output in other handlers.
 
+`View commits <https://github.com/sdss/python_template/compare/1.0.5...1.0.6>`__.
 
-.. _changelog-1.0.5:
+
+.. _python-template-1.0.5:
 
 1.0.5 (2019-05-13)
 ------------------
@@ -49,8 +51,10 @@ Fixed
 ^^^^^
 * Bug causing Python 2.7 templates to fail because ``PercentStyle`` is not available in ``logging`` module (thanks to :user:`andycasey`).
 
+`View commits <https://github.com/sdss/python_template/compare/1.0.4...1.0.5>`__.
 
-.. _changelog-1.0.4:
+
+.. _python-template-1.0.4:
 
 1.0.4 (2019-01-18)
 ------------------
@@ -63,8 +67,10 @@ Fixed
 ^^^^^
 * More fixes to quotes in ``module-whatis`` in module file.
 
+`View commits <https://github.com/sdss/python_template/compare/1.0.3...1.0.4>`__.
 
-.. _changelog-1.0.3:
+
+.. _python-template-1.0.3:
 
 1.0.3 (2018-12-10)
 ------------------
@@ -73,8 +79,10 @@ Fixed
 ^^^^^
 * Quotes in ``module-whatis`` in module file.
 
+`View commits <https://github.com/sdss/python_template/compare/1.0.2...1.0.3>`__.
 
-.. _changelog-1.0.2:
+
+.. _python-template-1.0.2:
 
 1.0.2 (2018-10-01)
 ------------------
@@ -83,8 +91,10 @@ Fixed
 ^^^^^
 * Remove ``from __future__ import unicode_literals`` that made the package install fail under Python 2. See `#9 <https://github.com/sdss/python_template/issues/9>`__ for details.
 
+`View commits <https://github.com/sdss/python_template/compare/1.0.1...1.0.2>`__.
 
-.. _changelog-1.0.1:
+
+.. _python-template-1.0.1:
 
 1.0.1 (2018-07-30)
 ------------------
@@ -110,7 +120,7 @@ Fixed
 `View commits <https://github.com/sdss/python_template/compare/1.0.0...1.0.1>`__.
 
 
-.. _changelog-1.0.0:
+.. _python-template-1.0.0:
 
 1.0.0 (2018-01-31)
 ------------------
