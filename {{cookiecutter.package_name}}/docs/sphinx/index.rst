@@ -7,7 +7,7 @@
 
 .. rubric:: :header_no_toc:`Welcome to {{cookiecutter.package_name}}'s documentation!`
 
-This is the documentation for the SDSS Python product {{cookiecutter.package_name}}. The current version if |{{cookiecutter.package_name}}_version|. You can install the package by doing
+This is the documentation for the SDSS Python product {{cookiecutter.package_name}}. The current version is |{{cookiecutter.package_name}}_version|. You can install the package by doing
 
 .. code-block:: console
 
