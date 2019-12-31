@@ -1,5 +1,1 @@
 recursive-include python/{{cookiecutter.package_name}}/etc *
-
-include requirements.txt
-include requirements_doc.txt
-include requirements_dev.txt
