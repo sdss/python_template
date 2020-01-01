@@ -1,11 +1,6 @@
-.. role:: header_no_toc
-  :class: class_header_no_toc
 
-.. title:: Welcome to {{cookiecutter.package_name}}'s documentation!
-
-:tocdepth: 2
-
-.. rubric:: :header_no_toc:`Welcome to {{cookiecutter.package_name}}'s documentation!`
+{{cookiecutter.package_name}}'s documentation
+=============================================
 
 This is the documentation for the SDSS Python product {{cookiecutter.package_name}}. The current version is |{{cookiecutter.package_name}}_version|. You can install the package by doing
 
@@ -34,7 +29,7 @@ Reference
 
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`
