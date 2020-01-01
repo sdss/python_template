@@ -1,3 +1,3 @@
 .. _standards:
 
-.. include:: ../../STYLE.md
+.. include:: ../../STYLE.rst

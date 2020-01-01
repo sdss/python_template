@@ -12,8 +12,13 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+import os
+
 # Comment if you do not want to use bootstrap themes.
 import sphinx_bootstrap_theme
+
+# Are we building in RTD?
+on_rtd = os.environ.get('READTHEDOCS') == 'True'
 
 # -- General configuration ------------------------------------------------
 
@@ -197,17 +202,22 @@ html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = "sdss_logo.png"
+html_logo = '_static/sdssv_logo_small.png'
 
 # The name of an image file (relative to this directory) to use as a favicon of
 # the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-html_favicon = '_static/marvin_favicon.ico'
+html_favicon = '_static/favicon_sdssv.ico'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+
+# See https://github.com/rtfd/readthedocs.org/issues/1776 for why we do this
+if on_rtd:
+    html_static_path = []
+else:
+    html_static_path = ['_static']
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied

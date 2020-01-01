@@ -120,7 +120,7 @@ testing framework. The owner(s) names should be obvious in the README of
 the repo and in the ``setup.py`` file.
 
 Tagging, versioning, and change logs
------------------------------------
+------------------------------------
 
 **All production software must run from tagged versions.** The only exception to this rule is when debugging new code during engineering or test runs.
 

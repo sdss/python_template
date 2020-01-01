@@ -1,10 +1,10 @@
 .. title:: SDSS Python Template documentation v1
 
-Welcome to SDSS Python Template documentation!
-==============================================
+Welcome to SDSS Python Template version 1 documentation!
+========================================================
 
-.. note::
-    This is the documentation for Python Template 2. The documentation for version 1 can be found :doc:`here <v1/v1>`.
+.. warning::
+    This documentation is for version 1 of the Python Template. Python Template 2 provides multiple new features. The documentation for version 2 can be found :doc:`here <../index>`.
 
 This page describes the `SDSS Python Template <https://github.com/sdss/python_template>`_ as well as the :doc:`coding standards <../standards>`.
 
@@ -15,15 +15,15 @@ What you get with this template
 
 * Python 2/3 compatibility
 * `Pytest <https://docs.pytest.org/en/latest/>`_ testing framework
-* Continuous Integration with :ref:`Travis <travis-section-v2>` and `Coveralls <https://coveralls.io/>`_
-* :ref:`Pip <deploying-section-v2>`-ready product
-* :ref:`Sphinx Documentation <sphinx-section-v2>` with :ref:`Read The Docs <rtd-section-v2>` integration
-* Versioning with :ref:`BumpVersion <bumpversion-section-v2>`.
-* :ref:`Invoke <invoke-section-v2>` for shell tasks
+* Continuous Integration with :ref:`Travis <travis-section-v1>` and `Coveralls <https://coveralls.io/>`_
+* :ref:`Pip <deploying-section-v1>`-ready product
+* :ref:`Sphinx Documentation <sphinx-section-v1>` with :ref:`Read The Docs <rtd-section-v1>` integration
+* Versioning with :ref:`BumpVersion <bumpversion-section-v1>`.
+* :ref:`Invoke <invoke-section-v1>` for shell tasks
 * SDSS-compliant `license file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/LICENSE.md>`_.
 * `Module file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/etc/%7B%7Bcookiecutter.package_name%7D%7D.module>`_.
-* :ref:`Configuration file <conf-log-section-v2>` and improved :ref:`logging <conf-log-section-v2>`.
-* the SDSS :ref:`tree and sdss_access <sdsspy-v2>` python packages.
+* :ref:`Configuration file <conf-log-section-v1>` and improved :ref:`logging <conf-log-section-v1>`.
+* the SDSS :ref:`tree and sdss_access <sdsspy-v1>` python packages.
 
 Directory Contents
 ------------------
@@ -74,7 +74,7 @@ The new product can be installed in your system by running ``python setup.py ins
 Now you have a totally functional, if very simple, Python package connected to a GitHub repository. The following sections explain how to use the features included in the template and how to connect it with different online services. Before you continue, this may be a good time to read the :doc:`SDSS coding standards <../standards>` and make sure your code complies with them.
 
 
-.. _bumpversion-section-v2:
+.. _bumpversion-section-v1:
 
 Bumping a version
 -----------------
@@ -108,7 +108,7 @@ This will create a new tag locally with the new bumped version as the tag name. 
 If you release and tag a new version, don't forget to do ``bumpversion patch`` to increment to the next `dev` version.
 
 
-.. _tests-section-v2:
+.. _tests-section-v1:
 
 Writing and running tests
 -------------------------
@@ -118,7 +118,7 @@ The ``tests`` directory contains some examples on how to write and run tests for
 If you prefer to use `unittest <https://docs.python.org/3/library/unittest.html>`_ or `nose <https://nose2.readthedocs.io/en/latest/getting_started.html>`_ feel free to remove those files.
 
 
-.. _travis-section-v2:
+.. _travis-section-v1:
 
 Connecting your product to Travis
 ---------------------------------
@@ -128,7 +128,7 @@ The template includes a basic setup for `Travis CI <https://travis-ci.org/>`__ a
 Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`__ account (create one if you don't have it) and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
 
 
-.. _invoke-section-v2:
+.. _invoke-section-v1:
 
 Using invoke
 ------------
@@ -137,12 +137,12 @@ The product includes several macros to automate frequent tasks using `Invoke <ht
 
     invoke -l
 
-The documentation can be compiled by doing ``invoke docs.build`` and then shown in your browser with ``invoke docs.show``. Another useful macro, ``invoke deploy``, automates the process of deploying a new version by creating new distribution packages and uploading them to PyPI (see deploying-section-v2_).
+The documentation can be compiled by doing ``invoke docs.build`` and then shown in your browser with ``invoke docs.show``. Another useful macro, ``invoke deploy``, automates the process of deploying a new version by creating new distribution packages and uploading them to PyPI (see deploying-section-v1_).
 
 You can add new tasks to the `tasks.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/tasks.py>`__ file.
 
 
-.. _sphinx-section-v2:
+.. _sphinx-section-v1:
 
 How to build Sphinx Documentation
 ---------------------------------
@@ -172,7 +172,7 @@ The template includes an example on how to automatically document the docstrings
 You can add similar blocks of code for other modules. See the Sphinx `autodoc <http://www.sphinx-doc.org/en/stable/ext/autodoc.html>`_ for more details. The :ref:`coding standards <style-docstring>` include a section on how to write good docstrings to document your code.
 
 
-.. _rtd-section-v2:
+.. _rtd-section-v1:
 
 Connecting your product to Read The Docs
 ----------------------------------------
@@ -184,7 +184,7 @@ Probably you will receive a message saying that the integration of the product i
 The product configuration for Read The Docs can be found in `readthedocs.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/readthedocs.yml>`_. By default, the Sphinx documentation will be built using Python 3.6 and using the requirements specified in `requirements_doc.txt <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/requirements_doc.txt>`_. You can change those settings easily.
 
 
-.. _conf-log-section-v2:
+.. _conf-log-section-v1:
 
 Configuration file and logging
 ------------------------------
@@ -241,7 +241,7 @@ The current log can be saved as ::
     log.save_log('~/Downloads/copy_of_log.log')
 
 
-.. _deploying-section-v2:
+.. _deploying-section-v1:
 
 Deploying your product
 ----------------------
@@ -290,7 +290,7 @@ Upon installation of the template by a user, the variables defined in the `cooki
 
 Please, *do not* modify the master branch directly unless otherwise instructed. Instead, develop your changes in a branch or fork and, when ready to merge, create a pull request.
 
-.. _sdsspy-v2:
+.. _sdsspy-v1:
 
 SDSS tree and sdss_access
 -------------------------
@@ -312,11 +312,3 @@ and to use ``sdss_access``::
     from sdss_access.path import Path
     path = Path()
     filepath = path.full('mangacube', drpver='v2_3_1', plate='8485', '1901')
-
-
-.. toctree::
-    :hidden:
-
-    v1/v1
-    standards
-    changelog
