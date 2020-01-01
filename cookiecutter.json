@@ -6,6 +6,7 @@
     "version": "0.1.0-alpha.0",
     "year": "{% now 'utc', '%Y' %}",
     "short_description": "Simple Template package for creating SDSS Python projects",
+    "packaging_system": ["setuptools", "poetry"],
     "sphinx_template": ["sphinx-bootstrap", "alabaster"],
     "use_releases": ["no", "yes"],
     "create_git_repo": ["yes", "no"],

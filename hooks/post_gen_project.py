@@ -4,6 +4,7 @@
 # Licensed under a 3-clause BSD license.
 
 import os
+import shutil
 
 import invoke
 from invoke.exceptions import UnexpectedExit
@@ -12,12 +13,38 @@ from invoke.exceptions import UnexpectedExit
 # This script runs after the cookiecutter template has been installed
 #
 
+PACKAGING_SYSTEM = '{{ cookiecutter.packaging_system }}'
+
 GITUSER = '{{ cookiecutter.github_organisation }}'
 PIPNAME = '{{ cookiecutter.pip_name }}'
 PKGNAME = '{{ cookiecutter.package_name }}'
 
 CURRENTDIR = os.path.abspath(os.curdir)
 PYTHONDIR = os.path.join(CURRENTDIR, 'python')
+
+
+def copy_packaging_system():
+    """Copies the appropriate files to use setup.cfg or poetry."""
+
+    # Initially the repo is created with two directories, setup_cfg and poetry
+    # that contain the files needed for each packaging system. Here, depending
+    # on the cookiecutter configuration, we move the appropriate files and
+    # remove the other ones.
+
+    if PACKAGING_SYSTEM == 'setuptools':
+        pack_dir = 'setup_cfg'
+    elif PACKAGING_SYSTEM == 'poetry':
+        pack_dir = 'poetry'
+    else:
+        raise ValueError(f'invalid packaging system {PACKAGING_SYSTEM!r}.')
+
+    files = os.listdir(pack_dir)
+    for file_ in files:
+        shutil.move(file_, CURRENTDIR)
+
+    # Delete both directories
+    for dir_ in ['setup_cfg', 'poetry']:
+        shutil.rmtree(dir_, ignore_errors=True)
 
 
 @invoke.task
@@ -80,7 +107,7 @@ def install_sdsstools(ctx):
 col = invoke.Collection(install, addgit, addremote, install_sdsstools)
 ex = invoke.executor.Executor(col)
 
-
+copy_packaging_system()
 ex.execute('install_sdsstools')
 
 # setup intial git repo
