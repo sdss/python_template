@@ -10,6 +10,10 @@ This page describes the `SDSS Python Template <https://github.com/sdss/python_te
 
 See :doc:`what's new <../changelog>`.
 
+
+.. contents:: **Table of Contents**
+
+
 What you get with this template
 -------------------------------
 
@@ -24,25 +28,6 @@ What you get with this template
 * :ref:`Configuration file <conf-log-section-v2>` and improved :ref:`logging <conf-log-section-v2>`.
 * Pre-defined scripts for frequently used :ref:`tasks <tasks-section-v2>`.
 * The SDSS :ref:`tree and sdss_access <sdsspy-v2>` python packages.
-
-Directory Contents
-------------------
-
-* **cextern**: The directory for placing C code to be compiled
-* **docs**: The directory for Sphinx documentation and other docu-related files
-* **etc**: The directory containing your SDSS modulefile and other etc
-* **python**: Your new python package directory
-* **python/package_name/exceptions**: A custom python Exceptions.
-* **python/package_name/etc**: An etc directory with text files that will be installed with the product. Contains a YAML configuration file that is ready by the package when imported.
-* **tests**: The directory containing the tests for the package. Includes a ``conftest.py`` file with basic configuration using `pytest <https://docs.pytest.org/en/latest/>`_.
-* **CHANGELOG.rst**: A file documenting changes to your code, e.g. new features, fixed issues, or bug-fixes.
-* **CODEOWNERS**: A file assigning ownership of the code to the package or components of the package to various users
-* **README.md**: A file describing your package.  This will be the main display on Github.
-* **LICENSE.md**: The open source license for your product.  DO NOT DELETE.
-* **readthedocs.yml**: The configuration file for Read The Docs.
-* **.travis.yml**:  The configuration file for Travis CI.
-
-Depending or whether you choose to use setuptools or poetry, you will also get the relevant ``setup.cfg``, ``setup.py``, and ``pyproject.toml``.
 
 
 Creating a new product
@@ -70,12 +55,32 @@ The new product can be installed in your system by running ``pip install .``. Fo
 Now you have a totally functional, if very simple, Python package connected to a GitHub repository. The following sections explain how to use the features included in the template and how to connect it with different online services. Before you continue, this may be a good time to read the :doc:`SDSS coding standards <../standards>` and make sure your code complies with them.
 
 
+Directory Contents
+------------------
+
+* **cextern**: The directory for placing C code to be compiled
+* **docs**: The directory for Sphinx documentation and other docu-related files
+* **etc**: The directory containing your SDSS modulefile and other etc
+* **python**: Your new python package directory
+* **python/package_name/exceptions**: A custom python Exceptions.
+* **python/package_name/etc**: An etc directory with text files that will be installed with the product. Contains a YAML configuration file that is ready by the package when imported.
+* **tests**: The directory containing the tests for the package. Includes a ``conftest.py`` file with basic configuration using `pytest <https://docs.pytest.org/en/latest/>`_.
+* **CHANGELOG.rst**: A file documenting changes to your code, e.g. new features, fixed issues, or bug-fixes.
+* **CODEOWNERS**: A file assigning ownership of the code to the package or components of the package to various users
+* **README.md**: A file describing your package.  This will be the main display on Github.
+* **LICENSE.md**: The open source license for your product.  DO NOT DELETE.
+* **readthedocs.yml**: The configuration file for Read The Docs.
+* **.travis.yml**:  The configuration file for Travis CI.
+
+Depending or whether you choose to use setuptools or poetry, you will also get the relevant ``setup.cfg``, ``setup.py``, and ``pyproject.toml``.
+
+
 .. _packaging-section-v2:
 
 Packaging and dependency management
 -----------------------------------
 
-During the cutting process you'll be asked what packaging system, setuptools or poetry, you want to use. This is an important decision that will change the files provided with the template are organised and how you manage your dependencies and packaging. While it's possible to switch between systems after cutting the product, it's not totally trivial so it's worth spending some time reading this section before making a decision.
+During the cutting process you'll be asked what packaging system, setuptools or poetry, you want to use. This is an important decision that will change the files provided with the template and how you manage your dependencies and packaging. While it's possible to switch between systems after cutting the product, it's not totally trivial so it's worth spending some time reading this section before making a decision.
 
 Setuptools
 ^^^^^^^^^^
@@ -91,151 +96,67 @@ To install your package, just run ``pip install .`` or (less preferred) ``python
 Poetry
 ^^^^^^
 
-Until recently, setuptools (or its deprecated predecessor, `distutils <https://docs.python.org/3/library/distutils.html>`__) was the only option for packaging and publication of Python products. This has changed with the publication of `PEP-517 <https://www.python.org/dev/peps/pep-0517/>`__ and `PEP-518 <https://www.python.org/dev/peps/pep-0518/>`__, which define a framework for creating custom build systems that can still be used with pip and PyPI. While the implementation of these standards is still incomplete, their publication opened the door for a number of new build frameworks, which aim to address several shortcomings of setuptools.
+Until recently, setuptools and its deprecated predecessor, `distutils <https://docs.python.org/3/library/distutils.html>`__, were the only options for packaging and publication of Python products. This has changed with the publication of `PEP-517 <https://www.python.org/dev/peps/pep-0517/>`__ and `PEP-518 <https://www.python.org/dev/peps/pep-0518/>`__, which define a framework for creating custom build systems that can still be used with pip and PyPI. While the implementation of these standards is still incomplete, their publication opened the door for a number of new build frameworks that aim to address several shortcomings in setuptools.
 
-One such build system is `poetry <https://python-poetry.org/>`__. poetry aims to provide a more robust development environment, integrating virtual environments with a robust dependency resolution. The Python ecosystem is very large and somehow convolved, with packages depending on each other in sometimes complicated and conflicting ways.
+One such build system is `poetry <https://python-poetry.org/>`__. poetry aims to provide a better development environment, integrating virtual environments with a robust dependency resolution.
 
-Say, for example, that you have a package ``projectA`` that dependes on ``projectB>1.0.0`` and ``projectC>=2.0.0`` but it also happens that ``projectB`` depends on ``projectC<2.0.0``. This is obviously a conflict and it should not be possible to publish ``projectA`` in such way. setuptools and pip provide ways to define the previous dependency versions, but they are quite bad at making sure that all the dependencies are coherent: their purpose is to install the requested products, not to look for conflicts.
+The Python ecosystem is very large and somehow convolved, with packages depending on each other in sometimes complicated and conflicting ways. Say, for example, that you have a package ``projectA`` that dependes on ``projectB>=1.0.0`` and ``projectC>=2.0.0`` but it also happens that ``projectB`` depends on ``projectC<2.0.0``. This is obviously a conflict and it should not be possible to publish ``projectA`` in such way. setuptools and pip provide ways to define the previous dependency versions but they are quite bad at making sure that all the dependencies are coherent: their purpose is to install the requested products, not to look for conflicts.
 
-In the case above, if you pip install ``productB 2.1.2``, it will also install ``productC 1.1.1``. But if you now install ``productC 2.7.1``, that won't change the already installed ``productB``. Depending on the order of the installations you may see a warning while running pip, but you have ended up with a broken dependency tree. This is even more likely to happen if you are not using a dedicated virtual environment for development.
+In the case above, if you pip install ``productB==2.1.2``, it will also install ``productC==1.1.1``. But if you now install ``productC==2.7.1``, that won't change the already installed ``productB``. Depending on the order of the installations you may see a warning while running pip, but you have ended up with a broken dependency tree. This is even more likely to happen if you are not using a dedicated virtual environment for development.
 
 Poetry tries to avoid that by always installing dependencies in a virtual environment (and making it easy to manage) and by running a dependency resolution algorithm on each new dependency. If the dependency versions you are trying to use conflict, as in the earlier example, poetry will uncompromisingly prevent you from adding the new dependency.
 
 Now that we have examined the motivations, let's see how poetry works. PEP-517 defines a new file ``pyproject.toml`` to store the metadata and dependencies. Similar to ``setup.cfg``, the template provides a flight-ready ``pyproject.toml`` for the cookiecut project, along with configurations for tools such as flake8, pytest, etc. To add a new dependency, one simple does ::
 
-    poetry add new-dependency
+    poetry add <new-dependency>
 
 and, if there are no conflicts, the dependency is added to ``pyproject.toml``. There are two sections for production dependencies and development ones. The poetry build system does not use a ``setup.py`` file. Instead, the build backend is defined in the ``[build-system]`` section of ``pyproject.toml``. You can still do ``pip install .`` or ``pip install sdss-mypackage`` and pip will know to use poetry to install your product.
 
 In addition to these core components, poetry provides a number of nice features such as easy packaging and publication to PyPI, version bumping, etc. We refer to `its documentation <https://python-poetry.org/docs/>`__ for details.
 
-At the time of this writing, poetry has reached version 1.0.0 and it's quite stable, but there are some features still missing. The main caveats to consider when thinking about adopting poetry are:
+At the time of this writing, poetry has reached version 1.0.0 and is quite stable, but there are some features still missing. The main caveats to consider when thinking about adopting poetry are:
 
 - Poetry does not allow to do editable install with ``pip install -e .`` (although doing ``poetry install`` does an editable install of your product, more on this in the :ref:`developing-section-v2` section).
 
 - Poetry does not provide a good build system for `extensions <https://docs.python.org/3/extending/building.html>`__ (e.g., Cython).
 
-The first issue is caused by the incomplete implementation of PEP-517 in pip and it can be expected to be fixed at some point in 2020. The second is expected to be addressed by poetry itself at some point (note that there is a `workaround <https://github.com/python-poetry/poetry/issues/11>`__ to build extensions, but it comes with some caveats).
+The first issue is caused by the incomplete implementation of PEP-517 in pip and it can be expected to be fixed at some point during 2020. The second is expected to be addressed by poetry itself at some point (note that there is a `workaround <https://github.com/python-poetry/poetry/issues/11>`__ to build extensions, but it comes with some caveats).
 
 To deal with these issues, the Python Template provides a ``create_setup.py`` script that generates a ``setup.py`` file based on the poetry information. We talk about it in detail in the :ref:`developing-section-v2` section.
 
 
+.. _tools-section-v2:
 
+Tools
+-----
+
+The template comes with some tools for logging, configuration parsing, version management, and task handling. In version 1 of the template these code for these tools was included with the template. This was suboptimal because any bug fixes or improvements to those tools could not be propagated to already cut projects. If, for example, a bug was discovered in the logging tool, you'd need to manually modify each of your cookiecut products to fix it.
+
+For version 2 we have moved those tools to a small, external repository called `sdsstools <https://github.com/sdss/sdsstools>`__. The template depends on it to provide these features so that if ``sdsstools`` gets update, you can simply do ``pip install --upgrade sdsstools`` and get all any new feature or bug fix. You can also use ``sdsstools`` for any project, even if it's not derived from this template.
+
+Normally, ``sdsstools`` will be installed as part of the cookiecut process, but depending on your Python installation and whether you are using virtual environments you may need to manually pip install it.
 
 .. _versioning-section-v2:
 
 Version management
-------------------
+^^^^^^^^^^^^^^^^^^
 
-The python template you cookiecut uses `bumpversion <https://github.com/peritus/bumpversion>`_ to increase the version of your product. First, you need to install ``bumpversion`` by doing ::
+:ref:`Version 1 <bumpversion-section-v1>` of the template used `bumpversion <https://github.com/peritus/bumpversion>`__ for version bumping. ``bumpversion`` is, however, not totally trivial to use, and the project has been abandoned.
 
-    pip install bumpversion
+In version 2 we simplify the process of handling the version of your product by using the `sdsstools.metadata <https://github.com/sdss/sdsstools#metadata>`__ module. The version of the product is defined *only* in your ``pyproject.toml`` or ``setup.cfg``. The cookiecut template uses the ``sdsstools.get_package_version`` function to determine the version and stores it in the ``__version__`` attribute so you can do ::
 
-The bumpversion configuration is defined in the `.bumpversion.cfg <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/.bumpversion.cfg>`_ file in your new product. You should read the bumpversion documentation for details, but usually your workflow will be as follows: once you are ready to start working on a new version do ::
+    >>> from mypackage import __version__
+    >>> print(__version__)
+    0.1.0-alpha.0
 
-    bumpversion patch
+To modify or bump the version, just go to the ``pyproject.toml`` or ``setup.cfg`` file and change it manually. Or, if using poetry, you can use `poetry version <https://python-poetry.org/docs/cli/#version>`__.
 
-This will increase your version from ``X.Y.Z`` to ``X.Y.(Z+1)dev`` (e.g., ``1.2.3`` to ``1.2.4dev``) everywhere in your product and commit the changes. You can alternatively do ``bumpversion minor`` or ``bumpversion major`` to change the minor or major version. Once you are ready to release the version, do ::
-
-    bumpversion release
-
-to remove the ``dev`` suffix. You can also do ``bumpversion patch release`` to release a new patch version without passing through the ``dev`` step.
-
-It is recommended to always do a dry run of your bump before the real thing to make sure it will go smoothly.  You can do it with::
-
-    bumpversion patch --dry-run --verbose
-
-The default configuration of bumpversion is to always perform a commit whenever you bump to the next version.  You can specify to also create a new tag of your version with::
-
-    bumpversion patch --tag
-
-This will create a new tag locally with the new bumped version as the tag name.  You can push the tag to Github with::
-
-    git push origin [tagname]
-
-If you release and tag a new version, don't forget to do ``bumpversion patch`` to increment to the next `dev` version.
-
-
-.. _tests-section-v2:
-
-Writing and running tests
--------------------------
-
-The ``tests`` directory contains some examples on how to write and run tests for your package using `pytest`_. Use the `conftest.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/python/%7B%7Bcookiecutter.package_name%7D%7D/tests/conftest.py>`_ file to define `fixtures <https://docs.pytest.org/en/latest/fixture.html>`__ and other `pytest`_-specific features. cd'ing to the ``tests`` directory and typing ``pytest`` will recursively run all the tests in files whose filename starts with ``test_``.
-
-If you prefer to use `unittest <https://docs.python.org/3/library/unittest.html>`_ or `nose <https://nose2.readthedocs.io/en/latest/getting_started.html>`_ feel free to remove those files.
-
-
-.. _travis-section-v2:
-
-Connecting your product to Travis
----------------------------------
-
-The template includes a basic setup for `Travis CI <https://travis-ci.org/>`__ and `Coveralls <https://coveralls.io/>`_. The configuration is defined in the `.travis.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/.travis.yml>`_ and `.coveragerc <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/.coveragerc>`_ files.
-
-Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`__ account (create one if you don't have it) and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
-
-
-.. _tasks-section-v2:
-
-Using invoke
-------------
-
-The product includes several macros to automate frequent tasks using `Invoke <http://www.pyinvoke.org/>`_. To get a list of all the available tasks, from the root of your cookiecut project, do ::
-
-    invoke -l
-
-The documentation can be compiled by doing ``invoke docs.build`` and then shown in your browser with ``invoke docs.show``. Another useful macro, ``invoke deploy``, automates the process of deploying a new version by creating new distribution packages and uploading them to PyPI (see deploying-section-v2_).
-
-You can add new tasks to the `tasks.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/tasks.py>`__ file.
-
-
-.. _sphinx-section-v2:
-
-How to build Sphinx Documentation
----------------------------------
-
-This template includes `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ documentation, written using the `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ format.  The documentation is located inside your python package, in a `docs/sphinx/` directory.  You can build the existing Sphinx documentation using invoke ::
-
-    invoke docs.build
-
-Alternatively, navigate to your python package's `docs/sphinx/` directory and type::
-
-    make html
-
-This will build your documentation, converting the rst files into html files.  The output html files live in the `docs/sphinx/_build` subdirectory.  To both build and display the documentation, type::
-
-    # builds and displays
-    invoke docs.show
-
-The main page of your documentation lives at `docs/sphinx/_build/html/index.html`.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.
-
-The template includes an example on how to automatically document the docstrings in your code. In `docs/sphinx/api.rst` you'll see the lines ::
-
-    .. automodule:: mypython.main
-       :members:
-       :undoc-members:
-       :show-inheritance:
-
-You can add similar blocks of code for other modules. See the Sphinx `autodoc <http://www.sphinx-doc.org/en/stable/ext/autodoc.html>`_ for more details. The :ref:`coding standards <style-docstring>` include a section on how to write good docstrings to document your code.
-
-
-.. _rtd-section-v2:
-
-Connecting your product to Read The Docs
-----------------------------------------
-
-The cookiecut product documentation is ready to be built and integrated with Read The Docs. As with Travis and Coveralls above, you will need to commit the products to a GitHub repository first. SDSS has a `Read The Docs <http://readthedocs.io/>`_ account that is the preferred place to integrate the documentation. You can request access to the account by emailing ``admin[at]sdss[dot]org``. Alternatively, you can deploy your product in your own Read the Docs account and add the user ``sdss`` as a maintainer from the admin menu.
-
-Probably you will receive a message saying that the integration of the product is not complete and that you need to set up a webhook. To do that, got to the admin setting of the new Read The Docs project. In ``Intergations`` add a new integration and copy the link to the webhook. Then go to the GitHub repository settings and in the ``Webhooks`` section add a new webhook with the URL you just copied. Once you submit, any push to the master branch of the GitHub repo should produce a new built of the documentation. You can find more details on the webhook set up `here <https://docs.readthedocs.io/en/latest/webhooks.html>`_.
-
-The product configuration for Read The Docs can be found in `readthedocs.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/readthedocs.yml>`_. By default, the Sphinx documentation will be built using Python 3.6 and using the requirements specified in `requirements_doc.txt <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/requirements_doc.txt>`_. You can change those settings easily.
-
+The :ref:`Sphinx documentation <sphinx-section-v2>` includes a `substitution <https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-definitions>`__, ``|mypackage_version|`` that you can use anywhere in your rST files to include the product version.
 
 .. _conf-log-section-v2:
 
 Configuration file and logging
-------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Your new product contains a `YAML <http://yaml.org/>`_ configuration file in the ``python/[product_name]/etc/`` directory. YAML is significantly superior to other alternatives such as `configparser <https://docs.python.org/3/library/configparser.html>`__; it provides typed values, a clear data structure, and powerful parsing libraries. When you import the package, the configuration can be accessed as a dictionary using the ``config`` attribute. For example ::
 
@@ -267,7 +188,7 @@ The package also includes a logging object built around Python's `logging <https
     log.info('Some information that we want to log')
     >>> [INFO]: Some information that we want to log
 
-Available levels are ``.debug``, ``.info``, ``.error``, and ``.critical``. For warnings, use `warnings <https://docs.python.org/3/library/warnings.html>`__ module.
+Available levels are ``.debug``, ``.info``, ``.error``, and ``.critical``. For warnings, use the `warnings <https://docs.python.org/3/library/warnings.html>`__ module. Warnings will be redirected to all the available logging handlers after being formatter and coloured.
 
 By default, the file logger is not enabled. To start logging to file do ::
 
@@ -287,6 +208,23 @@ On initialisation, the screen logger will only show messages with level ``INFO``
 The current log can be saved as ::
 
     log.save_log('~/Downloads/copy_of_log.log')
+
+The logging and configuration features are provided by the modules `sdsstools.logger <https://github.com/sdss/sdsstools#logging>`__ and `sdsstools.configuration <https://github.com/sdss/sdsstools#configuration>`__, respectively.
+
+.. _tasks-section-v2:
+
+Using tasks
+^^^^^^^^^^^
+
+``sdsstools`` comes with a command line script, ``sdss`` that you can call from anywhere. This CLI is a simple wrapper around a series of `Invoke <http://www.pyinvoke.org/>`__ tasks. You can think of them as macros for frequently used operations.
+
+If you run ``sdss`` you'll get a list of available tasks, such as :ref:`build documentation <sphinx-section-v2>`, or clean the workspace. A full list is available `here <https://github.com/sdss/sdsstools#command-line-interface>`__, and we'll mention them in the following sections.
+
+Note that the CLI requires ``sdsstools`` to be installed for development ::
+
+    pip install sdsstools[dev]
+
+Currently there is no procedure to extend the list of tasks in ``sdsstools``, but you can always create your own ``tasks.py`` file on the root of the project and use Invoke natively.
 
 
 .. _deploying-section-v2:
@@ -322,21 +260,67 @@ The ``NAME`` argument inside your ``setup.py`` specifies the name of the package
 ``tree`` would be called ``sdss-tree``.  The python package ``sdss_access`` would be called ``sdss-access``.
 
 
-How to modify this template
----------------------------
+.. _tests-section-v2:
 
-This template is built using `Cookiecutter <https://cookiecutter.readthedocs.io/en/latest/>`_.  To add content to or expand this template, you must first check out the main template product using git::
+Writing and running tests
+-------------------------
 
-    git clone https://github.com/sdss/python_template
+The ``tests`` directory contains some examples on how to write and run tests for your package using `pytest`_. Use the `conftest.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/python/%7B%7Bcookiecutter.package_name%7D%7D/tests/conftest.py>`_ file to define `fixtures <https://docs.pytest.org/en/latest/fixture.html>`__ and other `pytest`_-specific features. cd'ing to the ``tests`` directory and typing ``pytest`` will recursively run all the tests in files whose filename starts with ``test_``.
 
-Now you have the development version of this template.  The two main components need are a `cookiecutter.json` file and a `{{cookiecutter.package_name}}` directory.  Cookiecutter templates use the `Jinja2 <http://jinja.pocoo.org/docs/2.10/>`_ templating language to define variable substitution, using double bracket notation, e.g. `{{variable_name}}`.  All customizable content to be inserted by the user is defined using this notation.
+If you prefer to use `unittest <https://docs.python.org/3/library/unittest.html>`_ or `nose <https://nose2.readthedocs.io/en/latest/getting_started.html>`_ feel free to remove those files.
 
-* **{{cookiecutter.package_name}}**: the top-level directory defining the installed python package.  Everything below this directory belongs to the Python package that gets installed by the user.
-* **cookiecutter.json**: A JSON file containing a dictionary of key:value pairs of variables defined in the template, with their default values.  These keys are referenced throughout the template with `{{cookiecutter.key}}`.
 
-Upon installation of the template by a user, the variables defined in the `cookiecutter.json` file, or by the user during install, get substituted into their respective reference places.
+.. _travis-section-v2:
 
-Please, *do not* modify the master branch directly unless otherwise instructed. Instead, develop your changes in a branch or fork and, when ready to merge, create a pull request.
+Connecting your product to Travis
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The template includes a basic setup for `Travis CI <https://travis-ci.org/>`__ and `Coveralls <https://coveralls.io/>`_. The configuration is defined in the `.travis.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/.travis.yml>`_ and `.coveragerc <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/.coveragerc>`_ files.
+
+Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`__ account (create one if you don't have it) and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
+
+
+.. _sphinx-section-v2:
+
+How to build Sphinx Documentation
+---------------------------------
+
+This template includes `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ documentation, written using the `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ format.  The documentation is located inside your python package, in a `docs/sphinx/` directory.  You can build the existing Sphinx documentation using invoke ::
+
+    invoke docs.build
+
+Alternatively, navigate to your python package's `docs/sphinx/` directory and type::
+
+    make html
+
+This will build your documentation, converting the rst files into html files.  The output html files live in the `docs/sphinx/_build` subdirectory.  To both build and display the documentation, type::
+
+    # builds and displays
+    invoke docs.show
+
+The main page of your documentation lives at `docs/sphinx/_build/html/index.html`.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.
+
+The template includes an example on how to automatically document the docstrings in your code. In `docs/sphinx/api.rst` you'll see the lines ::
+
+    .. automodule:: mypython.main
+       :members:
+       :undoc-members:
+       :show-inheritance:
+
+You can add similar blocks of code for other modules. See the Sphinx `autodoc <http://www.sphinx-doc.org/en/stable/ext/autodoc.html>`_ for more details. The :ref:`coding standards <style-docstring>` include a section on how to write good docstrings to document your code.
+
+
+.. _rtd-section-v2:
+
+Connecting your product to Read The Docs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The cookiecut product documentation is ready to be built and integrated with Read The Docs. As with Travis and Coveralls above, you will need to commit the products to a GitHub repository first. SDSS has a `Read The Docs <http://readthedocs.io/>`_ account that is the preferred place to integrate the documentation. You can request access to the account by emailing ``admin[at]sdss[dot]org``. Alternatively, you can deploy your product in your own Read the Docs account and add the user ``sdss`` as a maintainer from the admin menu.
+
+Probably you will receive a message saying that the integration of the product is not complete and that you need to set up a webhook. To do that, got to the admin setting of the new Read The Docs project. In ``Intergations`` add a new integration and copy the link to the webhook. Then go to the GitHub repository settings and in the ``Webhooks`` section add a new webhook with the URL you just copied. Once you submit, any push to the master branch of the GitHub repo should produce a new built of the documentation. You can find more details on the webhook set up `here <https://docs.readthedocs.io/en/latest/webhooks.html>`_.
+
+The product configuration for Read The Docs can be found in `readthedocs.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/readthedocs.yml>`_. By default, the Sphinx documentation will be built using Python 3.6 and using the requirements specified in `requirements_doc.txt <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/requirements_doc.txt>`_. You can change those settings easily.
+
 
 .. _sdsspy-v2:
 
@@ -362,12 +346,21 @@ and to use ``sdss_access``::
     filepath = path.full('mangacube', drpver='v2_3_1', plate='8485', '1901')
 
 
-.. toctree::
-    :hidden:
+How to modify this template
+---------------------------
 
-    v1/v1
-    standards
-    changelog
+This template is built using `Cookiecutter <https://cookiecutter.readthedocs.io/en/latest/>`_.  To add content to or expand this template, you must first check out the main template product using git::
+
+    git clone https://github.com/sdss/python_template
+
+Now you have the development version of this template.  The two main components need are a `cookiecutter.json` file and a `{{cookiecutter.package_name}}` directory.  Cookiecutter templates use the `Jinja2 <http://jinja.pocoo.org/docs/2.10/>`_ templating language to define variable substitution, using double bracket notation, e.g. `{{variable_name}}`.  All customizable content to be inserted by the user is defined using this notation.
+
+* **{{cookiecutter.package_name}}**: the top-level directory defining the installed python package.  Everything below this directory belongs to the Python package that gets installed by the user.
+* **cookiecutter.json**: A JSON file containing a dictionary of key:value pairs of variables defined in the template, with their default values.  These keys are referenced throughout the template with `{{cookiecutter.key}}`.
+
+Upon installation of the template by a user, the variables defined in the `cookiecutter.json` file, or by the user during install, get substituted into their respective reference places.
+
+Please, *do not* modify the master branch directly unless otherwise instructed. Instead, develop your changes in a branch or fork and, when ready to merge, create a pull request.
 
 
 .. _developing-section-v2:
@@ -381,10 +374,22 @@ Developing your product
 Frequently Asked Questions
 --------------------------
 
-**How do I install the just the requirement packages from ``setup.cfg``?**
+**How do I install the just the requirement packages from setup.cfg?**
 
     Normally you'll want to install your package along with its requirements by doing ``pip install .`` (or, in editable mode, ``pip install -e .``). But what if you only want to install the dependencies but not the main product. In that case you can still do ``pip install .`` and then ``pip uninstall <mypackage>``, which will leave the dependencies installed.
 
     Alternatively, you can use the ``sdss install-deps`` :ref:`task <tasks-section-v2>` to install only the dependencies. You can even pass an ``--extras`` flag to tell it to install extras, for example ::
 
         sdss install-deps --extras dev,docs
+
+**What if I need to build C/C++ extensions with poetry?**
+
+    Poetry provides a fairly immature system to build extensions. You can add your extensions to a file called ``build.py`` and then tell ``pyproject.toml`` to use it for extension building. See `this thread <https://github.com/python-poetry/poetry/issues/11>`__ for details. The template already includes a placeholder ``build.py``; just add your `Extension <https://docs.python.org/3.8/library/distutils.html>`__ instances there. Note that, as discussed :ref:`here <developing-section-v2>`, this will require using the ``create_setup.py`` script and handling the generated ``setup,py`` as a lock file.
+
+
+.. toctree::
+    :hidden:
+
+    v1/v1
+    standards
+    changelog
