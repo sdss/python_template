@@ -22,8 +22,8 @@ from {{cookiecutter.package_name}} import __version__
 on_rtd = os.environ.get('READTHEDOCS') == 'True'
 
 # Sphinx template selected in cookiecutter and whether to use releases
-sphinx_template = {{cookiecutter.sphinx_template}}
-use_releases = {{cookiecutter.use_releases}}
+sphinx_template = '{{cookiecutter.sphinx_template}}'
+use_releases = True if '{{cookiecutter.use_releases}}' == 'yes' else False
 
 if sphinx_template == 'sphinx-bootstrap':
     import sphinx_bootstrap_theme
