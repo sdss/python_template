@@ -4,21 +4,29 @@
 Change Log
 ==========
 
-This document records the main changes to the {{cookiecutter.package_name}} code.
+{% if cookiecutter.use_releases %}
 
-.. {{cookiecutter.package_name}}-0.1.0:
+    * First change goes here.
 
-0.1.0 (unreleased)
-------------------
+{% else %}
 
-Added
-^^^^^
-* A thing we added.
+    This document records the main changes to the {{cookiecutter.package_name}} code.
 
-Changed
-^^^^^^^
-* TBD
+    .. {{cookiecutter.package_name}}-0.1.0:
 
-Fixed
-^^^^^
-* TBD
+    0.1.0 (unreleased)
+    ------------------
+
+    Added
+    ^^^^^
+    * A thing we added.
+
+    Changed
+    ^^^^^^^
+    * TBD
+
+    Fixed
+    ^^^^^
+    * TBD
+
+{% endif %}
