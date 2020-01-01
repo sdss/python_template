@@ -10,8 +10,6 @@
 # serve to show the default.
 
 import os
-import sys
-import urllib.request
 
 from pkg_resources import parse_version
 
@@ -23,7 +21,7 @@ on_rtd = os.environ.get('READTHEDOCS') == 'True'
 
 # Sphinx template selected in cookiecutter and whether to use releases
 sphinx_template = '{{cookiecutter.sphinx_template}}'
-use_releases = True if '{{cookiecutter.use_releases}}' == 'yes' else False
+use_releases = '{{cookiecutter.use_releases}}'
 
 if sphinx_template == 'sphinx-bootstrap':
     import sphinx_bootstrap_theme
@@ -315,7 +313,7 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
-if use_releases:
+if use_releases == 'yes':
 
     extensions += ['sdsstools.releases']
 
