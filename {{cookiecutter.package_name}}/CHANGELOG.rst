@@ -3,30 +3,25 @@
 ==========
 Change Log
 ==========
-
 {% if cookiecutter.use_releases %}
-
-    * First change goes here.
-
+* First change goes here.
 {% else %}
+This document records the main changes to the {{cookiecutter.package_name}} code.
 
-    This document records the main changes to the {{cookiecutter.package_name}} code.
+.. {{cookiecutter.package_name}}-0.1.0:
 
-    .. {{cookiecutter.package_name}}-0.1.0:
+0.1.0 (unreleased)
+------------------
 
-    0.1.0 (unreleased)
-    ------------------
+Added
+^^^^^
+* A thing we added.
 
-    Added
-    ^^^^^
-    * A thing we added.
+Changed
+^^^^^^^
+* TBD
 
-    Changed
-    ^^^^^^^
-    * TBD
-
-    Fixed
-    ^^^^^
-    * TBD
-
+Fixed
+^^^^^
+* TBD
 {% endif %}
