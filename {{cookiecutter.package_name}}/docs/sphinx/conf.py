@@ -17,7 +17,7 @@ try:
     from {{cookiecutter.package_name}} import __version__
 except ModuleNotFoundError:
     from sdsstools import get_package_version
-    __version__ = get_package_version(__file__, {{cookiecutter.pip_name}}) or 'dev'
+    __version__ = get_package_version(__file__, '{{cookiecutter.pip_name}}') or 'dev'
 
 
 # Are we building in RTD?
