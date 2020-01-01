@@ -29,7 +29,10 @@ python = "^3.7"
 sdss-tree = ">=2.15.2"
 sdss-access = ">=0.2.3"
 sdsstools = "^0.1.0"
-{% if cookiecutter.sphinx_template == "sphinx-bootstrap" %}sphinx_bootstrap_theme = {"version"=">=0.4.12", optional=true}{% endif %}
+Sphinx = { "version"="^2.2.0", optional=true }
+{%- if cookiecutter.sphinx_template == "sphinx-bootstrap" -%}
+sphinx_bootstrap_theme = {"version"=">=0.4.12", optional=true}
+{%- endif -%}
 
 [tool.poetry.dev-dependencies]
 ipython = "^7.11.0"
@@ -41,7 +44,6 @@ pytest-asyncio = "^0.10.0"
 pytest-cov = "^2.8.1"
 pytest-mock = "^1.13.0"
 pytest-sugar = "^0.9.2"
-Sphinx = "^2.2.0"
 isort = "^4.3.21"
 codecov = "^2.0.15"
 coverage = {version = "5.0", extras = ["toml"]}
