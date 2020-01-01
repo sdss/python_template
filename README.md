@@ -54,3 +54,7 @@ To test install the cookiecutter package locally, run:
     cookiecutter [path_to_my_local_clone_directory]
 
 It is good practice to test install the package locally before you commit any changes to ensure the package can properly install without error.
+
+You can also fork this template or create new branches with your specific preferences; then just install it by doing
+
+    cookiecutter https://github.com/sdss/python_template.git --checkout <branch>
