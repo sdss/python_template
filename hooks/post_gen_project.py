@@ -40,7 +40,7 @@ def copy_packaging_system():
 
     files = os.listdir(pack_dir)
     for file_ in files:
-        shutil.move(file_, CURRENTDIR)
+        shutil.move(os.path.join(pack_dir, file_), CURRENTDIR)
 
     # Delete both directories
     for dir_ in ['setup_cfg', 'poetry']:
