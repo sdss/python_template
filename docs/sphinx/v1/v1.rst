@@ -58,7 +58,7 @@ To install and initialize a new product from the template run ::
     pip install invoke
     pip install bumpversion
     pip install cookiecutter
-    cookiecutter https://github.com/sdss/python_template.git
+    cookiecutter https://github.com/sdss/python_template.git --checkout python-template-v1
 
 During the installation `cookiecutter <https://github.com/audreyr/cookiecutter>`__ will ask you a series of prompts to specify options and variable names, e.g. your name, the repository/folder name, the package name (which can be identical to the repository name), etc. These definitions will be inserted into the package in designated places to customise it for you.
 
