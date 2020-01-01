@@ -1,0 +1,84 @@
+[tool.poetry]
+name = "{{cookiecutter.pip_name}}"
+version = "{{cookiecutter.version}}"
+description = "{{cookiecutter.short_description}}"
+authors = ["{{cookiecutter.full_name}} <{{cookiecutter.email}}>"]
+license = "BSD-3-Clause"
+readme = "README.md"
+homepage = "https://github.com/{{cookiecutter.github_organisation}}/{{cookiecutter.package_name}}"
+repository = "https://github.com/{{cookiecutter.github_organisation}}/{{cookiecutter.package_name}}"
+documentation = "https://{{cookiecutter.pip_name}}.readthedocs.org"
+keywords = ["astronomy", "software"]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+	"Programming Language :: Python :: 3.6",
+	"Programming Language :: Python :: 3.7",
+	"Programming Language :: Python :: 3.8",
+    "Topic :: Documentation :: Sphinx",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+packages = [
+    { include = "{{cookiecutter.package_name}}", from = "python" }
+]
+include = ["{{cookiecutter.package_name}}/etc/*", "cextern/**/*", "LICENSE.md"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+sdss-tree = ">=2.15.2"
+sdss-access = ">=0.2.3"
+sdsstools = "^0.1.0"
+
+[tool.poetry.dev-dependencies]
+ipython = "^7.11.0"
+matplotlib = "^3.1.1"
+flake8 = "^3.7.9"
+doc8 = "^0.8.0"
+pytest = "^5.2.2"
+pytest-asyncio = "^0.10.0"
+pytest-cov = "^2.8.1"
+pytest-mock = "^1.13.0"
+pytest-sugar = "^0.9.2"
+Sphinx = "^2.2.0"
+isort = "^4.3.21"
+codecov = "^2.0.15"
+coverage = {version = "5.0", extras = ["toml"]}
+ipdb = "^0.12.3"
+sdsstools = {version="^0.1.0", extras=["dev"]}
+
+[tool.isort]
+line_length = 79
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+default_section = "THIRDPARTY"
+known_first_party = "{{cookiecutter.package_name}}"
+balanced_wrapping = true
+include_trailing_comma = false
+lines_after_imports = 2
+use_parentheses = true
+
+[tool.flake8]
+ignore = [
+    "H101",
+    "N",
+    "W504"
+]
+per-file-ignores = [
+    "*/__init__.py:E,W"
+]
+max-line-length = 99
+
+[tool.coverage.run]
+branch = true
+include = ["python/{{cookiecutter.package_name}}/*"]
+omit = [
+    "*/__init__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+]
+
+[build-system]
+build-backend = "poetry.masonry.api"
+requires = ["poetry>=1.0.0"]
