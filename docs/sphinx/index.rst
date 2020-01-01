@@ -1,7 +1,7 @@
-.. title:: SDSS Python Template documentation v1
+.. title:: SDSS Python Template documentation
 
-Welcome to SDSS Python Template documentation!
-==============================================
+SDSS Python Template
+====================
 
 .. note::
     This is the documentation for Python Template 2. The documentation for version 1 can be found :doc:`here <v1/v1>`.
@@ -13,17 +13,17 @@ See :doc:`what's new <../changelog>`.
 What you get with this template
 -------------------------------
 
-* Python 2/3 compatibility
-* `Pytest <https://docs.pytest.org/en/latest/>`_ testing framework
-* Continuous Integration with :ref:`Travis <travis-section-v2>` and `Coveralls <https://coveralls.io/>`_
-* :ref:`Pip <deploying-section-v2>`-ready product
-* :ref:`Sphinx Documentation <sphinx-section-v2>` with :ref:`Read The Docs <rtd-section-v2>` integration
-* Versioning with :ref:`BumpVersion <bumpversion-section-v2>`.
-* :ref:`Invoke <invoke-section-v2>` for shell tasks
+* Python 3 compatibility (if you need Python 2/3 compatibility, check the :ref:`template version 1 <template-v1>`).
+* `Pytest <https://docs.pytest.org/en/latest/>`_ testing framework.
+* Continuous Integration with :ref:`Travis <travis-section-v2>` and `codecov <https://codecov.io>`_.
+* :ref:`pip <deploying-section-v2>`-ready product.
+* Dependency and metadata handling using :ref:`setuptools or poetry <packaging-section-v2>`.
+* :ref:`Sphinx Documentation <sphinx-section-v2>` with :ref:`Read The Docs <rtd-section-v2>` integration.
 * SDSS-compliant `license file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/LICENSE.md>`_.
 * `Module file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/etc/%7B%7Bcookiecutter.package_name%7D%7D.module>`_.
 * :ref:`Configuration file <conf-log-section-v2>` and improved :ref:`logging <conf-log-section-v2>`.
-* the SDSS :ref:`tree and sdss_access <sdsspy-v2>` python packages.
+* Pre-defined scripts for frequently used :ref:`tasks <tasks-section-v2>`.
+* The SDSS :ref:`tree and sdss_access <sdsspy-v2>` python packages.
 
 Directory Contents
 ------------------
@@ -32,22 +32,17 @@ Directory Contents
 * **docs**: The directory for Sphinx documentation and other docu-related files
 * **etc**: The directory containing your SDSS modulefile and other etc
 * **python**: Your new python package directory
-* **python/package_name/core**: A directory for high-level core classes used in your product.  Contains a set of custom python Exceptions.
+* **python/package_name/exceptions**: A custom python Exceptions.
 * **python/package_name/etc**: An etc directory with text files that will be installed with the product. Contains a YAML configuration file that is ready by the package when imported.
-* **python/package_name/utils**: General-use tools, including a custom logger and colour printing routines.
-* **python/package_name/tests**: The directory containing the tests for the package. Includes a ``conftest.py`` file with basic configuration using `pytest <https://docs.pytest.org/en/latest/>`_.
+* **tests**: The directory containing the tests for the package. Includes a ``conftest.py`` file with basic configuration using `pytest <https://docs.pytest.org/en/latest/>`_.
 * **CHANGELOG.rst**: A file documenting changes to your code, e.g. new features, fixed issues, or bug-fixes.
 * **CODEOWNERS**: A file assigning ownership of the code to the package or components of the package to various users
-* **README.rst**: A file describing your package.  This will be the main display on Github.
-* **STYLE.rst**: The SDSS style guide for best coding practices.
+* **README.md**: A file describing your package.  This will be the main display on Github.
 * **LICENSE.md**: The open source license for your product.  DO NOT DELETE.
-* **setup.py**: The setup for your pip-deployable product.  Also used when installing manually with `python setup.py install`.
-* **tasks.py**: A list of all invoke tasks available.
-* **requirements[_xxx].txt**: These files list all Python packages that are dependencies for your product.  Needed by pip.
 * **readthedocs.yml**: The configuration file for Read The Docs.
 * **.travis.yml**:  The configuration file for Travis CI.
-* **.bumpversion.cfg**: The configuration file for Bumpversion.
-* **.coveragerc**: The configuration file for python code coverage and Coveralls.
+
+Depending or whether you choose to use setuptools or poetry, you will also get the relevant ``setup.cfg``, ``setup.py``, and ``pyproject.toml``.
 
 
 Creating a new product
@@ -56,28 +51,81 @@ Creating a new product
 To install and initialize a new product from the template run ::
 
     pip install invoke
-    pip install bumpversion
     pip install cookiecutter
     cookiecutter https://github.com/sdss/python_template.git
 
 During the installation `cookiecutter <https://github.com/audreyr/cookiecutter>`__ will ask you a series of prompts to specify options and variable names, e.g. your name, the repository/folder name, the package name (which can be identical to the repository name), etc. These definitions will be inserted into the package in designated places to customise it for you.
 
-The **create_git_repo** prompt asks ``do you want to create a git repository out of your new package?``.  If you answer ``yes``, the product will be initialised as a git repository.  The final prompts ask ``did you already create a new repository on Github?`` and ``what is your Github username?``.  If you answer ``yes``, and specify a name, a remote origin will be added to your new git repository and will be pushed to Github.  If not, `create a blank GitHub repository <https://help.github.com/articles/creating-a-new-repository/>`_ (either at the `SDSS organisation <https://github.com/sdss>`_ or in your personal account) and copy the URL provided by GitHub.  Make sure the Github repository is initially empty. In the root of your local product run ::
+After asking for your name and emails, the cookiecutter process will prompt you for a **package_name** and a **pip_name**. The former is the name that you want to use when *importing* the product (``from package_name import main``) while the former is the name you want to use to publish your product to PyPI and make it pip-installable (``pip install pip_name``). While ``package_name`` and ``pip_name`` could be the same, normally we prefix the ``package_name`` with ``sdss-`` when publishing it. So, if your product is called ``mycamera``, its pip/PyPI name would be ``sdss-mycamera``. We talk about it in detail in :ref:`deploying-section-v2`.
+
+The **create_git_repo** prompt asks ``do you want to create a git repository out of your new package?``.  If you answer ``yes``, the product will be initialised as a git repository.  The final prompts ask ``did you already create a new repository on Github?`` and ``what is your Github organisation?``.  If you answer ``yes``, and specify a name, a remote origin will be added to your new git repository and will be pushed to Github.  If not, `create a blank GitHub repository <https://help.github.com/articles/creating-a-new-repository/>`_ (either at the `SDSS organisation <https://github.com/sdss>`_ or in your personal account) and copy the URL provided by GitHub.  Make sure the Github repository is initially empty. In the root of your local product run ::
 
     git remote add origin GITHUB_URL
     git push
 
-The new product can be installed in your system by running ``python setup.py install``. For development, however, it is usually better to add the product path to your ``PYTHONPATH``. In bash add the following line to your ``~/.bashrc`` (modify accordingly for csh or other shells) ::
+The new product can be installed in your system by running ``pip install .``. For development, however, it is usually better to add the product path to your ``PYTHONPATH`` or create a virtual environment. We talk about it in the :ref:`developing-section-v2` section. To modify your PYTHONPATH, in bash, add the following line to your ``~/.bashrc`` (modify accordingly for csh or other shells) ::
 
     export PYTHONPATH=/path/to/your/product/python:$PYTHONPATH
 
 Now you have a totally functional, if very simple, Python package connected to a GitHub repository. The following sections explain how to use the features included in the template and how to connect it with different online services. Before you continue, this may be a good time to read the :doc:`SDSS coding standards <../standards>` and make sure your code complies with them.
 
 
-.. _bumpversion-section-v2:
+.. _packaging-section-v2:
 
-Bumping a version
------------------
+Packaging and dependency management
+-----------------------------------
+
+During the cutting process you'll be asked what packaging system, setuptools or poetry, you want to use. This is an important decision that will change the files provided with the template are organised and how you manage your dependencies and packaging. While it's possible to switch between systems after cutting the product, it's not totally trivial so it's worth spending some time reading this section before making a decision.
+
+Setuptools
+^^^^^^^^^^
+
+The default packaging system for the Python Template (and for Python, in general) is `setuptools <https://setuptools.readthedocs.io/en/latest/index.html>`__, i.e., the well-known ``setup.py`` file. We refer to `their documentation <https://setuptools.readthedocs.io/en/latest/setuptools.html>`__ for details on how the system works.
+
+Starting with version 30, setuptools provides the option of using a ``setup.cfg`` file to consolidate all the necessary information for packaging, that used to be distributed across multiple files. ``setup.cfg`` includes the package metadata (its name, which matches the ``repo_name`` defined when initialising the product, version, author name and email, keywords, URLs, etc) but also the dependencies (which used to be included in ``requirements`` files), and package data (the ``MANIFEST.in`` file), etc.
+
+The ``setup.cfg`` provided with the template is a ready-to-deploy file which includes both the production and development dependencies. We also include sensible configurations for many tools such as `isort <https://github.com/timothycrosley/isort>`__, `flake8 <https://coverage.readthedocs.io/>`__ `pytest <https://pytest.org/>`__, `coverage <https://coverage.readthedocs.io/>`__, etc. Using a ``setup.cfg`` dramatically reduces the number of files needed to configure your package and makes it easier to know where to go to change a parameter.
+
+To install your package, just run ``pip install .`` or (less preferred) ``python setup.py install``.
+
+Poetry
+^^^^^^
+
+Until recently, setuptools (or its deprecated predecessor, `distutils <https://docs.python.org/3/library/distutils.html>`__) was the only option for packaging and publication of Python products. This has changed with the publication of `PEP-517 <https://www.python.org/dev/peps/pep-0517/>`__ and `PEP-518 <https://www.python.org/dev/peps/pep-0518/>`__, which define a framework for creating custom build systems that can still be used with pip and PyPI. While the implementation of these standards is still incomplete, their publication opened the door for a number of new build frameworks, which aim to address several shortcomings of setuptools.
+
+One such build system is `poetry <https://python-poetry.org/>`__. poetry aims to provide a more robust development environment, integrating virtual environments with a robust dependency resolution. The Python ecosystem is very large and somehow convolved, with packages depending on each other in sometimes complicated and conflicting ways.
+
+Say, for example, that you have a package ``projectA`` that dependes on ``projectB>1.0.0`` and ``projectC>=2.0.0`` but it also happens that ``projectB`` depends on ``projectC<2.0.0``. This is obviously a conflict and it should not be possible to publish ``projectA`` in such way. setuptools and pip provide ways to define the previous dependency versions, but they are quite bad at making sure that all the dependencies are coherent: their purpose is to install the requested products, not to look for conflicts.
+
+In the case above, if you pip install ``productB 2.1.2``, it will also install ``productC 1.1.1``. But if you now install ``productC 2.7.1``, that won't change the already installed ``productB``. Depending on the order of the installations you may see a warning while running pip, but you have ended up with a broken dependency tree. This is even more likely to happen if you are not using a dedicated virtual environment for development.
+
+Poetry tries to avoid that by always installing dependencies in a virtual environment (and making it easy to manage) and by running a dependency resolution algorithm on each new dependency. If the dependency versions you are trying to use conflict, as in the earlier example, poetry will uncompromisingly prevent you from adding the new dependency.
+
+Now that we have examined the motivations, let's see how poetry works. PEP-517 defines a new file ``pyproject.toml`` to store the metadata and dependencies. Similar to ``setup.cfg``, the template provides a flight-ready ``pyproject.toml`` for the cookiecut project, along with configurations for tools such as flake8, pytest, etc. To add a new dependency, one simple does ::
+
+    poetry add new-dependency
+
+and, if there are no conflicts, the dependency is added to ``pyproject.toml``. There are two sections for production dependencies and development ones. The poetry build system does not use a ``setup.py`` file. Instead, the build backend is defined in the ``[build-system]`` section of ``pyproject.toml``. You can still do ``pip install .`` or ``pip install sdss-mypackage`` and pip will know to use poetry to install your product.
+
+In addition to these core components, poetry provides a number of nice features such as easy packaging and publication to PyPI, version bumping, etc. We refer to `its documentation <https://python-poetry.org/docs/>`__ for details.
+
+At the time of this writing, poetry has reached version 1.0.0 and it's quite stable, but there are some features still missing. The main caveats to consider when thinking about adopting poetry are:
+
+- Poetry does not allow to do editable install with ``pip install -e .`` (although doing ``poetry install`` does an editable install of your product, more on this in the :ref:`developing-section-v2` section).
+
+- Poetry does not provide a good build system for `extensions <https://docs.python.org/3/extending/building.html>`__ (e.g., Cython).
+
+The first issue is caused by the incomplete implementation of PEP-517 in pip and it can be expected to be fixed at some point in 2020. The second is expected to be addressed by poetry itself at some point (note that there is a `workaround <https://github.com/python-poetry/poetry/issues/11>`__ to build extensions, but it comes with some caveats).
+
+To deal with these issues, the Python Template provides a ``create_setup.py`` script that generates a ``setup.py`` file based on the poetry information. We talk about it in detail in the :ref:`developing-section-v2` section.
+
+
+
+
+.. _versioning-section-v2:
+
+Version management
+------------------
 
 The python template you cookiecut uses `bumpversion <https://github.com/peritus/bumpversion>`_ to increase the version of your product. First, you need to install ``bumpversion`` by doing ::
 
@@ -128,7 +176,7 @@ The template includes a basic setup for `Travis CI <https://travis-ci.org/>`__ a
 Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`__ account (create one if you don't have it) and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
 
 
-.. _invoke-section-v2:
+.. _tasks-section-v2:
 
 Using invoke
 ------------
@@ -320,3 +368,23 @@ and to use ``sdss_access``::
     v1/v1
     standards
     changelog
+
+
+.. _developing-section-v2:
+
+Developing your product
+-----------------------
+
+
+.. _faq-section-v2:
+
+Frequently Asked Questions
+--------------------------
+
+**How do I install the just the requirement packages from ``setup.cfg``?**
+
+    Normally you'll want to install your package along with its requirements by doing ``pip install .`` (or, in editable mode, ``pip install -e .``). But what if you only want to install the dependencies but not the main product. In that case you can still do ``pip install .`` and then ``pip uninstall <mypackage>``, which will leave the dependencies installed.
+
+    Alternatively, you can use the ``sdss install-deps`` :ref:`task <tasks-section-v2>` to install only the dependencies. You can even pass an ``--extras`` flag to tell it to install extras, for example ::
+
+        sdss install-deps --extras dev,docs

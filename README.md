@@ -12,6 +12,7 @@ To install and initialize this template:
 
 ```console
 pip install invoke
+pip install cookiecutter
 cookiecutter https://github.com/sdss/python_template.git
 ```
 

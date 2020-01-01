@@ -1,7 +1,9 @@
 .. title:: SDSS Python Template documentation v1
 
-Welcome to SDSS Python Template version 1 documentation!
-========================================================
+.. _template-v1:
+
+SDSS Python Template version 1
+==============================
 
 .. warning::
     This documentation is for version 1 of the Python Template. Python Template 2 provides multiple new features. The documentation for version 2 can be found :doc:`here <../index>`.
