@@ -40,7 +40,10 @@ def copy_packaging_system():
 
     files = os.listdir(pack_dir)
     for file_ in files:
-        shutil.move(os.path.join(pack_dir, file_), CURRENTDIR)
+        if file_ == 'cli.py':
+            shutil.move(os.path.join(pack_dir, file_), os.path.join(PYTHONDIR, PKGNAME))
+        else:
+            shutil.move(os.path.join(pack_dir, file_), CURRENTDIR)
 
     # Delete both directories
     for dir_ in ['setup_cfg', 'poetry']:

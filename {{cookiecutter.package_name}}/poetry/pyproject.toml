@@ -24,6 +24,9 @@ packages = [
 ]
 include = ["{{cookiecutter.package_name}}/etc/*", "cextern/**/*", "LICENSE.md"]
 
+[tool.poetry.scripts]
+{{cookiecutter.package_name}} = "{{cookiecutter.package_name}}.cli:main"
+
 [tool.poetry.dependencies]
 python = "^3.7"
 sdss-tree = ">=2.15.2"
