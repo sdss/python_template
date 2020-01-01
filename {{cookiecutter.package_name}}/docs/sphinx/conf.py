@@ -248,7 +248,7 @@ elif sphinx_template == 'alabaster':
         ]
     }
 
-    html_css_files += ["custom_alabaster.css"]
+    html_css_files += ["custom.css"]
 
 html_favicon = './_static/favicon_sdssv.ico'
 
