@@ -10,12 +10,16 @@ The full documentation on how to use this template can be found [here](http://sd
 
 To install and initialize this template:
 
-    pip install invoke
-    cookiecutter https://github.com/sdss/python_template.git
+```console
+pip install invoke
+cookiecutter https://github.com/sdss/python_template.git
+```
 
 If you want to install [version 1](https://github.com/sdss/python_template/tree/python-template-v1) of the template, you can do:
 
-    cookiecutter https://github.com/sdss/python_template.git --checkout python-template-v1
+```console
+cookiecutter https://github.com/sdss/python_template.git --checkout python-template-v1
+```
 
 During the installation, you will be asked a series of prompts to specify options and variable names, e.g. your name, the desired package name, etc. These definitions will be inserted into the package in designated places. The final prompts ask
 
@@ -43,18 +47,26 @@ Before you start writing your code, make sure to read and understand the [SDSS c
 
 If you are developing on this template, first clone the product:
 
-    git clone https://github.com/sdss/python_template.git
+```console
+git clone https://github.com/sdss/python_template.git
+```
 
 Now edit / add to the code as one normally does. This package contains a Jinja2 template structure, with variable substitution that occurs upon installation. Variables to be inserted into the template are defined in `cookiecutter.json`. To reference a variable inside the template structure use the Jinja2 double bracket nomenclature.
 
-   {{cookiecutter.full_name}}
+```console
+{{cookiecutter.full_name}}
+```
 
 To test install the cookiecutter package locally, run:
 
-    cookiecutter [path_to_my_local_clone_directory]
+```console
+cookiecutter [path_to_my_local_clone_directory]
+```
 
 It is good practice to test install the package locally before you commit any changes to ensure the package can properly install without error.
 
 You can also fork this template or create new branches with your specific preferences; then just install it by doing
 
-    cookiecutter https://github.com/sdss/python_template.git --checkout <branch>
+```console
+cookiecutter https://github.com/sdss/python_template.git --checkout <branch>
+```
