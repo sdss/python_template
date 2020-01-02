@@ -232,7 +232,12 @@ Currently there is no procedure to extend the list of tasks in ``sdsstools``, bu
 Deploying your product
 ----------------------
 
-This section explains how to deploy a new version of your product to `PyPI <https://pypi.python.org/pypi>`_ so that it becomes `pip <https://pip.pypa.io/en/stable/>`_-installable. All SDSS products should be deployed to the SDSS dedicated PyPI account, access to which can be requested to ``admin[at]sdss[dot]org``. First you will need to create a ``~/.pypirc`` file with the following content ::
+This section explains how to deploy a new version of your product to `PyPI <https://pypi.python.org/pypi>`_ so that it becomes `pip <https://pip.pypa.io/en/stable/>`_-installable.
+
+The first step is to make sure that your project is ready to be deployed. This includes checking that the version is correct (i.e., not a pre-release or beta) and tagging the product. If using poetry, you may want to run a final ``poetry update`` to make sure all dependencies are correct.
+
+
+Next, you will need to create a ``~/.pypirc`` file with the following content ::
 
     [distutils]
     index-servers=
@@ -240,8 +245,10 @@ This section explains how to deploy a new version of your product to `PyPI <http
 
     [pypi]
     repository = https://pypi.python.org/pypi
-    username = sdss
-    password = [request this password]
+    username = [username]
+    password = [password]
+
+Here you have two options; you can either use your own account in PyPI to deploy the product, or use the SDSS one. For the latter, you'll need to ask for the username and password by emailing ``admin[at]sdss[dot]org``. If you use your own account, and after the new project has been created, remember to go to the management options and make ``sdss`` an **owner** of the project. This will allow other people in SDSS to edit it or contribute new versions if you stop being a maintainer.
 
 To deploy a new release you will need `twine <https://pypi.python.org/pypi/twine>`_. To install it ::
 
@@ -249,15 +256,21 @@ To deploy a new release you will need `twine <https://pypi.python.org/pypi/twine
 
 Then, from the root of your product, run ::
 
-    invoke deploy
+    sdss deploy
 
 which will create source and `wheel <https://pythonwheels.com/>`_ distributions of your package and upload them to PyPI. The command above is equivalent to running ::
 
     python setup.py sdist bdist_wheel --universal
     twine upload dist/*
 
-The ``NAME`` argument inside your ``setup.py`` specifies the name of the package as it appears in `PyPi` and how it will be installed.  To avoid potential conflicts with existing packages, all SDSS package pip-names should adhere to the format ``sdss-[pkgname]``.  E.g. the Python package
-``tree`` would be called ``sdss-tree``.  The python package ``sdss_access`` would be called ``sdss-access``.
+The ``pip_name`` that you selected when you cookiecut the new project specifies the name of the package as it appears in PyPI and how it will be installed.  To avoid potential conflicts with existing packages, all SDSS package pip-names should adhere to the format ``sdss-[pkgname]``.  E.g. the Python package ``tree`` would be called ``sdss-tree``.  The python package ``sdss_access`` would be called ``sdss-access``.
+
+If you are using poetry this procedure may fail so it's better to use poetry's own publication system. Simply do ::
+
+    poetry build
+    poetry publish
+
+which are equivalent to the build and upload steps above.
 
 
 .. _tests-section-v2:
@@ -265,19 +278,18 @@ The ``NAME`` argument inside your ``setup.py`` specifies the name of the package
 Writing and running tests
 -------------------------
 
-The ``tests`` directory contains some examples on how to write and run tests for your package using `pytest`_. Use the `conftest.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/python/%7B%7Bcookiecutter.package_name%7D%7D/tests/conftest.py>`_ file to define `fixtures <https://docs.pytest.org/en/latest/fixture.html>`__ and other `pytest`_-specific features. cd'ing to the ``tests`` directory and typing ``pytest`` will recursively run all the tests in files whose filename starts with ``test_``.
+The ``tests`` directory contains some examples on how to write and run tests for your package using `pytest`_. Use the `conftest.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/tests/conftest.py>`__ file to define `fixtures <https://docs.pytest.org/en/latest/fixture.html>`__ and other `pytest`_-specific features. cd'ing to the ``tests`` directory and typing ``pytest`` will recursively run all the tests in files whose filename starts with ``test_``.
 
 If you prefer to use `unittest <https://docs.python.org/3/library/unittest.html>`_ or `nose <https://nose2.readthedocs.io/en/latest/getting_started.html>`_ feel free to remove those files.
-
 
 .. _travis-section-v2:
 
 Connecting your product to Travis
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The template includes a basic setup for `Travis CI <https://travis-ci.org/>`__ and `Coveralls <https://coveralls.io/>`_. The configuration is defined in the `.travis.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/.travis.yml>`_ and `.coveragerc <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/.coveragerc>`_ files.
+The template includes a basic setup for `Travis CI <https://travis-ci.org/>`__ and `codecov <https://codecov.io>`_. The configuration is defined in the `.travis.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/.travis.yml>`__. `Coverage <https://coverage.readthedocs.io/>`__ configuration is included in your ``pyproject.toml`` or ``setup.cfg`` files.
 
-Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`__ account (create one if you don't have it) and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
+Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`__ account (create one if you don't have it) and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same for codecov_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report (to see it, you will also need to go to to codecov_, sign with your GitHub account, and turn on the repository).
 
 
 .. _sphinx-section-v2:
@@ -285,22 +297,22 @@ Once you have created the GitHub repository for the product, you can go to your 
 How to build Sphinx Documentation
 ---------------------------------
 
-This template includes `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ documentation, written using the `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ format.  The documentation is located inside your python package, in a `docs/sphinx/` directory.  You can build the existing Sphinx documentation using invoke ::
+This template includes `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ documentation, written using the `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ format.  The documentation is located inside your python package, in a ``docs/sphinx/`` directory.  You can build the existing Sphinx documentation using invoke ::
 
-    invoke docs.build
+    sdss docs.build
 
-Alternatively, navigate to your python package's `docs/sphinx/` directory and type::
+Alternatively, navigate to your python package's ``docs/sphinx/`` directory and type ::
 
     make html
 
-This will build your documentation, converting the rst files into html files.  The output html files live in the `docs/sphinx/_build` subdirectory.  To both build and display the documentation, type::
+This will build your documentation, converting the rst files into html files.  The output html files live in the ``docs/sphinx/_build`` subdirectory.  To both build and display the documentation, type::
 
     # builds and displays
-    invoke docs.show
+    sdss docs.show
 
-The main page of your documentation lives at `docs/sphinx/_build/html/index.html`.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.
+The main page of your documentation lives at ``docs/sphinx/_build/html/index.html``.  New documentation must be written in the rst syntax for Sphinx to understand and properly build html files.
 
-The template includes an example on how to automatically document the docstrings in your code. In `docs/sphinx/api.rst` you'll see the lines ::
+The template includes an example on how to automatically document the docstrings in your code. In ``docs/sphinx/api.rst`` you'll see the lines ::
 
     .. automodule:: mypython.main
        :members:
@@ -309,17 +321,16 @@ The template includes an example on how to automatically document the docstrings
 
 You can add similar blocks of code for other modules. See the Sphinx `autodoc <http://www.sphinx-doc.org/en/stable/ext/autodoc.html>`_ for more details. The :ref:`coding standards <style-docstring>` include a section on how to write good docstrings to document your code.
 
-
 .. _rtd-section-v2:
 
 Connecting your product to Read The Docs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The cookiecut product documentation is ready to be built and integrated with Read The Docs. As with Travis and Coveralls above, you will need to commit the products to a GitHub repository first. SDSS has a `Read The Docs <http://readthedocs.io/>`_ account that is the preferred place to integrate the documentation. You can request access to the account by emailing ``admin[at]sdss[dot]org``. Alternatively, you can deploy your product in your own Read the Docs account and add the user ``sdss`` as a maintainer from the admin menu.
+The cookiecut product documentation is ready to be built and integrated with Read The Docs. As with Travis and Coveralls above, you will need to commit the products to a GitHub repository first. As with PyPI, SDSS has a `Read The Docs <http://readthedocs.io/>`__ account to which you can request access by emailing ``admin[at]sdss[dot]org``. Alternatively, you can deploy your product in your own Read the Docs account and add the user ``sdss`` as a maintainer from the admin menu. The expected address of your documentation will be ``https://<pip_name>.readthedocs.org``.
 
-Probably you will receive a message saying that the integration of the product is not complete and that you need to set up a webhook. To do that, got to the admin setting of the new Read The Docs project. In ``Intergations`` add a new integration and copy the link to the webhook. Then go to the GitHub repository settings and in the ``Webhooks`` section add a new webhook with the URL you just copied. Once you submit, any push to the master branch of the GitHub repo should produce a new built of the documentation. You can find more details on the webhook set up `here <https://docs.readthedocs.io/en/latest/webhooks.html>`_.
+You may receive a message saying that the integration of the product is not complete and that you need to set up a webhook. To do that, got to the admin setting of the new Read The Docs project. In ``Intergations`` add a new integration and copy the link to the webhook. Then go to the GitHub repository settings and in the ``Webhooks`` section add a new webhook with the URL you just copied. Once you submit, any push to the master branch of the GitHub repo should produce a new built of the documentation. You can find more details on the webhook set up `here <https://docs.readthedocs.io/en/latest/webhooks.html>`_.
 
-The product configuration for Read The Docs can be found in `readthedocs.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/readthedocs.yml>`_. By default, the Sphinx documentation will be built using Python 3.6 and using the requirements specified in `requirements_doc.txt <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/requirements_doc.txt>`_. You can change those settings easily.
+The product configuration for Read The Docs can be found in `readthedocs.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/readthedocs.yml>`_. By default, the Sphinx documentation will be built using Python 3.7 and will install the product with all its production requirements. If you have dependencies that are needed only for building the documentation (for example, a custom Sphinx theme), your can add them to the ``docs`` extras section of ``pyproject.toml`` or ``setup.cfg``.
 
 
 .. _sdsspy-v2:
@@ -346,6 +357,53 @@ and to use ``sdss_access``::
     filepath = path.full('mangacube', drpver='v2_3_1', plate='8485', '1901')
 
 
+.. _developing-section-v2:
+
+Developing your product
+-----------------------
+
+Now that we have seen what's included with your new product, how should you develop it? This, of course, depends on your habits and preferences, but here we list a few good advice.
+
+The most important thing to do is to **always develop your product in a virtual environment**. You can use `virtualenv <https://virtualenv.pypa.io/en/latest/>`__ or `pyenv <https://github.com/pyenv/pyenv>`__ to create and activate a new environment only for your new products. This makes sure that you don't have conflicting products installing dependencies: for example, assume that your package needs ``numpy`` but numpy is already present in your global installation of Python; because all your ``import numpy`` work you may forget about it and not add it as dependency.
+
+In general, if working on a project that only depends on other Python products, you should not need to use modules or set the ``PYTHONPATH`` variable. Those are only necessary if you depend on non-Python products (for example, an IDL product, or a configuration directory).
+
+While working on a virtual environment, every time you install a new package remember to also add it to ``pyproject.toml`` or ``setup.cfg``, making sure you define the version ranges correctly. If you are using poetry, things are simpler since poetry enforces the use of a virtual environment; in that case just run ``poetry add <dependency>`` and it will be added to ``pyproject.toml``.
+
+It is a good practice to set up Travis early on during your project development. Each Travis run is executed on an isolated environment so, in addition of running your tests on each commit, you may find issues with your dependency declaration that way.
+
+Sometimes you'll be developing on several project at the same time, each one depending on some of the others. In that case `pip editable installs <https://stackoverflow.com/questions/35064426/when-would-the-e-editable-option-be-useful-with-pip-install>`__ can be useful. By doing ::
+
+    pip install -e <path-to-projectB>
+
+you can make ``projectB`` available to your project A, but if you make changes directly in ``<path-to-projectB>``, those changes will reflect also in ``projectA`` without having to run pip install again.
+
+Considerations when using poetry
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Poetry provides a very nice framework for development but comes with some caveat and frequent confusions. When you run ``poetry install`` you product will be installed in the virtual environment as an *editable install*. This means that if you then change the code, you can see the results without having to install it again.
+
+Remember that after doing ``poetry install`` you either need to activate the virtual environment to run commands such as ``pytest`` or do ``poetry run pytest`` to make sure the command is execute inside the product environment.
+
+When you run ``poetry install`` or ``poetry add``, a `poetry.lock file <https://python-poetry.org/docs/basic-usage/#installing-dependencies>`__ is generated. This file contains the exact versions that are installed in your environment and *you must commit it*. When you run ``poetry install`` with the lock file present, poetry install those specific version, providing a method to define a completely reproducible environment. If you want to update the versions of your dependencies (always with the constrains defined in ``pyproject.toml``) you can do ``poetry update``, which will also update the lock file.
+
+The main caveat when working with poetry has to do with the incomplete implementation of PEP-517 in pip. Because of that, you cannot do pip editable installs on your poetry product with ``pip install -e .`` (note that you **can** do ``pip install .`` for a normal installation).
+
+The second caveat is that the build system for C extensions is quite experimental at this point, as described :ref:`here <poetry-extensions>`.
+
+To solve both those issues you may want to manually generate a ``setup.py`` file with the build information. The template provides a ``create_setup.py`` script that uses poetry itself to generate the ``setup.py``. If you do this, you need to run the script after each change to ``pyproject.toml`` or when you run a ``poetry add`` command. Remember to commit the ``setup.py`` file and treat it as a lock file.
+
+In this case, you may also want to comment the following lines in ``pyproject.toml``
+
+.. code-block:: toml
+
+    [build-system]
+    build-backend = "poetry.masonry.api"
+    requires = ["poetry>=1.0.0"]
+
+This will tell pip to not use poetry for installations, and instead use the ``setup.py`` with setuptools. You can still continue developing and deploying you code with poetry; this is only relevant for how other users will install your software.
+
+
 How to modify this template
 ---------------------------
 
@@ -363,12 +421,6 @@ Upon installation of the template by a user, the variables defined in the `cooki
 Please, *do not* modify the master branch directly unless otherwise instructed. Instead, develop your changes in a branch or fork and, when ready to merge, create a pull request.
 
 
-.. _developing-section-v2:
-
-Developing your product
------------------------
-
-
 .. _faq-section-v2:
 
 Frequently Asked Questions
@@ -381,6 +433,8 @@ Frequently Asked Questions
     Alternatively, you can use the ``sdss install-deps`` :ref:`task <tasks-section-v2>` to install only the dependencies. You can even pass an ``--extras`` flag to tell it to install extras, for example ::
 
         sdss install-deps --extras dev,docs
+
+.. _poetry-extensions:
 
 **What if I need to build C/C++ extensions with poetry?**
 
