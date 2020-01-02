@@ -46,7 +46,7 @@ When deciding what version of Python to write your code on, consider which are i
 
 -  If your code depends on key packages that are Python 2-only (e.g., ``actorcore``, ``opscore``, ``RO``, ``twistedActor``), write your code in Python 2 **but** try to make it as much Python 3-ready as possible, so that when those dependencies are upgraded you can upgrade your code easily.
 
-There are Python 3-ready versions for `actorcore <https://github.com/sdss/actorcore>`__, `opscore <https://github.com/sdss/opscore>`__, `actorkeys <https://github.com/sdss/actorkeys>`__, and `tron <https://github.com/sdss/tron>`__. If you are writing code for SDSS-V, develop it as Python3-only against those versions.
+.. note:: There are Python 3-ready versions for `actorcore <https://github.com/sdss/actorcore>`__, `opscore <https://github.com/sdss/opscore>`__, `actorkeys <https://github.com/sdss/actorkeys>`__, and `tron <https://github.com/sdss/tron>`__. If you are writing code for SDSS-V, develop it as Python3-only against those versions.
 
 - If your code is intended for a large user base, Python 2 and 3 compatibility may be considered, but the focus should be put into Python 3.
 
