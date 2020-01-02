@@ -438,7 +438,7 @@ Frequently Asked Questions
 
 **What if I need to build C/C++ extensions with poetry?**
 
-    Poetry provides a fairly immature system to build extensions. You can add your extensions to a file called ``build.py`` and then tell ``pyproject.toml`` to use it for extension building. See `this thread <https://github.com/python-poetry/poetry/issues/11>`__ for details. The template already includes a placeholder ``build.py``; just add your `Extension <https://docs.python.org/3.8/library/distutils.html>`__ instances there. Note that, as discussed :ref:`here <developing-section-v2>`, this will require using the ``create_setup.py`` script and handling the generated ``setup,py`` as a lock file.
+    Poetry provides a fairly immature system to build extensions. You can add your extensions to a file called ``build.py`` and then tell ``pyproject.toml`` to use it for extension building. See `this thread <https://github.com/python-poetry/poetry/issues/11>`__ for details. The template already includes a placeholder ``build.py``; just add your `Extension <https://docs.python.org/3.8/library/distutils.html>`__ instances there. Note that, as discussed :ref:`here <developing-section-v2>`, this will require using the ``create_setup.py`` script and handling the generated ``setup.py`` as a lock file.
 
 
 .. toctree::
