@@ -364,7 +364,7 @@ Developing your product
 
 Now that we have seen what's included with your new product, how should you develop it? This, of course, depends on your habits and preferences, but here we list a few good advice.
 
-The most important thing to do is to **always develop your product in a virtual environment**. You can use `virtualenv <https://virtualenv.pypa.io/en/latest/>`__ or `pyenv <https://github.com/pyenv/pyenv>`__ to create and activate a new environment for your new product. This makes sure that you don't have conflicting products installing dependencies: for example, assume that your package needs ``numpy`` but numpy is already present in your global installation of Python; because all your ``import numpy`` work you may forget about it and not add it as dependency.
+The most important thing to do is to **always develop your product in a virtual environment**. You can use `virtualenv <https://virtualenv.pypa.io/en/latest/>`__ or `pyenv <https://github.com/pyenv/pyenv>`__ to create and activate a new environment for your new product. This makes sure that you don't have conflicting products installing dependencies: for example, assume that your package needs ``numpy`` but numpy is already present in your global installation of Python; because all your ``import numpy`` work you may forget about it and not add it as dependency. This will cause a problem when somebody else tries to use it.
 
 In general, if working on a project that only depends on other Python products, you should not need to use modules or set the ``PYTHONPATH`` variable. Those are only necessary if you depend on non-Python products (for example, an IDL product, or a configuration directory).
 
