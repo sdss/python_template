@@ -1,24 +1,14 @@
-SDSS Python template and coding standards
-=========================================
+SDSS coding standards
+=====================
 
-So you want to write some Python code. Congratulations, you've arrived at
-the right place! This repository has a dual purpose: it provides a
-`template <sdss-python-template.readthedocs.io/en/latest/>`__ for a basic but complete Python package; and lists the coding
-standards and recommendations for developing code for SDSS. Please, read
-this document carefully. If you decide to develop your product based on
-this template, feel free to replace `<README.rst>`__ with a description
-of your project, but keep the `<STYLE.rst>`__ file as a reminder of the
-coding conventions.
+So you want to write some Python code. Congratulations, you've arrived at the right place! This repository has a dual purpose: it provides a `template <sdss-python-template.readthedocs.io/en/latest/>`__ for a basic but complete Python package; and lists the coding standards and recommendations for developing code for SDSS. Please, read this document carefully and suggest modifications by opening an `new issue <https://github.com/sdss/python_template/issues/new>`__.
 
-While this document deals with Python product, and some of the solutions
-and services suggested are specific for it, much of what is written here
-is general good advice for developing software in any platform.
+While this document deals with Python product, and some of the solutions and services suggested are specific for it, much of what is written here is general good advice for developing software in any platform.
 
 Table of Contents
 -----------------
 
--  `Python 2 vs Python 3: which one to
-   choose? <#python-2-vs-python-3-which-one-to-choose>`__
+-  `Python 2 vs Python 3: which one to choose? <#python-2-vs-python-3-which-one-to-choose>`__
 -  `Code storage and ownership. <#code-storage-and-ownership>`__
 -  `Tagging, versioning, and change logs. <#tagging-versioning-and-change-logs>`__
 -  `Deployment <#deployment>`__
@@ -34,8 +24,7 @@ Table of Contents
    -  `Continuous integration and
       coverage <#continuous-integration-and-coverage>`__
 
--  `Automatic documentation
-   generation <#automatic-documentation-generation>`__
+-  `Automatic documentation generation <#automatic-documentation-generation>`__
 
    -  `Read the Docs <#read-the-docs>`__
 
@@ -49,28 +38,19 @@ Table of Contents
 Python 2 vs Python 3: which one to choose?
 ------------------------------------------
 
-SDSS has made the decision to transition to Python 3 by 2020. That means
-that all new code must *at least* be compatible with Python 3.6. There is,
-however, a very significant amount of ancillary code that is still
-Python 2-only and that will not be ported to Python 3 for some time.
+SDSS has made the decision to transition to Python 3 by 2020. That means that all new code must *at least* be compatible with Python 3.6. There is, however, a very significant amount of ancillary code that is still Python 2-only and that will not be ported to Python 3 for some time.
 
-When deciding what version of Python to write your code on, consider
-which are its dependencies:
+When deciding what version of Python to write your code on, consider which are its dependencies:
 
--  If your code is standalone, or depends on Python 3-compatible code,
-   write it in Python 3. **You don't need to make sure your code is
-   Python 2-backwards compatible.**
+-  If your code is standalone, or depends on Python 3-compatible code, write it in Python 3. **You don't need to make sure your code is Python 2-backwards compatible.**
 
--  If your code depends on key packages that are Python 2-only (e.g.,
-   ``actorcore``, ``opscore``, ``RO``, ``twistedActor``), write your
-   code in Python 2 **but** try to make it as much Python 3-ready as
-   possible, so that when those dependencies are upgraded you can
-   upgrade your code easily.
+-  If your code depends on key packages that are Python 2-only (e.g., ``actorcore``, ``opscore``, ``RO``, ``twistedActor``), write your code in Python 2 **but** try to make it as much Python 3-ready as possible, so that when those dependencies are upgraded you can upgrade your code easily.
 
-- If your code is intended for a large user base, Python 2 and 3 compatibility is recommended, but the focus should be put into Python 3.
+There are Python 3-ready versions for `actorcore <https://github.com/sdss/actorcore>`__, `opscore <https://github.com/sdss/opscore>`__, `actorkeys <https://github.com/sdss/actorkeys>`__, and `tron <https://github.com/sdss/tron>`__. If you are writing code for SDSS-V, develop it as Python3-only against those versions.
 
-Whenever you create a new Python file, make sure to add the following
-lines at the top of the file
+- If your code is intended for a large user base, Python 2 and 3 compatibility may be considered, but the focus should be put into Python 3.
+
+If you want to ensure Python 2/3 compatibility, whenever you create a new Python file, make sure to add the following lines at the top of the file
 
 .. code:: python
 
@@ -79,20 +59,13 @@ lines at the top of the file
     from __future__ import absolute_import
     from __future__ import unicode_literals
 
-That will force you to use ``import``, ``print``, and division in a way
-that is Python 2 and 3-compatible.
+That will force you to use ``import``, ``print``, and division in a way that is Python 2 and 3-compatible.
 
-Some resources that can be useful to write code that is Python 2 and
-3-compatible, and to port code from 2 to 3:
+Some resources that can be useful to write code that is Python 2 and 3-compatible, and to port code from 2 to 3:
 
--  A `cheat sheet <http://python-future.org/compatible_idioms.html>`__
-   with advice to write code compatible with Python 2 and 3.
--  The `six <https://pythonhosted.org/six/#>`__ library provides
-   functions to write code that will work in Python 2 and 3.
--  When converting code from Python 2 to 3, consider using
-   `python-futurize <http://python-future.org/overview.html#automatic-conversion-to-py2-3-compatible-code>`__ as the
-   starting point. It works very well for most files, and even for those
-   files that require manual interaction, it paves most of the way.
+-  A `cheat sheet <http://python-future.org/compatible_idioms.html>`__ with advice to write code compatible with Python 2 and 3.
+-  The `six <https://pythonhosted.org/six/#>`__ library provides functions to write code that will work in Python 2 and 3.
+-  When converting code from Python 2 to 3, consider using `python-futurize <http://python-future.org/overview.html#automatic-conversion-to-py2-3-compatible-code>`__ as the starting point. It works very well for most files, and even for those files that require manual interaction, it paves most of the way.
 
 Code storage and ownership
 --------------------------
