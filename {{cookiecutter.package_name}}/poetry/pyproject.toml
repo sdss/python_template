@@ -59,9 +59,10 @@ docs = ["Sphinx"{% if cookiecutter.sphinx_template == "sphinx-bootstrap" %}, "sp
 
 [tool.isort]
 line_length = 79
-sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "SDSS", "FIRSTPARTY", "LOCALFOLDER"]
 default_section = "THIRDPARTY"
 known_first_party = "{{cookiecutter.package_name}}"
+known_sdss_party = ["sdsstools"]
 balanced_wrapping = true
 include_trailing_comma = false
 lines_after_imports = 2
