@@ -68,17 +68,6 @@ include_trailing_comma = false
 lines_after_imports = 2
 use_parentheses = true
 
-[tool.flake8]
-ignore = [
-    "H101",
-    "N",
-    "W504"
-]
-per-file-ignores = [
-    "*/__init__.py:E,W"
-]
-max-line-length = 99
-
 [tool.coverage.run]
 branch = true
 include = ["python/{{cookiecutter.package_name}}/*"]
