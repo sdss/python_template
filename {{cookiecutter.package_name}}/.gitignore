@@ -108,3 +108,8 @@ ENV/
 .vscode
 
 .pytest_cache
+
+# Vim temporary files
+*~
+*.swp
+*.swo
