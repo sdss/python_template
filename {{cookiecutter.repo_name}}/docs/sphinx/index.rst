@@ -1,21 +1,23 @@
-.. role:: header_no_toc
-  :class: class_header_no_toc
 
-.. title:: Welcome to {{cookiecutter.package_name}}'s documentation!
+{{cookiecutter.package_name}}'s documentation
+=============================================
 
-:tocdepth: 2
+This is the documentation for the SDSS Python product {{cookiecutter.package_name}}. The current version is |{{cookiecutter.package_name}}_version|. You can install the package by doing
 
-.. rubric:: :header_no_toc:`Welcome to {{cookiecutter.package_name}}'s documentation!`
+.. code-block:: console
 
-This is the Sphinx documentation for the SDSS Python product {{cookiecutter.package_name}}
+  $ pip install {{cookiecutter.pip_name}}
 
-Introduction
-------------
 
-A description of the package can go here.
+Contents
+--------
 
-* :ref:`What's new in {{cookiecutter.package_name}}? <changelog>`
-* :ref:`Introduction to {{cookiecutter.package_name}} <intro>`
+.. toctree::
+  :maxdepth: 2
+
+  What's new in {{cookiecutter.package_name}}? <CHANGELOG>
+  Introduction to {{cookiecutter.package_name}} <intro>
+
 
 Reference
 ---------
@@ -27,7 +29,7 @@ Reference
 
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`

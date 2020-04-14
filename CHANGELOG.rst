@@ -6,12 +6,34 @@ Change Log
 
 This document records the main changes to the python-template code.
 
+
 .. _python-template-master:
 
 master
 ------
 
-`View commits since the last tag <https://github.com/sdss/python_template/compare/1.0.6...HEAD>`__.
+`View commits since the last tag <https://github.com/sdss/python_template/compare/2.0.0...HEAD>`__.
+
+
+.. _python-template-2.0.0:
+
+2.0.0 (2020-04-13)
+------------------
+
+Changed
+^^^^^^^
+* Dropped support for Python 2.
+* Move style guide to root level.
+* Use ``setup.cfg`` for packaging and configuration of ``pytest``, ``flake8``, ``isort``, and ``coverage``.
+* Move ``tests`` outside of the package to simplify packaging.
+* Replace ``utils`` with `sdsstools <https://github.com/sdss/sdsstools>`__.
+* Remove use of ``bumpversion``. Instead, get the package version using ``sdsstools.get_package_version``.
+* Updated the template Sphinx docs.
+* Updated style guide and documentation.
+* Allow to choose between setuptools and poetry.
+* Allow to choose between ``sphinx-bootstrap-theme`` and ``alabaster``.
+
+`View commits <https://github.com/sdss/python_template/compare/1.0.6...2.0.0>`__.
 
 
 .. _python-template-1.0.6:

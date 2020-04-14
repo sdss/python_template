@@ -1,14 +1,6 @@
 # encoding: utf-8
 #
 # conftest.py
-#
-
-
-from __future__ import division
-from __future__ import print_function
-from __future__ import absolute_import
-from __future__ import unicode_literals
-
 
 """
 Here you can add fixtures that will be used for all the tests in this

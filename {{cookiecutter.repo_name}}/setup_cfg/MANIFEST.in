@@ -1,0 +1,2 @@
+recursive-include python/{{cookiecutter.package_name}}/etc *
+recursive-include cextern/**/*

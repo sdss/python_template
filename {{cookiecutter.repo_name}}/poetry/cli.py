@@ -3,7 +3,7 @@
 #
 # @Author: José Sánchez-Gallego
 # @Date: Dec 1, 2017
-# @Filename: {{cookiecutter.package_name}}
+# @Filename: cli.py
 # @License: BSD 3-Clause
 # @Copyright: José Sánchez-Gallego
 
@@ -14,7 +14,7 @@ import sys
 from {{cookiecutter.package_name}}.main import math
 
 
-if __name__ == '__main__':
+def main():
 
     # An example of how to write a command line parser that works with the
     # main.math function. For more details on how to use argparse, start with
@@ -39,3 +39,8 @@ if __name__ == '__main__':
         print('{} {} {} = {}'.format(args.VALUE1, args.OPERATOR, args.VALUE2, result))
     else:
         print(result)
+
+
+if __name__ == '__main__':
+
+    main()

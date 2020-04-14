@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 #
-# BMO documentation build configuration file, created by
-# sphinx-quickstart on Fri May  5 01:30:21 2017.
-#
 # This file is execfile()d with the current directory set to its
 # containing dir.
 #
@@ -12,18 +9,31 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sphinx_bootstrap_theme
+import os
+
+from pkg_resources import parse_version
+
+try:
+    from {{cookiecutter.package_name}} import __version__
+except ModuleNotFoundError:
+    from sdsstools import get_package_version
+    __version__ = get_package_version(__file__, '{{cookiecutter.pip_name}}') or 'dev'
+
+
+# Are we building in RTD?
+on_rtd = os.environ.get('READTHEDOCS') == 'True'
+
+# Sphinx template selected in cookiecutter and whether to use releases
+sphinx_template = '{{cookiecutter.sphinx_template}}'
+use_releases = '{{cookiecutter.use_releases}}'
+
+if sphinx_template == 'sphinx-bootstrap':
+    import sphinx_bootstrap_theme
+
 
 # Importing matplotlib here with agg to prevent tkinter error in readthedocs
 # import matplotlib
 # matplotlib.use('agg')
-
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-
-from {{cookiecutter.package_name}} import __version__
-from pkg_resources import parse_version
 
 
 # -- General configuration ------------------------------------------------
@@ -48,9 +58,9 @@ templates_path = ['_templates']
 source_suffix = ['.rst', '.md']
 # source_suffix = '.rst'
 
-source_parsers = {
-    '.md': 'recommonmark.parser.CommonMarkParser',
-}
+# source_parsers = {
+#     '.md': 'recommonmark.parser.CommonMarkParser',
+# }
 
 # The master toctree document.
 master_doc = 'index'
@@ -119,98 +129,139 @@ autodoc_member_order = 'groupwise'
 napoleon_use_rtype = False
 napoleon_use_ivar = True
 
-rst_epilog = """
+rst_epilog = f"""
 .. |numpy_array| replace:: Numpy array
 .. |HDUList| replace:: :class:`~astropy.io.fits.HDUList`
+.. |{{cookiecutter.package_name}}_version| replace:: {__version__}
 """
 
 
 # -- Options for HTML output ----------------------------------------------
 
+html_css_files = [
+    'pygments.css'
+]
+
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
-html_theme = 'bootstrap'
 
-html_sidebars = {}
+if sphinx_template == 'sphinx-bootstrap':
 
-# Theme options are theme-specific and customize the look and feel of a theme
-# further.  For a list of options available for each theme, see the
-# documentation.
-html_theme_options = {
-    # Navigation bar title. (Default: ``project`` value)
-    'navbar_title': "SDSS: {0}".format(project),
+    html_theme = 'bootstrap'
 
-    # Tab name for entire site. (Default: "Site")
-    'navbar_site_name': "Site",
+    html_sidebars = {}
 
-    # A list of tuples containing pages or urls to link to.
-    # Valid tuples should be in the following forms:
-    #    (name, page)                 # a link to a page
-    #    (name, "/aa/bb", 1)          # a link to an arbitrary relative url
-    #    (name, "http://example.com", True) # arbitrary absolute url
-    # Note the "1" or "True" value above as the third argument to indicate
-    # an arbitrary url.
-    'navbar_links': [
-    ],
+    # Theme options are theme-specific and customize the look and feel of a theme
+    # further.  For a list of options available for each theme, see the
+    # documentation.
+    html_theme_options = {
+        # Navigation bar title. (Default: ``project`` value)
+        'navbar_title': "SDSS: {0}".format(project),
 
-    # Render the next and previous page links in navbar. (Default: true)
-    'navbar_sidebarrel': False,
+        # Tab name for entire site. (Default: "Site")
+        'navbar_site_name': "Site",
 
-    # Render the current pages TOC in the navbar. (Default: true)
-    'navbar_pagenav': False,
+        # A list of tuples containing pages or urls to link to.
+        # Valid tuples should be in the following forms:
+        #    (name, page)                 # a link to a page
+        #    (name, "/aa/bb", 1)          # a link to an arbitrary relative url
+        #    (name, "http://example.com", True) # arbitrary absolute url
+        # Note the "1" or "True" value above as the third argument to indicate
+        # an arbitrary url.
+        'navbar_links': [
+        ],
 
-    # Tab name for the current pages TOC. (Default: "Page")
-    'navbar_pagenav_name': "Page",
+        # Render the next and previous page links in navbar. (Default: true)
+        'navbar_sidebarrel': False,
 
-    # Global TOC depth for "site" navbar tab. (Default: 1)
-    # Switching to -1 shows all levels.
-    'globaltoc_depth': 2,
+        # Render the current pages TOC in the navbar. (Default: true)
+        'navbar_pagenav': False,
 
-    # Include hidden TOCs in Site navbar?
-    #
-    # Note: If this is "false", you cannot have mixed ``:hidden:`` and
-    # non-hidden ``toctree`` directives in the same page, or else the build
-    # will break.
-    #
-    # Values: "true" (default) or "false"
-    'globaltoc_includehidden': "true",
+        # Tab name for the current pages TOC. (Default: "Page")
+        'navbar_pagenav_name': "Page",
 
-    # HTML navbar class (Default: "navbar") to attach to <div> element.
-    # For black navbar, do "navbar navbar-inverse"
-    'navbar_class': "navbar",
+        # Global TOC depth for "site" navbar tab. (Default: 1)
+        # Switching to -1 shows all levels.
+        'globaltoc_depth': 2,
 
-    # Fix navigation bar to top of page?
-    # Values: "true" (default) or "false"
-    'navbar_fixed_top': "true",
+        # Include hidden TOCs in Site navbar?
+        #
+        # Note: If this is "false", you cannot have mixed ``:hidden:`` and
+        # non-hidden ``toctree`` directives in the same page, or else the build
+        # will break.
+        #
+        # Values: "true" (default) or "false"
+        'globaltoc_includehidden': "true",
 
-    # Location of link to source.
-    # Options are "nav" (default), "footer" or anything else to exclude.
-    'source_link_position': "",
+        # HTML navbar class (Default: "navbar") to attach to <div> element.
+        # For black navbar, do "navbar navbar-inverse"
+        'navbar_class': "navbar",
 
-    # Bootswatch (http://bootswatch.com/) theme.
-    #
-    # Options are nothing (default) or the name of a valid theme
-    # such as "amelia" or "cosmo".
-    'bootswatch_theme': "paper",
+        # Fix navigation bar to top of page?
+        # Values: "true" (default) or "false"
+        'navbar_fixed_top': "true",
 
-    # Choose Bootstrap version.
-    # Values: "3" (default) or "2" (in quotes)
-    'bootstrap_version': "3",
-}
+        # Location of link to source.
+        # Options are "nav" (default), "footer" or anything else to exclude.
+        'source_link_position': "",
 
-# Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+        # Bootswatch (http://bootswatch.com/) theme.
+        #
+        # Options are nothing (default) or the name of a valid theme
+        # such as "amelia" or "cosmo".
+        'bootswatch_theme': "paper",
 
-html_favicon = './_static/favicon.ico'
+        # Choose Bootstrap version.
+        # Values: "3" (default) or "2" (in quotes)
+        'bootstrap_version': "3",
+    }
+
+    # Add any paths that contain custom themes here, relative to this directory.
+    html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+
+    html_logo = '_static/sdssv_logo_small.png'
+
+    html_css_files += ["custom_bootstrap.css"]
+
+    html_sidebars = {'**': ['localtoc.html']}
+
+elif sphinx_template == 'alabaster':
+
+    html_theme = 'alabaster'
+
+    html_theme_options = {
+        'logo': 'sdssv_logo.png',
+        'github_user': 'sdss',
+        'github_repo': project,
+        'github_button': True,
+        'github_type': 'star',
+        'sidebar_collapse': True,
+        'page_width': '80%'
+    }
+
+    html_sidebars = {
+        '**': [
+            'about.html',
+            'navigation.html',
+            'relations.html',
+            'searchbox.html',
+        ]
+    }
+
+    html_css_files += ["custom.css"]
+
+html_favicon = './_static/favicon_sdssv.ico'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
 
+# See https://github.com/rtfd/readthedocs.org/issues/1776 for why we do this
+if on_rtd:
+    html_static_path = []
+else:
+    html_static_path = ['_static']
 
-html_sidebars = {'**': ['localtoc.html']}
 
 # -- Options for HTMLHelp output ------------------------------------------
 
@@ -265,3 +316,11 @@ texinfo_documents = [
      author, project, 'One line description of project.',
      'Miscellaneous'),
 ]
+
+if use_releases == 'yes':
+
+    extensions += ['sdsstools.releases']
+
+    releases_github_path = '{{cookiecutter.github_organisation}}/{{cookiecutter.package_name}}'
+    releases_document_name = ['CHANGELOG']
+    releases_unstable_prehistory = True
