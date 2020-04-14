@@ -14,6 +14,18 @@ See :doc:`what's new <../changelog>`.
 .. contents:: **Table of Contents**
 
 
+Major changes since version 1
+-----------------------------
+
+Python Template v2 provides the following major features:
+
+* Dropped support for Python 2.
+* Replace ``utils`` with `sdsstools <https://github.com/sdss/sdsstools>`__.
+* Remove use of ``bumpversion``. Instead, get the package version using ``sdsstools.get_package_version``.
+* Allow to choose between `setuptools <https://setuptools.readthedocs.io/en/latest/>`__ and `poetry <https://python-poetry.org/>`__.
+* Allow to choose between ``sphinx-bootstrap-theme`` and ``alabaster``.
+
+
 What you get with this template
 -------------------------------
 
