@@ -17,7 +17,7 @@ master
 
 .. _python-template-2.0.0:
 
-2.0.0 (unreleased)
+2.0.0 (2020-04-13)
 ------------------
 
 Changed
@@ -26,7 +26,7 @@ Changed
 * Move style guide to root level.
 * Use ``setup.cfg`` for packaging and configuration of ``pytest``, ``flake8``, ``isort``, and ``coverage``.
 * Move ``tests`` outside of the package to simplify packaging.
-* Replace ``utils`` with `sdsstools <https://github.com/sdss/sdsstools>`.
+* Replace ``utils`` with `sdsstools <https://github.com/sdss/sdsstools>`__.
 * Remove use of ``bumpversion``. Instead, get the package version using ``sdsstools.get_package_version``.
 * Updated the template Sphinx docs.
 * Updated style guide and documentation.
