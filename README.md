@@ -1,5 +1,8 @@
 # cookiecutter-python
 
+> :warning: Version 1 of the template is now deprecated. You probably want [v2](https://github.com/sdss/python_template).
+
+
 This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for creating Python packages that adhere to the [SDSS standard](./\{\{cookiecutter.repo_name\}\}/STYLE.rst).
 
 The full documentation on how to use this template can be found [here](http://sdss-python-template.readthedocs.io/en/latest/).
@@ -11,7 +14,7 @@ To install and initialize this template:
     pip install invoke
     pip install bumpversion
     pip install cookiecutter
-    cookiecutter https://github.com/sdss/python_template.git
+    cookiecutter https://github.com/sdss/python_template.git --checkout python-template-v1
 
 or to optionally install a specific branch:
 
@@ -22,7 +25,6 @@ During the installation, you will be asked a series of prompts to specify option
 * do you want to install the new python package with python setup.py install?
 * do you want to create a git repository out of your new package?
 * do you want to connect your new git repo to an account on github?
-
 
 ## Developers
 
