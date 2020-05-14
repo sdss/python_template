@@ -178,7 +178,7 @@ Your new product contains a `YAML <http://yaml.org/>`_ configuration file in the
     print(mypython.config['option1']['suboption2'])
     >>> 'some text'
 
-If the user creates a custom configuration file in ``~/.config/mypython/mypython.yml``, the contents of that file will be used to update the default options. For instance, if you create a file with the contents
+If the user creates a custom configuration file in ``~/.config/sdss/mypython.yaml``, the contents of that file will be used to update the default options. For instance, if you create a file with the contents
 
 .. code-block:: yaml
 
