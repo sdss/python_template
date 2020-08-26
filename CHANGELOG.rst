@@ -14,6 +14,9 @@ master
 
 `View commits since the last tag <https://github.com/sdss/python_template/compare/2.0.0...HEAD>`__.
 
+Changed
+^^^^^^^
+* Updated dependencies.
 
 .. _python-template-2.0.0:
 
