@@ -23,7 +23,10 @@ packages = [
     { include = "{{cookiecutter.package_name}}", from = "python" }
 ]
 include = ["python/{{cookiecutter.package_name}}/etc/*", "cextern/**/*", "LICENSE.md"]
-build = "build.py"
+
+[tool.poetry.build]
+script = "build.py"
+generate-setup-file = false
 
 [tool.poetry.scripts]
 {{cookiecutter.package_name}} = "{{cookiecutter.package_name}}.cli:main"
@@ -83,5 +86,5 @@ exclude_lines = [
 ]
 
 [build-system]
-build-backend = "poetry.masonry.api"
-requires = ["poetry>=1.0.0"]
+requires = ["poetry-core>=1.0.0", "setuptools>=49.6.0"]
+build-backend = "poetry.core.masonry.api"
