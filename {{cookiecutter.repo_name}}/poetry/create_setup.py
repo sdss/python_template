@@ -14,15 +14,27 @@
 
 import os
 import sys
+from distutils.version import StrictVersion
 
 
 # If there is a global installation of poetry, prefer that.
-poetry_python_lib = os.path.expanduser('~/.poetry/lib')
-sys.path.append(os.path.realpath(poetry_python_lib))
+lib = os.path.expanduser('~/.poetry/lib')
+vendors = os.path.join(lib, 'poetry', '_vendor')
+current_vendors = os.path.join(
+    vendors, 'py{}'.format('.'.join(str(v) for v in sys.version_info[:2]))
+)
+
+sys.path.insert(0, lib)
+sys.path.insert(0, current_vendors)
 
 try:
-    from poetry.masonry.builders.sdist import SdistBuilder
-    from poetry.factory import Factory
+    try:
+        from poetry.core.factory import Factory
+        from poetry.core.masonry.builders.sdist import SdistBuilder
+    except (ImportError, ModuleNotFoundError):
+        from poetry.masonry.builders.sdist import SdistBuilder
+        from poetry.factory import Factory
+    from poetry.__version__ import __version__
 except (ImportError, ModuleNotFoundError) as ee:
     raise ImportError('install poetry by doing pip install poetry to use '
                       f'this script: {ee}')
@@ -33,7 +45,11 @@ factory = Factory()
 poetry = factory.create_poetry(os.path.dirname(__file__))
 
 # Use the SdistBuilder to genrate a blob for setup.py
-sdist_builder = SdistBuilder(poetry, None, None)
+if StrictVersion(__version__) >= StrictVersion('1.1.0b1'):
+    sdist_builder = SdistBuilder(poetry, None)
+else:
+    sdist_builder = SdistBuilder(poetry, None, None)
+
 setuppy_blob = sdist_builder.build_setup()
 
 with open('setup.py', 'wb') as unit:
