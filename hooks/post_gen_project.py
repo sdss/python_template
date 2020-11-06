@@ -87,7 +87,7 @@ def addremote(ctx):
                 .format(GITUSER, PKGNAME))
         try:
             print('Pushing to github ..')
-            ctx.run("git push -u origin master")
+            ctx.run("git push -u origin main")
         except Exception:
             print('Could not push to github. ERROR: Repository not found. '
                   'Make sure to add the repo to your github account. ')

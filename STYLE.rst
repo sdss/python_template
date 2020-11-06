@@ -230,10 +230,10 @@ Git workflow
 Working with Git and GitHub provides a series of extremely useful tools to write code collaboratively. Atlassian provides a `good tutorial <https://www.atlassian.com/git/tutorials/syncing>`__ on Git workflows. While the topic is an extensive one, here is a simplified version of a typical Git workflow you should follow:
 
 1. `Clone <https://git-scm.com/docs/git-clone>`__ the repository.
-2. Create a `branch <https://git-scm.com/docs/git-branch>`__ (usually from master) to work on a bug fix or new feature. Develop all your work in that branch. Commit frequently and modularly. Add tests.
+2. Create a `branch <https://git-scm.com/docs/git-branch>`__ (usually from main) to work on a bug fix or new feature. Develop all your work in that branch. Commit frequently and modularly. Add tests.
 3. Once your branch is ready and well tested, and your are ready to integrate your changes, you have two options:
 
-   1. If you are the owner of the repo and no other people are contributing code at the time (or your changes are **very** small and non-controversial) you can simple `merge <https://git-scm.com/docs/git-merge>`__ the branch back into master and push it to the upstream repo.
+   1. If you are the owner of the repo and no other people are contributing code at the time (or your changes are **very** small and non-controversial) you can simple `merge <https://git-scm.com/docs/git-merge>`__ the branch back into main and push it to the upstream repo.
    2. If several people are collaborating in a project, you *want* to create a `pull request <https://help.github.com/articles/about-pull-requests/>`__ for that branch. The change can then be discussed, changes made and, when approved, you can merge the pull request.
 
 4. GOTO 2

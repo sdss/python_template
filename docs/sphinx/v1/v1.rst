@@ -22,8 +22,8 @@ What you get with this template
 * :ref:`Sphinx Documentation <sphinx-section-v1>` with :ref:`Read The Docs <rtd-section-v1>` integration
 * Versioning with :ref:`BumpVersion <bumpversion-section-v1>`.
 * :ref:`Invoke <invoke-section-v1>` for shell tasks
-* SDSS-compliant `license file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/LICENSE.md>`_.
-* `Module file <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/etc/%7B%7Bcookiecutter.package_name%7D%7D.module>`_.
+* SDSS-compliant `license file <https://github.com/sdss/python_template/blob/main/%7B%7Bcookiecutter.package_name%7D%7D/LICENSE.md>`_.
+* `Module file <https://github.com/sdss/python_template/blob/main/%7B%7Bcookiecutter.package_name%7D%7D/etc/%7B%7Bcookiecutter.package_name%7D%7D.module>`_.
 * :ref:`Configuration file <conf-log-section-v1>` and improved :ref:`logging <conf-log-section-v1>`.
 * the SDSS :ref:`tree and sdss_access <sdsspy-v1>` python packages.
 
@@ -85,7 +85,7 @@ The python template you cookiecut uses `bumpversion <https://github.com/peritus/
 
     pip install bumpversion
 
-The bumpversion configuration is defined in the `.bumpversion.cfg <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/.bumpversion.cfg>`_ file in your new product. You should read the bumpversion documentation for details, but usually your workflow will be as follows: once you are ready to start working on a new version do ::
+The bumpversion configuration is defined in the `.bumpversion.cfg <https://github.com/sdss/python_template/blob/main/%7B%7Bcookiecutter.package_name%7D%7D/.bumpversion.cfg>`_ file in your new product. You should read the bumpversion documentation for details, but usually your workflow will be as follows: once you are ready to start working on a new version do ::
 
     bumpversion patch
 
@@ -115,7 +115,7 @@ If you release and tag a new version, don't forget to do ``bumpversion patch`` t
 Writing and running tests
 -------------------------
 
-The ``tests`` directory contains some examples on how to write and run tests for your package using `pytest`_. Use the `conftest.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/python/%7B%7Bcookiecutter.package_name%7D%7D/tests/conftest.py>`_ file to define `fixtures <https://docs.pytest.org/en/latest/fixture.html>`__ and other `pytest`_-specific features. cd'ing to the ``tests`` directory and typing ``pytest`` will recursively run all the tests in files whose filename starts with ``test_``.
+The ``tests`` directory contains some examples on how to write and run tests for your package using `pytest`_. Use the `conftest.py <https://github.com/sdss/python_template/blob/main/%7B%7Bcookiecutter.package_name%7D%7D/python/%7B%7Bcookiecutter.package_name%7D%7D/tests/conftest.py>`_ file to define `fixtures <https://docs.pytest.org/en/latest/fixture.html>`__ and other `pytest`_-specific features. cd'ing to the ``tests`` directory and typing ``pytest`` will recursively run all the tests in files whose filename starts with ``test_``.
 
 If you prefer to use `unittest <https://docs.python.org/3/library/unittest.html>`_ or `nose <https://nose2.readthedocs.io/en/latest/getting_started.html>`_ feel free to remove those files.
 
@@ -125,7 +125,7 @@ If you prefer to use `unittest <https://docs.python.org/3/library/unittest.html>
 Connecting your product to Travis
 ---------------------------------
 
-The template includes a basic setup for `Travis CI <https://travis-ci.org/>`__ and `Coveralls <https://coveralls.io/>`_. The configuration is defined in the `.travis.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/.travis.yml>`_ and `.coveragerc <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/.coveragerc>`_ files.
+The template includes a basic setup for `Travis CI <https://travis-ci.org/>`__ and `Coveralls <https://coveralls.io/>`_. The configuration is defined in the `.travis.yml <https://github.com/sdss/python_template/blob/main/%7B%7Bcookiecutter.package_name%7D%7D/.travis.yml>`_ and `.coveragerc <https://github.com/sdss/python_template/blob/main/%7B%7Bcookiecutter.package_name%7D%7D/.coveragerc>`_ files.
 
 Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`__ account (create one if you don't have it) and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same for `Coveralls <https://coveralls.io/>`_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report.
 
@@ -141,7 +141,7 @@ The product includes several macros to automate frequent tasks using `Invoke <ht
 
 The documentation can be compiled by doing ``invoke docs.build`` and then shown in your browser with ``invoke docs.show``. Another useful macro, ``invoke deploy``, automates the process of deploying a new version by creating new distribution packages and uploading them to PyPI (see deploying-section-v1_).
 
-You can add new tasks to the `tasks.py <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/tasks.py>`__ file.
+You can add new tasks to the `tasks.py <https://github.com/sdss/python_template/blob/main/%7B%7Bcookiecutter.package_name%7D%7D/tasks.py>`__ file.
 
 
 .. _sphinx-section-v1:
@@ -181,9 +181,9 @@ Connecting your product to Read The Docs
 
 The cookiecut product documentation is ready to be built and integrated with Read The Docs. As with Travis and Coveralls above, you will need to commit the products to a GitHub repository first. SDSS has a `Read The Docs <http://readthedocs.io/>`_ account that is the preferred place to integrate the documentation. You can request access to the account by emailing ``admin[at]sdss[dot]org``. Alternatively, you can deploy your product in your own Read the Docs account and add the user ``sdss`` as a maintainer from the admin menu.
 
-Probably you will receive a message saying that the integration of the product is not complete and that you need to set up a webhook. To do that, got to the admin setting of the new Read The Docs project. In ``Intergations`` add a new integration and copy the link to the webhook. Then go to the GitHub repository settings and in the ``Webhooks`` section add a new webhook with the URL you just copied. Once you submit, any push to the master branch of the GitHub repo should produce a new built of the documentation. You can find more details on the webhook set up `here <https://docs.readthedocs.io/en/latest/webhooks.html>`_.
+Probably you will receive a message saying that the integration of the product is not complete and that you need to set up a webhook. To do that, got to the admin setting of the new Read The Docs project. In ``Intergations`` add a new integration and copy the link to the webhook. Then go to the GitHub repository settings and in the ``Webhooks`` section add a new webhook with the URL you just copied. Once you submit, any push to the main branch of the GitHub repo should produce a new built of the documentation. You can find more details on the webhook set up `here <https://docs.readthedocs.io/en/latest/webhooks.html>`_.
 
-The product configuration for Read The Docs can be found in `readthedocs.yml <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/readthedocs.yml>`_. By default, the Sphinx documentation will be built using Python 3.6 and using the requirements specified in `requirements_doc.txt <https://github.com/sdss/python_template/blob/master/%7B%7Bcookiecutter.package_name%7D%7D/requirements_doc.txt>`_. You can change those settings easily.
+The product configuration for Read The Docs can be found in `readthedocs.yml <https://github.com/sdss/python_template/blob/main/%7B%7Bcookiecutter.package_name%7D%7D/readthedocs.yml>`_. By default, the Sphinx documentation will be built using Python 3.6 and using the requirements specified in `requirements_doc.txt <https://github.com/sdss/python_template/blob/main/%7B%7Bcookiecutter.package_name%7D%7D/requirements_doc.txt>`_. You can change those settings easily.
 
 
 .. _conf-log-section-v1:
@@ -290,7 +290,7 @@ Now you have the development version of this template.  The two main components 
 
 Upon installation of the template by a user, the variables defined in the `cookiecutter.json` file, or by the user during install, get substituted into their respective reference places.
 
-Please, *do not* modify the master branch directly unless otherwise instructed. Instead, develop your changes in a branch or fork and, when ready to merge, create a pull request.
+Please, *do not* modify the main branch directly unless otherwise instructed. Instead, develop your changes in a branch or fork and, when ready to merge, create a pull request.
 
 .. _sdsspy-v1:
 
