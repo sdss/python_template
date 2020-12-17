@@ -54,8 +54,8 @@ jobs:
         pip install coverage[toml]
         pytest
 
-    - name: Upload coverage to Codecov
-      if: matrix.python-version == '3.8'
-      uses: codecov/codecov-action@v1
-      with:
-        file: ./coverage.xml
+    # - name: Upload coverage to Codecov
+    #   if: matrix.python-version == '3.8'
+    #   uses: codecov/codecov-action@v1
+    #   with:
+    #     file: ./coverage.xml
