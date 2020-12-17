@@ -14,6 +14,7 @@
     "exists_on_github": ["no", "yes"],
     "github_organisation": "sdss",
     "_copy_without_render": [
-        "*/_templates/*.html"
+        "*/_templates/*.html",
+        "*/.github/workflows/*"
     ]
 }
