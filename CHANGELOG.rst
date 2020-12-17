@@ -14,9 +14,18 @@ main
 
 `View commits since the last tag <https://github.com/sdss/python_template/compare/2.0.0...HEAD>`__.
 
+Added
+^^^^^
+* GitHub workflow for testing.
+
 Changed
 ^^^^^^^
 * Updated dependencies.
+
+Fixed
+^^^^^
+* Link to the standards in the README.
+
 
 .. _python-template-2.0.0:
 

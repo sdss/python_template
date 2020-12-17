@@ -39,6 +39,7 @@ During the installation, you will be asked a series of prompts to specify option
 * Continuous Integration with Travis.
 * Code coverage with [codecov](https://codecov.io).
 * Module file.
+* GitHub test workflow.
 
 ## Coding standards
 
