@@ -42,7 +42,7 @@ During the installation, you will be asked a series of prompts to specify option
 
 ## Coding standards
 
-Before you start writing your code, make sure to read and understand the [SDSS coding standards](./\{\{cookiecutter.package_name\}\}/STYLE.rst).
+Before you start writing your code, make sure to read and understand the [SDSS coding standards](./STYLE.rst).
 
 ## Developers
 
