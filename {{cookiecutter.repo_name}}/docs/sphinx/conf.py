@@ -9,6 +9,8 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+# type: ignore
+
 import os
 
 from pkg_resources import parse_version
@@ -119,7 +121,7 @@ pygments_style = 'sphinx'
 todo_include_todos = False
 
 # Intersphinx mappings
-intersphinx_mapping = {'python': ('https://docs.python.org/3.6', None),
+intersphinx_mapping = {'python': ('https://docs.python.org/', None),
                        'astropy': ('http://docs.astropy.org/en/latest', None),
                        'numpy': ('http://docs.scipy.org/doc/numpy/', None)}
 
