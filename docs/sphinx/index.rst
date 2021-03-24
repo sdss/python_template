@@ -317,6 +317,12 @@ Alternatively, navigate to your python package's ``docs/sphinx/`` directory and 
 
     make html
 
+If you are using the ``sphinx-bootstrap-theme`` package, you'll need to install it manually or by going to ``docs/sphinx`` and running ::
+
+    pip install -r requirements.txt
+
+You can add packages that your documentation needs to that file. The documentation dependencies in ``requirements.txt`` are automatically installed in the Read The Docs build.
+
 This will build your documentation, converting the rst files into html files.  The output html files live in the ``docs/sphinx/_build`` subdirectory.  To both build and display the documentation, type::
 
     # builds and displays
@@ -444,7 +450,7 @@ Frequently Asked Questions
 
     Alternatively, you can use the ``sdss install-deps`` :ref:`task <tasks-section-v2>` to install only the dependencies. You can even pass an ``--extras`` flag to tell it to install extras, for example ::
 
-        sdss install-deps --extras dev,docs
+        sdss install-deps --extras dev
 
 .. _poetry-extensions:
 
