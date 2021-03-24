@@ -21,6 +21,7 @@ Added
 Changed
 ^^^^^^^
 * Updated dependencies.
+* Removed the requirements ``docs`` extra. Instead, documentation extra packages are defined in a ``requirements.txt`` in ``docs/sphinx`` and automatically installed in the RTD build.
 
 Fixed
 ^^^^^
