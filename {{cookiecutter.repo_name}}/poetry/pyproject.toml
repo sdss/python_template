@@ -22,7 +22,7 @@ classifiers = [
 packages = [
     { include = "{{cookiecutter.package_name}}", from = "python" }
 ]
-include = ["python/{{cookiecutter.package_name}}/etc/*", "cextern/**/*", "LICENSE.md"]
+include = ["python/{{cookiecutter.package_name}}/etc/*"]
 
 [tool.poetry.build]
 script = "build.py"
