@@ -299,10 +299,16 @@ If you prefer to use `unittest <https://docs.python.org/3/library/unittest.html>
 Connecting your product to Travis
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The template includes a basic setup for `Travis CI <https://travis-ci.org/>`__ and `codecov <https://codecov.io>`_. The configuration is defined in the `.travis.yml <https://github.com/sdss/python_template/blob/main/%7B%7Bcookiecutter.package_name%7D%7D/.travis.yml>`__. `Coverage <https://coverage.readthedocs.io/>`__ configuration is included in your ``pyproject.toml`` or ``setup.cfg`` files.
+The template includes a basic setup for `Travis CI <https://travis-ci.org/>`__ and `codecov <https://codecov.io>`_. The configuration is defined in the `.travis.yml <https://github.com/sdss/python_template/blob/4fc3bce1945a5e0f6f1c9159850d3c2c993f8390/%7B%7Bcookiecutter.repo_name%7D%7D/.travis.yml>`__. `Coverage <https://coverage.readthedocs.io/>`__ configuration is included in your ``pyproject.toml`` or ``setup.cfg`` files.
 
 Once you have created the GitHub repository for the product, you can go to your `Travis CI <https://travis-ci.org>`__ account (create one if you don't have it) and click on ``Add a new repository``. Then search for the new product and flip the switch to initiate the integration. You can do the same for codecov_. Each new push to the repository will trigger a Travis run that, if successful, will update the coverage report (to see it, you will also need to go to to codecov_, sign with your GitHub account, and turn on the repository).
 
+.. _github-actions-v2:
+
+Running the GitHub Action
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The template also includes a basic `GitHub Actions <https://github.com/features/actions>`__ workflow in `.github/workflows/test.yml <https://github.com/sdss/python_template/blob/4fc3bce1945a5e0f6f1c9159850d3c2c993f8390/%7B%7Bcookiecutter.repo_name%7D%7D/.github/workflows/test.yml>`__. The workflow will run on each commit as long as your repository has Actions enabled and will check linting using ``flake8``, import sorting with ``isort``, and will run the tests using ``pytest``. To push the results to `codecov`_ uncomment the section at the bottom of the file.
 
 .. _sphinx-section-v2:
 
