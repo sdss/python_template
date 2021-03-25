@@ -1,9 +1,9 @@
 build:
-   image: latest
+    image: latest
 
 python:
-   version: 3.6
-   setup_py_install: false
+    version: 3.8
+    setup_py_install: false
 
 requirements_file: docs/sphinx/requirements_template_docs.txt
 

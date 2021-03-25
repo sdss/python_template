@@ -1,11 +1,11 @@
 version: 2
 
 build:
-   image: latest
+    image: latest
 
 python:
-   version: 3.7
-   install:
-      - requirements: docs/sphinx/requirements.txt
-      - method: pip
-        path: .
+    version: 3.8
+    install:
+        - requirements: docs/sphinx/requirements.txt
+        - method: pip
+          path: .
