@@ -12,7 +12,13 @@ This document records the main changes to the python-template code.
 main
 ----
 
-`View commits since the last tag <https://github.com/sdss/python_template/compare/2.0.0...HEAD>`__.
+`View commits since the last tag <https://github.com/sdss/python_template/compare/2.1.0...HEAD>`__.
+
+
+.. _python-template-2.1.0:
+
+2.1.0 (2021-03-24)
+------------------
 
 Added
 ^^^^^
@@ -26,6 +32,8 @@ Changed
 Fixed
 ^^^^^
 * Link to the standards in the README.
+
+`View commits <https://github.com/sdss/python_template/compare/2.0.0...2.1.0>`__.
 
 
 .. _python-template-2.0.0:
