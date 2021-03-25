@@ -140,9 +140,7 @@ rst_epilog = f"""
 
 # -- Options for HTML output ----------------------------------------------
 
-html_css_files = [
-    'pygments.css'
-]
+html_css_files = []
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
