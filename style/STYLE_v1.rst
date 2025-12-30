@@ -1,5 +1,5 @@
-SDSS coding standards
-=====================
+SDSS coding standards (version 1)
+=================================
 
 So you want to write some Python code. Congratulations, you've arrived at the right place! This repository has a dual purpose: it provides a `template <sdss-python-template.readthedocs.io/en/latest/>`__ for a basic but complete Python package; and lists the coding standards and recommendations for developing code for SDSS. Please, read this document carefully and suggest modifications by opening an `new issue <https://github.com/sdss/python_template/issues/new>`__.
 
@@ -121,7 +121,7 @@ It is beyond the scope of this document to summarise the PEP8 conventions, but h
 -  No trailing spaces. You can configure your editor to strip the lines automatically for you.
 -  Imports go on the top of the file. Do **not** import more than one package in the same line (``import os, sys``). Maintain the namespace, do **not** import all functions in a package (``from os import *``). You can import multiple functions from the same package at the same time (``from os.path import dirname, basename``).
 -  Use single quotes for strings. Double quotes must be reserved for docstrings and string blocks.
--  For inline comments, at least two spaces between the statement and the beginning of the comment (``a = 1­­  # This is a comment about a``).
+-  For inline comments, at least two spaces between the statement and the beginning of the comment (``a = 1  # This is a comment about a``).
 -  Class names must be in camelcase (``class MyClass``). Function, method, and variable names should be all lowercase separated by underscores for legibility (``def a_function_that_does_something``, ``my_variable = 1``). For the latter ones, PEP8 allows some flexibility. The general rule of thumb is to make your function, method, and variable names descriptive and readable (avoid multiple words in all lowercase). As such, if you prefer to use camelcase (``aFunctionThatDoesSomething``, ``myVariable = 1``) for your project that is accepted, as long as you are consistent throughout the project. When modifying somebody else's code, stick to their naming decisions.
 -  Use ``is`` for comparisons with ``None``, ``True``, or ``False``: ``if foo is not None:``.
 
