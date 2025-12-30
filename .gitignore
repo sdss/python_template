@@ -107,3 +107,5 @@ ENV/
 *~
 *.swp
 *.swo
+
+.vscode/
