@@ -1,0 +1,96 @@
+project_name:
+  type: str
+  qmark: 📚
+  help: The name of the project. Used as repository name, in documentation, and other places.
+  validator: >-
+    {% if project_name == "" %}
+    Answer must not be an empty string.
+    {% endif %}
+
+package_name:
+  type: str
+  qmark: 📦
+  help: The name of the Python package to create. This is the import name and the name of the package in PyPI.
+  validator: >-
+    {% if package_name == "" %}
+    Answer must not be an empty string.
+    {% endif %}
+
+project_description:
+  type: str
+  qmark: 📝
+  help: A short description of the project.
+  validator: >-
+    {% if project_description == "" %}
+    Answer must not be an empty string.
+    {% endif %}
+
+author_name:
+  type: str
+  qmark: 🙋
+  help: The full name of the project maintainer.
+  validator: >-
+    {% if author_name == "" %}
+    Answer must not be an empty string.
+    {% endif %}
+
+author_email:
+  type: str
+  qmark: 📧
+  help: The email of the project maintainer.
+  validator: >-
+    {% if author_email == "" %}
+    Answer must not be an empty string.
+    {% endif %}
+
+license:
+  type: str
+  qmark: ⚖️
+  help: The license for the project.
+  default: BSD-3-Clause
+  choices:
+    - BSD-3-Clause
+    - GPL-3.0-or-later
+    - Apache-2.0
+    - MIT
+
+github_organization:
+  type: str
+  qmark: 🐙
+  help: The GitHub organization or user where the repository will be hosted.
+  default: sdss
+
+github_username:
+  type: str
+  qmark: 👤
+  help: The GitHub username of the project maintainer.
+
+push_to_github:
+  type: bool
+  qmark: 🚀
+  help: Whether to create a GitHub repository and push the initial commit (requires GitHub CLI).
+  default: false
+
+private_repository:
+  type: bool
+  qmark: 🔒
+  help: Create a private GitHub repository?
+  default: false
+  when: '{{ push_to_github == true }}'
+
+sync_project:
+  type: bool
+  qmark: 🔄
+  help: Whether to create a venv and sync the project after creation using uv.
+  default: true
+
+keep_answers:
+  type: bool
+  qmark: 💾
+  help: Keep Copier answers to questions for future re-use.
+  default: false
+
+_subdirectory: template
+
+_tasks:
+  - command: ['{{ _copier_python }}', 'post_copy.py']
