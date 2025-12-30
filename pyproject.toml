@@ -6,7 +6,8 @@ authors = [
     { name = "José Sánchez-Gallego", email = "gallegoj@uw.edu" },
     { name = "Brian Cherinka", email = "bcherinka@stsci.edu" }
 ]
-license = { text = "BSD-3-Clause" }
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
 readme = "README.md"
 requires-python = ">=3.10,<4"
 

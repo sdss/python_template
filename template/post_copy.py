@@ -8,8 +8,10 @@
 
 from __future__ import annotations
 
+import datetime
 import pathlib
 import subprocess
+import urllib.request
 
 from typing import Any
 
@@ -47,6 +49,47 @@ def delete_copier_files(keep_answers: bool = False) -> None:
     if not keep_answers and answers_path.exists():
         answers_path.unlink(missing_ok=True)
         print(colorama.Fore.WHITE + "  > Deleted .copier-answers.yml file.")
+
+
+def get_license_text(license_file: str) -> str:
+    """Returns the text of a license file."""
+
+    url = f"https://raw.githubusercontent.com/sdss/python_template/refs/heads/python-template-v3/licenses/{license_file}"
+
+    with urllib.request.urlopen(url) as response:
+        return response.read().decode("utf-8")
+
+
+def update_license(license: str) -> bool:
+    """Updates the LICENSE file with the selected license."""
+
+    dst_file = pathlib.Path.cwd() / "LICENSE"
+    license_text: str = ""
+
+    if license == "BSD-3-Clause":
+        # The template includes this license by default.
+        pass
+    else:
+        license_text = get_license_text(license)
+        with dst_file.open("w") as f:
+            f.write(license_text)
+
+    # Update the copyright year
+    with dst_file.open("a+") as f:
+        f.seek(0)
+        text = f.read()
+        text = text.replace(
+            "{{ year }}",
+            str(datetime.datetime.now().year),
+        )
+        f.seek(0)
+        f.truncate(0)
+        f.write(text)
+        f.truncate()
+
+    print(colorama.Fore.WHITE + f"  > Updated LICENSE file to {license}.")
+
+    return True
 
 
 def run_command(
@@ -111,6 +154,11 @@ def post_copy():
         delete_copier_files(keep_answers=keep_answers)
         return
 
+    # Update the LICENSE file
+    license = answers.get("license", "BSD-3-Clause").strip()
+    update_license(license)
+
+    # Sync the project with 'uv' if requested
     if answers.get("sync_project", True):
         uv_path = get_binary_path("uv")
         if not uv_path:
@@ -136,6 +184,7 @@ def post_copy():
                 error_message="Failed to sync project with 'uv'.",
             )
 
+    # If git is available, initialize a repository.
     git_path = get_binary_path("git")
     if not git_path:
         print(colorama.Fore.YELLOW + "  ! 'git' binary not found in PATH.")
@@ -150,7 +199,10 @@ def post_copy():
         push_to_github = answers.get("push_to_github", False)
         private = answers.get("private_repository", False)
 
+        # If we are pushing to GitHub, set the remote and push. We need to add and
+        # commit all files first but skip the copier files.
         if result and push_to_github and github_organization:
+            # Set the remote
             github_repo_url = f"git@github.com:{github_organization}/{project_name}.git"
             run_command(
                 [str(git_path), "remote", "add", "origin", github_repo_url],
@@ -160,6 +212,7 @@ def post_copy():
                 keep_answers=keep_answers,
             )
 
+            # Stage all files
             run_command(
                 [str(git_path), "add", "."],
                 success_message="Staged all files for initial commit.",
@@ -168,6 +221,20 @@ def post_copy():
                 keep_answers=keep_answers,
             )
 
+            # Remove copier files from staging
+            files_to_unstage = ["post_copy.py"]
+            if not keep_answers:
+                files_to_unstage.append(".copier-answers.yml")
+
+            run_command(
+                [str(git_path), "reset", "--"] + files_to_unstage,
+                success_message="Removed copier files from staging.",
+                error_message="Failed to remove copier files from staging.",
+                exit_on_error=True,
+                keep_answers=keep_answers,
+            )
+
+            # Commit
             run_command(
                 [str(git_path), "commit", "-m", "Initial commit"],
                 success_message="Created initial commit.",
@@ -176,11 +243,12 @@ def post_copy():
                 keep_answers=keep_answers,
             )
 
-            gh_path = get_binary_path("gh")
-            if gh_path:
+            # Create the GitHub repository using 'gh' CLI, if available.
+            gh_cli_path = get_binary_path("gh")
+            if gh_cli_path:
                 if run_command(
                     [
-                        str(gh_path),
+                        str(gh_cli_path),
                         "repo",
                         "create",
                         f"{github_organization}/{project_name}",
