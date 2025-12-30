@@ -84,12 +84,6 @@ sync_project:
   help: Whether to create a venv and sync the project after creation using uv.
   default: true
 
-keep_answers:
-  type: bool
-  qmark: 💾
-  help: Keep Copier answers to questions for future re-use.
-  default: false
-
 _subdirectory: template
 
 _tasks:
