@@ -111,6 +111,8 @@ typehints_use_signature_return = True
 copybutton_prompt_text = r">>> |\$ "
 copybutton_prompt_is_regexp = True
 
+myst_heading_anchors = 3
+
 rst_epilog = """
 .. |python_template_version| replace:: 3.0.0
 .. default-role:: py:obj

@@ -304,7 +304,7 @@ The template includes three [GitHub Actions workflows](https://docs.github.com/e
 
 * `lint.yml` runs a linting and format check using Ruff every time a commit is pushed to the repository. The files are not modified.
 * `test.yml` runs the pytest tests using different Python versions under Linux (Ubuntu 24.04). This workflow also runs on each commit.
-* `release.yml` runs when a new tag is pushed and creates a new GitHub release using the contents of the `CHANGELOG.md` file. The package is built and published to PyPI (see [Publishing your package](publishing-your-package) below).
+* `release.yml` runs when a new tag is pushed and creates a new GitHub release using the contents of the `CHANGELOG.md` file. The package is built and published to PyPI (see [Publishing your package](#publishing-your-package) below).
 
 The `test.yml` action outputs information about test coverage, but that information is not uploaded to any service by default. We recommend using [codecov](https://about.codecov.io) for this. To enable uploading coverage reports you will need to log in to your codecov account, select the project in question, go to Configuration — General and copy the `CODECOV_TOKEN` value. Then go to your project page in GitHub, access the Settings, Secrets and variables, Actions, and add a new Repository secret with name `CODECOV_TOKEN` and value the copied token. Then edit `.github/workflows/test.yml` and uncomment the "Upload coverage to Codecov" section.
 
@@ -361,9 +361,105 @@ The `uv` backend is enough for most purposes. One case where that is not the cas
 
 ### Scripts and command line tools
 
+Python packaging supports defining scripts and command line interfaces under the general term of [entry points](https://packaging.python.org/en/latest/specifications/entry-points/), which can be defined in the `pyproject.toml` file. The SDSS template does not include any entry points by default, but you can easily add them by editing the `pyproject.toml` file. See the [relevant documentation](https://docs.astral.sh/uv/concepts/projects/config/#entry-points) in `uv` for details and examples.
+
+The specification only allows running Python functions as scripts. The script definition is the path to the function to run. For example, we can define the following function that prints the version of our package:
+
+```{code-block} python
+:caption: src/my_package/cli.py
+
+from my_package import __version__
+
+def print_version():
+   print(f"The package version is {__version__}.")
+
+```
+
+And then add the following lines in `pyproject.toml`:
+
+```{code-block} toml
+:caption: pyproject.toml
+
+[project.scripts]
+my-package-version = "my_package.cli:print_version"
+```
+
+After syncing the project again we can do
+
+```bash
+$ my-package-version
+0.1.0a1
+```
+
+You can use this as an entry point for a fully-featured command line interface using packages such as [Click](https://click.palletsprojects.com/) or [Typer](https://typer.tiangolo.com/).
+
+If you need to run a non-Python script, you can include it in your `src/<package-name>` directory, for example under `scripts/`, and then include a Python entry point that runs that script using `subprocess.run()`.
+
+```{code-block} bash
+:caption: src/my_package/scripts/myscript.sh
+#!/bin/bash
+echo "Hello from myscript.sh"
+```
+
+```{code-block} toml
+:caption: pyproject.toml
+[project.scripts]
+my-script = "my_package.__main__:run_myscript"
+```
+
+```{code-block} python
+:caption: src/my_package/__main__.py
+import pathlib
+import subprocess
+
+def run_myscript():
+    cwd = pathlib.Path(__file__).parent
+    subprocess.run(["bash", str(cwd / "scripts/myscript.sh")])
+```
+
+Finally, you can use external tools to run development scripts and to automate certain tasks. One such option is [poe](https://poethepoet.natn.io/global_options.html), which integrates well with `uv` and `pyproject.toml`. For example, you can define a `poe` task to run the tests as
+
+```{code-block} toml
+:caption: pyproject.toml
+[tool.poe.tasks]
+test-coverage = "pytest tests/"
+```
+
+Add `poethepoet` to the `dev` development group as `uv add --group dev poethepoet` and then you can run
+
+```bash
+$ poe test
+Poe => pytest --cov=test_package tests/
+      Built test-package @ file:///Users/gallegoj/Downloads/test_project
+Uninstalled 1 package in 0.76ms
+Installed 1 package in 1ms
+Test session starts (platform: darwin, Python 3.14.2, pytest 9.0.2, pytest-sugar 1.1.1)
+rootdir: /Users/gallegoj/Downloads/test_project
+configfile: pyproject.toml
+plugins: mock-3.15.1, asyncio-1.3.0, sugar-1.1.1, cov-7.0.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1 item
+
+ tests/test_test_package.py ✓                                                                                                                     100% ██████████
+======================================================================== tests coverage =========================================================================
+_______________________________________________________ coverage: platform darwin, python 3.14.2-final-0 ________________________________________________________
+
+Name                           Stmts   Miss  Cover
+--------------------------------------------------
+src/test_package/__init__.py       4      0   100%
+src/test_package/__main__.py       5      5     0%
+--------------------------------------------------
+TOTAL                              9      5    44%
+
+Results (0.08s):
+       1 passed
+```
+
 ### Multi-architecture distributions
 
 ### Creating a Docker container
+
+### What if I really don't want to use `uv`?
 
 ## Changelog
 
