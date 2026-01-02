@@ -64,6 +64,24 @@ section-order = ["future", "standard-library", "typing", "third-party", "sdss", 
 typing = ["typing"]
 sdss = ["sdsstools", "sdssdb", "clu", "tree", "sdss_access", "datamodel", "coordio"]
 
+[tool.pytest.ini_options]
+addopts = "--cov {{package_name}} --cov-report xml --cov-report html --cov-report term -W ignore"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.coverage.run]
+branch = true
+include = ["src/{{package_name}}/*"]
+omit = [
+    "*/__init__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "if TYPE_CHECKING:",
+    "# pragma: no cover"
+]
+
 [build-system]
 requires = ["uv_build>=0.9.20,<0.10.0"]
 build-backend = "uv_build"
