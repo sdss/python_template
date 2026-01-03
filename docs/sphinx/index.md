@@ -44,7 +44,7 @@ The goal of the SDSS Python Template is to provide a lightweight template that c
 * Unit-testing using [pytest](https://docs.pytest.org/en/stable/).
 * GitHub Actions workflows for linting, testing, and deployment.
 
-Version 3 of the template is somewhat more opinionated than previous versions and supports fewer configuration options. This is partly to streamline the process of creating a new project and partly because in recent years the Python community has consolidated around a set of tools (`uv`, Ruff, pytest) for development. Our philosophy is that if you have strong opinions about what tools to use it is probably trivial for you to modify the rendered template to meet your needs.
+Version 3 of the template is somewhat more opinionated than previous versions and supports fewer configuration options. This is partly to streamline the process of creating a new project and partly because in recent years the Python community has consolidated around a set of tools (uv, Ruff, pytest) for development. Our philosophy is that if you have strong opinions about what tools to use it is probably trivial for you to modify the rendered template to meet your needs.
 
 ## Customizing the rendered template
 
@@ -175,21 +175,21 @@ Once the virtual environment has been created there are two main ways to use it.
 source .venv/bin/activate
 ```
 
-and then run commands normally, or you can use `uv run` and let `uv` ensure that you are using the package environment. For example, to run an IPython terminal with the virtual environment do
+and then run commands normally, or you can use `uv run` and let uv ensure that you are using the package environment. For example, to run an IPython terminal with the virtual environment do
 
 ```bash
 uv run ipython
 ```
 
-The code for the package can be found under `src/<package-name>`. When you sync a project with `uv` the package is installed in "editable" mode, which means that you don't need to resync or reinstall the package when you make changes to it. The code in the package template is extremely simple, just a `__init__.py` file that provides a `__version__` variable with the version of the package, read from the `pyproject.toml` file or the package metadata.
+The code for the package can be found under `src/<package-name>`. When you sync a project with uv the package is installed in "editable" mode, which means that you don't need to resync or reinstall the package when you make changes to it. The code in the package template is extremely simple, just a `__init__.py` file that provides a `__version__` variable with the version of the package, read from the `pyproject.toml` file or the package metadata.
 
 ### Adding dependencies
 
-To add new dependencies to your package we recommend that you read [this section](https://docs.astral.sh/uv/concepts/projects/dependencies/) from the `uv` documentation. Modern Python package support three types of dependencies:
+To add new dependencies to your package we recommend that you read [this section](https://docs.astral.sh/uv/concepts/projects/dependencies/) from the uv documentation. Modern Python package support three types of dependencies:
 
-* Standard dependencies. These are the packages that are installed when you `pip install` your package. You can add a new dependency with `uv add <dependency>` from the root of your project, e.g., `uv add numpy`. By default, `uv` will install the latest version available. You can restrict this, e.g., `uv add numpy<2`. See the documentation for more details on dependency specification, including installing dependencies from a file or a remote repository.
+* Standard dependencies. These are the packages that are installed when you `pip install` your package. You can add a new dependency with `uv add <dependency>` from the root of your project, e.g., `uv add numpy`. By default, uv will install the latest version available. You can restrict this, e.g., `uv add numpy<2`. See the documentation for more details on dependency specification, including installing dependencies from a file or a remote repository.
 * Optional dependencies. These are additional dependencies that you install like `pip install sdssdb[all]` and specify additional, non-default package to install. `[all]` is called an "extra". Extras can be used to customize the behaviour of your package while keeping the default dependencies limited. They can be specified with the `--optional` flag and the name of the dependency extra, e.g., `uv add httpx --optional network`.
-* Development dependencies. These are dependencies that are only used for development and not included when the package is installed in production. They can only be installed when syncing with `uv` or other package manager that supports [PEP 735](https://peps.python.org/pep-0735/). Typical development dependencies include linters, formatters, testing tools, etc. A new development dependency can be added to a dependency "group" as `uv add --group dev ipython`. The SDSS template includes three development dependency groups by default, `dev` with linters, debuggers, etc., `test` with [pytest](https://docs.pytest.org/en/stable/) and plugins, and `docs` with [Sphinx](https://www.sphinx-doc.org/en/master/) and extensions.
+* Development dependencies. These are dependencies that are only used for development and not included when the package is installed in production. They can only be installed when syncing with uv or other package manager that supports [PEP 735](https://peps.python.org/pep-0735/). Typical development dependencies include linters, formatters, testing tools, etc. A new development dependency can be added to a dependency "group" as `uv add --group dev ipython`. The SDSS template includes three development dependency groups by default, `dev` with linters, debuggers, etc., `test` with [pytest](https://docs.pytest.org/en/stable/) and plugins, and `docs` with [Sphinx](https://www.sphinx-doc.org/en/master/) and extensions.
 
 You may have noticed that when we synced the project we used
 
@@ -204,7 +204,7 @@ Specifying reasonable dependencies that play well with other package is not a tr
 
 If your package is an application that is meant to run by itself (e.g., an actor or a web application) you can assume that it will be deployed in an isolated environment such as a Python virtual environment or Docker container. In that case the situation is very similar to development and you can generally choose any dependencies and version you want.
 
-If you package is a general-use library that will be imported by other packages and needs to be installed in an environment with other dependencies, things get a bit more complicated. In this case you want to be careful when defining the minimal version of your dependencies. `uv` and modern versions of `pip` include good dependency resolution engines that try to solve the network of inter-related dependencies and install package versions that are valid for all specifications, but in some cases this may not be possible. For example, imagine that you require `numpy>=2.0` in your new package. Many other packages may not have migrated to Numpy 2 yet and may specify `numpy<2` in their dependecies. If you try to install your package alongside it, a dependency conflict will occur. Do you really need Numpy 2? If that is the case you may need to document this choice and be ready for potential conflicts; otherwise maybe you can relax the dependency to `numpy>=1.0` and let the dependency managers choose the best version to install.
+If you package is a general-use library that will be imported by other packages and needs to be installed in an environment with other dependencies, things get a bit more complicated. In this case you want to be careful when defining the minimal version of your dependencies. uv and modern versions of `pip` include good dependency resolution engines that try to solve the network of inter-related dependencies and install package versions that are valid for all specifications, but in some cases this may not be possible. For example, imagine that you require `numpy>=2.0` in your new package. Many other packages may not have migrated to Numpy 2 yet and may specify `numpy<2` in their dependecies. If you try to install your package alongside it, a dependency conflict will occur. Do you really need Numpy 2? If that is the case you may need to document this choice and be ready for potential conflicts; otherwise maybe you can relax the dependency to `numpy>=1.0` and let the dependency managers choose the best version to install.
 ```
 
 ### Manually editing `pyproject.toml`
@@ -322,13 +322,13 @@ uv build
 
 this will create two files in `dist/`, one with `.tar.gz` with the source distribution and a `.whl` wheel.
 
-The next step is to publish these files to an online service that allows other users to download and install it. Although there are other options, almost every Python package is published to the [PyPI registry](https://pypi.org). PyPI requires you to have an account and generate a token to upload files. Then you can generate a token and upload the distribution files using `uv`,
+The next step is to publish these files to an online service that allows other users to download and install it. Although there are other options, almost every Python package is published to the [PyPI registry](https://pypi.org). PyPI requires you to have an account and generate a token to upload files. Then you can generate a token and upload the distribution files using uv,
 
 ```bash
 uv publish
 ```
 
-See the [uv documentation](https://docs.astral.sh/uv/guides/package/#publishing-your-package) about how to authenticate `uv` with PyPI.
+See the [uv documentation](https://docs.astral.sh/uv/guides/package/#publishing-your-package) about how to authenticate uv with PyPI.
 
 Alternatively, the `release.yml` GitHub Action will do this for you every time you tag and release a new version. PyPI requires defining a [trusted publisher](https://docs.pypi.org/trusted-publishers/adding-a-publisher/) to allow CI services uploading files to PyPI. If you have not yet published your package to PyPI you will also want to [read this page](https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/) to create a trusted published for a not-yet-existing project.
 
@@ -357,11 +357,11 @@ Updating the package version can be done directly in the `pyproject.toml` file b
 
 By default, the template uses the [uv build backend](https://docs.astral.sh/uv/concepts/build-backend/) which will be used to build and publish the package under `src/`. The build backend will include all Python files and other files in the `src/<package-name>` directory, while removing cache and temporary files and including metadata files such as `pyproject.toml`, the README file, and the license. Including/excluding other files is not always trivial. Read the [relevant section](https://docs.astral.sh/uv/concepts/build-backend/#file-inclusion-and-exclusion) if you need to do that.
 
-The `uv` backend is enough for most purposes. One case where that is not the case is when the package must include compiled extension modules (e.g., a C/C++ library that is compiled when the package is built). The `uv` backend does not support extensions and a different backend, such as [scikit-build-core](https://github.com/scikit-build/scikit-build-core) or [setuptools](https://setuptools.pypa.io/en/latest/userguide/ext_modules.html) must be used. See the [uv documentation](https://setuptools.pypa.io/en/latest/userguide/ext_modules.html) for more details. The [flicamera](https://github.com/sdss) is an example of a tool using `pyproject.toml` and `uv` with a `setuptools` build backend (see the `pyproject.toml` and `setup.py` files).
+The uv backend is enough for most purposes. One case where that is not the case is when the package must include compiled extension modules (e.g., a C/C++ library that is compiled when the package is built). The uv backend does not support extensions and a different backend, such as [scikit-build-core](https://github.com/scikit-build/scikit-build-core) or [setuptools](https://setuptools.pypa.io/en/latest/userguide/ext_modules.html) must be used. See the [uv documentation](https://setuptools.pypa.io/en/latest/userguide/ext_modules.html) for more details. The [flicamera](https://github.com/sdss) is an example of a tool using `pyproject.toml` and uv with a `setuptools` build backend (see the `pyproject.toml` and `setup.py` files).
 
 ### Scripts and command line tools
 
-Python packaging supports defining scripts and command line interfaces under the general term of [entry points](https://packaging.python.org/en/latest/specifications/entry-points/), which can be defined in the `pyproject.toml` file. The SDSS template does not include any entry points by default, but you can easily add them by editing the `pyproject.toml` file. See the [relevant documentation](https://docs.astral.sh/uv/concepts/projects/config/#entry-points) in `uv` for details and examples.
+Python packaging supports defining scripts and command line interfaces under the general term of [entry points](https://packaging.python.org/en/latest/specifications/entry-points/), which can be defined in the `pyproject.toml` file. The SDSS template does not include any entry points by default, but you can easily add them by editing the `pyproject.toml` file. See the [relevant documentation](https://docs.astral.sh/uv/concepts/projects/config/#entry-points) in uv for details and examples.
 
 The specification only allows running Python functions as scripts. The script definition is the path to the function to run. For example, we can define the following function that prints the version of our package:
 
@@ -417,7 +417,7 @@ def run_myscript():
     subprocess.run(["bash", str(cwd / "scripts/myscript.sh")])
 ```
 
-Finally, you can use external tools to run development scripts and to automate certain tasks. One such option is [poe](https://poethepoet.natn.io/global_options.html), which integrates well with `uv` and `pyproject.toml`. For example, you can define a `poe` task to run the tests as
+Finally, you can use external tools to run development scripts and to automate certain tasks. One such option is [poe](https://poethepoet.natn.io/global_options.html), which integrates well with uv and `pyproject.toml`. For example, you can define a `poe` task to run the tests as
 
 ```{code-block} toml
 :caption: pyproject.toml
@@ -457,9 +457,104 @@ Results (0.08s):
 
 ### Multi-architecture distributions
 
+As discussed above, running `uv build` will create wheels only for the current architecture. This is usually fine since Python code is interpreted and multi-platform. But if you code include compiled extensions or scripts (C/C++, Rust), the wheels will only work for the native architecture. This means that if a user tries to install your package in a different platform, they will instead download the source distribution and compile it. Again, this is usually fine but slower, and requires the user to have the tools to compile your extension (usually a GCC compiler and the appropriate libraries).
+
+Instead, it is possible to use CI to generate wheels for a variety of architectures. It's beyond the scope of this guide to describe the process in detail, but you can either create a matrix of CI workers with different architectures and Python versions, save the wheels as artifacts and upload them to PyPI, or use a tool such as [cibuildwheel](https://cibuildwheel.pypa.io/en/stable/) to automate the process. You can check [this workflow](https://github.com/sdss/sdss-sep/blob/c55b6b3e8b6117b4d47bd921d8e983c4a2234eea/.github/workflows/build-wheels-upload-pypi.yml) for a working example.
+
 ### Creating a Docker container
 
-### What if I really don't want to use `uv`?
+If you need to build your project into a Docker image, a simple `Dockerfile` with a few lines should be sufficient. Check the [uv Docker integration](https://docs.astral.sh/uv/guides/integration/docker/) documentation. You can see an example of a `Dockerfile` [here](https://github.com/sdss/lvmgort/blob/c31b127b9ea77bd8f05507ddecd33af02d111a2a/Dockerfile).
+
+The preferred location to upload SDSS Docker images is the [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) rather than the Docker Hub. This keeps the Docker images alongside the repository code and allows simple integration with GitHub Actions. You can then add the following GitHub Action in `.github/workflows/docker.yml` (replace the )
+
+```{code-block} yaml
+:caption: .github/workflows/docker.yml
+name: Docker
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+    paths-ignore:
+      - 'docs/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docker:
+    name: Docker
+
+    runs-on: ubuntu-24.04
+
+    env:
+      USER: <user>
+      APP: <app>
+
+    steps:
+      - name: Set docker tags
+        id: set-tags
+        run: |
+          if [[ $GITHUB_REF == refs/heads/main ]]
+          then
+            echo TAGS=$USER/$APP:latest >> $GITHUB_OUTPUT
+          elif [[ $GITHUB_REF == refs/heads/* ]]
+          then
+            BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed -r 's/[\/]/_/g')
+            echo TAGS=$USER/$APP:$BRANCH >> $GITHUB_OUTPUT
+          elif [[ $GITHUB_REF == refs/pull/* ]]
+          then
+            BRANCH=${{ github.head_ref || github.ref_name }}
+            echo TAGS=$USER/$APP:$BRANCH >> $GITHUB_OUTPUT
+          else
+            echo TAGS=$USER/$APP:${GITHUB_REF#refs/tags/} >> $GITHUB_OUTPUT
+          fi
+
+      - name: Show tags
+        run: echo ${{ steps.set-tags.outputs.TAGS }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          provenance: false
+          tags: ghcr.io/${{ steps.set-tags.outputs.TAGS }}
+
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+```
+
+Replace `<user>` with the GitHub user or organization (e.g., `sdss`) and `<app>` with the name of the repository. To make sure the images are associated with the correct repository, add the following line in the `Dockerfile`
+
+```text
+LABEL org.opencontainers.image.source=https://github.com/<user>/<app>
+```
+
+The image will be available as `ghcr.io/<user>/<app>:<tag>`, e.g., `ghcr.io/sdss/lvmgort:latest`.
+
+### What if I really don't want to use uv?
+
+uv is quickly becoming the standard for Python packaging, but if you prefer to use a different package manager (or no manager at all), it's easy to modify the template to do so. Except for the dependency groups, nothing in the `pyproject.toml` or other files is specific to uv (and the dependency groups are understood by any dependency manager that supports [PEP 735](https://peps.python.org/pep-0735/)). The only thing you'll need to do is to replace the `[build-system]` section in `pyproject.toml` with your build system if choice. If you want an experience as similar as possible to old-style Python packaging, use the `setuptools` build system
+
+```toml
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+```
+
+and check the [documentation](https://setuptools.pypa.io/en/latest/userguide/index.html).
 
 ## Changelog
 
