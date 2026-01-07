@@ -31,7 +31,7 @@ To create a new project `test_project`, run:
 uvx copier copy --trust gh:sdss/python_template <path-to-root>/test_project
 ```
 
-Note that you want to include the `--trust` flag to allow the post-copy tasks to run. The destination must include the project name, e.g. `~/software/test_project`. Copier will ask a few questions and then will copy the rendered template to the destination folder.
+Note that you'll want to include the `--trust` flag to allow the post-copy tasks to run. The destination must include the project name, e.g. `~/software/test_project`. Copier will ask a few questions and then will copy the rendered template to the destination folder.
 
 ## Goals of the template
 
