@@ -71,9 +71,7 @@ asyncio_default_fixture_loop_scope = "function"
 [tool.coverage.run]
 branch = true
 include = ["src/{{package_name}}/*"]
-omit = [
-    "*/__init__.py",
-]
+omit = []
 
 [tool.coverage.report]
 exclude_lines = [
