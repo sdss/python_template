@@ -4,6 +4,8 @@ This document records the main changes to the `python-template` code.
 
 ## main
 
+* [#26](https://github.com/sdss/python_template/pull/26) Update the template to version 3 using [copier](https://copier.readthedocs.io/en/stable/) instead of cookiecutter and updating the documentation and style guide.
+
 [View commits since the last tag](https://github.com/sdss/python_template/compare/2.1.0...HEAD)
 
 
