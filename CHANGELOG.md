@@ -9,11 +9,11 @@ This document records the main changes to the `python-template` code.
 
 ## 2.1.0 (2021-03-24)
 
-### 🚀 Added
+### 🚀 New
 
 * GitHub workflow for testing.
 
-### ✨ Changed
+### ✨ Improved
 
 * Updated dependencies.
 * Removed the requirements `docs` extra. Instead, documentation extra packages are defined in a `requirements.txt` in `docs/sphinx` and automatically installed in the RTD build.
@@ -27,7 +27,7 @@ This document records the main changes to the `python-template` code.
 
 ## 2.0.0 (2020-04-13)
 
-### ✨ Changed
+### ✨ Improved
 
 * Dropped support for Python 2.
 * Move style guide to root level.
@@ -45,7 +45,7 @@ This document records the main changes to the `python-template` code.
 
 ## 1.0.6 (2019-12-31)
 
-### 🚀 Added
+### 🚀 New
 
 * Avoid connecting more than one console handler to the warnings log.
 
@@ -62,11 +62,11 @@ This document records the main changes to the `python-template` code.
 
 * The default path for the user configuration file is now `~/.config/<name>/<name>.yml`.
 
-### 🚀 Added
+### 🚀 New
 
 * Better handling of configuration files. An environment variable `$<NAME>_CONFIG_PATH` (e.g., `$MYPYTHON_CONFIG_PATH`) can be defined to point to the user configuration file. If defined, this path overrides the default location.
 
-### ✨ Changed
+### ✨ Improved
 
 * Modified logger to deal with warnings. Added critical level printing. Fixes #12 and #13.
 
@@ -79,7 +79,7 @@ This document records the main changes to the `python-template` code.
 
 ## 1.0.4 (2019-01-18)
 
-### ✨ Changed
+### ✨ Improved
 
 * Updated year in template to 2019.
 
@@ -110,11 +110,11 @@ This document records the main changes to the `python-template` code.
 
 ## 1.0.1 (2018-07-30)
 
-### 🚀 Added
+### 🚀 New
 
 * Added W0621 to disabled list in pylint.
 
-### ✨ Changed
+### ✨ Improved
 
 * Changed documentation font size.
 * Modified code and readthedocs configuration to use Python 3.6.
@@ -133,7 +133,7 @@ This document records the main changes to the `python-template` code.
 
 ## 1.0.0 (2018-01-31)
 
-### 🚀 Added
+### 🚀 New
 
 * Initial release.
 * Includes Travis CI, Read The Docs, Coverage, and Bumpversion integrations.

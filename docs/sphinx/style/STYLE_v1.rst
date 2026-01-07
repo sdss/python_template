@@ -1,7 +1,14 @@
+:orphan:
+
 SDSS coding standards (version 1)
 =================================
 
-So you want to write some Python code. Congratulations, you've arrived at the right place! This repository has a dual purpose: it provides a `template <sdss-python-template.readthedocs.io/en/latest/>`__ for a basic but complete Python package; and lists the coding standards and recommendations for developing code for SDSS. Please, read this document carefully and suggest modifications by opening an `new issue <https://github.com/sdss/python_template/issues/new>`__.
+.. warning::
+   This version of the coding standards is deprecated and kept only for historical purposes. You should be reading the `current guide <STYLE_v2>`__.
+
+
+
+So you want to write some Python code. Congratulations, you've arrived at the right place! This repository has a dual purpose: it provides a `template </>`__ for a basic but complete Python package; and lists the coding standards and recommendations for developing code for SDSS. Please, read this document carefully and suggest modifications by opening a `new issue <https://github.com/sdss/python_template/issues/new>`__.
 
 While this document deals with Python product, and some of the solutions and services suggested are specific for it, much of what is written here is general good advice for developing software in any platform.
 

@@ -1,3 +1,17 @@
 # {{ project_name }}
 
+![Versions](https://img.shields.io/badge/python-3.10+-blue)
+<!-- [![Documentation Status](https://readthedocs.org/projects/{{ project_name }}/badge/?version=latest)](https://{{ project_name }}.readthedocs.io/en/latest/) -->
+[![Test](https://github.com/sdss/{{ project_name }}/actions/workflows/test.yml/badge.svg)](https://github.com/sdss/{{ project_name }}/actions/workflows/test.yml)
+<!-- [![codecov](https://codecov.io/gh/sdss/{{ project_name }}/branch/main/graph/badge.svg)](https://codecov.io/gh/sdss/{{ project_name }}) -->
+{% if license == "BSD-3-Clause" %}
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+{% elif license == "MIT" %}
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+{% elif license == "Apache-2.0" %}
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+{% elif license == "GPL-3.0-or-later" %}
+[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+{% endif %}
+
 {{ project_description }}

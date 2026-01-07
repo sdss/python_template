@@ -4,7 +4,7 @@
 ```{toctree}
 :hidden:
 Changelog <changelog>
-Style guide <style>
+Style guide <style/STYLE_v2>
 ```
 
 
@@ -38,13 +38,15 @@ Note that you want to include the `--trust` flag to allow the post-copy tasks to
 The goal of the SDSS Python Template is to provide a lightweight template that conforms to the SDSS coding standards and that includes everything that you need to start a new coding project without a lot of extra features that you might not need. The template provides:
 
 * A basic Python 3 template with a `pyproject.toml` file using [uv](https://docs.astral.sh/uv) as build system and dependency manager.
-* Linting and formatting using [ruff](https://docs.astral.sh/ruff) with rules that meet the [SDSS coding standards](style).
+* Linting and formatting using [ruff](https://docs.astral.sh/ruff) with rules that meet the [SDSS coding standards](style/STYLE_v2).
 * Post-copy scripts to create a remote repository for your project.
 * Ready-to-write and -deploy Sphinx documentation using the [furo](https://github.com/pradyunsg/furo) theme.
 * Unit-testing using [pytest](https://docs.pytest.org/en/stable/).
 * GitHub Actions workflows for linting, testing, and deployment.
 
 Version 3 of the template is somewhat more opinionated than previous versions and supports fewer configuration options. This is partly to streamline the process of creating a new project and partly because in recent years the Python community has consolidated around a set of tools (uv, Ruff, pytest) for development. Our philosophy is that if you have strong opinions about what tools to use it is probably trivial for you to modify the rendered template to meet your needs.
+
+Please, [open an issue](https://github.com/sdss/python_template/issues/new) if you think that something important is missing from the template or if you find a bug.
 
 ## Customizing the rendered template
 
@@ -278,7 +280,7 @@ Due to limitations in how RTD can install projects, the documentation dependenci
 
 ### Linting and formatting
 
-The template uses [Ruff](https://docs.astral.sh/ruff) to enforce linting and formatting according to the [SDSS style standards](style). The configuration is fairly vanilla and can be found in the `pyproject.toml` file. A few rules are bypassed but for the most part the standard Ruff configuration and rules are used. Import sorting includes a special group for SDSS tools such as [sdsstools](https://github.com/sdss/sdsstools) or [sdssdb](https://github.com/sdss/sdssdb).
+The template uses [Ruff](https://docs.astral.sh/ruff) to enforce linting and formatting according to the [SDSS style standards](style/STYLE_v2). The configuration is fairly vanilla and can be found in the `pyproject.toml` file. A few rules are bypassed but for the most part the standard Ruff configuration and rules are used. Import sorting includes a special group for SDSS tools such as [sdsstools](https://github.com/sdss/sdsstools) or [sdssdb](https://github.com/sdss/sdssdb).
 
 Linting can be checked by running
 
@@ -334,7 +336,7 @@ Alternatively, the `release.yml` GitHub Action will do this for you every time y
 
 ### Keeping a changelog
 
-Keeping a log of the changes to your project is critical. Refer to the [coding standards](style) for details on the preferred format. Before releasing a new version make sure that you update the `CHANGELOG.md` file with the changes and that they are listed under a heading with the tag name. The `release.yml` workflow uses [taiki-e/create-gh-release-action](https://github.com/taiki-e/create-gh-release-action) to capture the changelog content for the new version and include it in the GitHub release.
+Keeping a log of the changes to your project is critical. Refer to the [coding standards](style/STYLE_v2) for details on the preferred format. Before releasing a new version make sure that you update the `CHANGELOG.md` file with the changes and that they are listed under a heading with the tag name. The `release.yml` workflow uses [taiki-e/create-gh-release-action](https://github.com/taiki-e/create-gh-release-action) to capture the changelog content for the new version and include it in the GitHub release.
 
 ### Workflow for releasing a new version
 
