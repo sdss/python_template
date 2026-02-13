@@ -202,7 +202,7 @@ When merging a pull request, we recommend using [squash merges](https://help.git
 
 ## Docker images
 
-Docker images of SDSS products should be stored as [GitHub packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-docker-registry) within the SDSS GitHub organization and associated with the appropriate repository. This allows for easy versioning and distribution of Docker images alongside the source code. Ensure that each Docker image is tagged with the corresponding software version to maintain consistency between the codebase and its containerized environment. The template documentation contains [some information](../index.md#creating-a-docker-container) on how to set up GitHub Actions to build and deploy Docker images automatically.
+Docker images of SDSS products should be stored as [GitHub packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-docker-registry) within the SDSS GitHub organization and associated with the appropriate repository. This allows for easy versioning and distribution of Docker images alongside the source code. Ensure that each Docker image is tagged with the corresponding software version to maintain consistency between the codebase and its containerized environment. The template documentation contains [information](../index.md#building-and-publishing-a-docker-image) on how to set up GitHub Actions to build and deploy Docker images automatically.
 
 ## Software citation
 

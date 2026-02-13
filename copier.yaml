@@ -84,6 +84,12 @@ sync_project:
   help: Create a virtual env and sync the project after creation using uv.
   default: true
 
+build_docker_image:
+  type: bool
+  qmark: 🐳
+  help: Create a GitHub workflow to build and push a Docker image to the GitHub Container Registry
+  default: false
+
 _subdirectory: template
 
 _tasks:

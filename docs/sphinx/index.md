@@ -43,6 +43,7 @@ The goal of the SDSS Python Template is to provide a lightweight template that c
 * Ready-to-write and -deploy Sphinx documentation using the [furo](https://github.com/pradyunsg/furo) theme.
 * Unit-testing using [pytest](https://docs.pytest.org/en/stable/).
 * GitHub Actions workflows for linting, testing, and deployment.
+* A `Dockerfile` and GitHub Actions workflow for building and publishing a Docker image to the GitHub Container Registry.
 
 Version 3 of the template is somewhat more opinionated than previous versions and supports fewer configuration options. This is partly to streamline the process of creating a new project and partly because in recent years the Python community has consolidated around a set of tools (uv, Ruff, pytest) for development. Our philosophy is that if you have strong opinions about what tools to use it is probably trivial for you to modify the rendered template to meet your needs.
 
@@ -349,6 +350,16 @@ As you develop your package you will settle on a workflow that works for you. Th
 * Bump the version back to pre-release, `uv version 1.2.4a1`. Commit the changes with message `"Bump version to 1.2.4a1"`.
 * Continue developing against the `main` branch.
 
+## Building and publishing a Docker image
+
+During the project generation process you will be asked if you want to include a `Dockerfile` and workflow for build a Docker image. If you select "Yes", a `Dockerfile` will be added to your project and the `docker.yml` GitHub Action workflow will run on each push and tag. The action will build the image and upload it to the [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) under the `ghcr.io` namespace. The resulting image will be automatically associated with your repository (you can find it on the right sidebar under "Packages"). You can then pull the image with
+
+```bash
+docker pull ghcr.io/<github-organization>/<project-name>:latest
+```
+
+Note that the included `Dockerfile` is very basic and does not include an entry point. You will need to edit it to suit your needs. We recommend checking the [uv Docker documentation](https://docs.astral.sh/uv/guides/integration/docker/) to learn how to work with the uv base images.
+
 ## Advanced topics
 
 ### Updating the package version
@@ -462,89 +473,6 @@ Results (0.08s):
 As discussed above, running `uv build` will create wheels only for the current architecture. This is usually fine since Python code is interpreted and multi-platform. But if you code include compiled extensions or scripts (C/C++, Rust), the wheels will only work for the native architecture. This means that if a user tries to install your package in a different platform, they will instead download the source distribution and compile it. Again, this is usually fine but slower, and requires the user to have the tools to compile your extension (usually a GCC compiler and the appropriate libraries).
 
 Instead, it is possible to use CI to generate wheels for a variety of architectures. It's beyond the scope of this guide to describe the process in detail, but you can either create a matrix of CI workers with different architectures and Python versions, save the wheels as artifacts and upload them to PyPI, or use a tool such as [cibuildwheel](https://cibuildwheel.pypa.io/en/stable/) to automate the process. You can check [this workflow](https://github.com/sdss/sdss-sep/blob/c55b6b3e8b6117b4d47bd921d8e983c4a2234eea/.github/workflows/build-wheels-upload-pypi.yml) for a working example.
-
-### Creating a Docker container
-
-If you need to build your project into a Docker image, a simple `Dockerfile` with a few lines should be sufficient. Check the [uv Docker integration](https://docs.astral.sh/uv/guides/integration/docker/) documentation. You can see an example of a `Dockerfile` [here](https://github.com/sdss/lvmgort/blob/c31b127b9ea77bd8f05507ddecd33af02d111a2a/Dockerfile).
-
-The preferred location to upload SDSS Docker images is the [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) rather than the Docker Hub. This keeps the Docker images alongside the repository code and allows simple integration with GitHub Actions. You can then add the following GitHub Action in `.github/workflows/docker.yml` (replace the )
-
-```{code-block} yaml
-:caption: .github/workflows/docker.yml
-name: Docker
-
-on:
-  push:
-    branches:
-      - main
-    tags:
-      - '*'
-    paths-ignore:
-      - 'docs/**'
-  pull_request:
-    branches:
-      - main
-
-jobs:
-  docker:
-    name: Docker
-
-    runs-on: ubuntu-24.04
-
-    env:
-      USER: <user>
-      APP: <app>
-
-    steps:
-      - name: Set docker tags
-        id: set-tags
-        run: |
-          if [[ $GITHUB_REF == refs/heads/main ]]
-          then
-            echo TAGS=$USER/$APP:latest >> $GITHUB_OUTPUT
-          elif [[ $GITHUB_REF == refs/heads/* ]]
-          then
-            BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed -r 's/[\/]/_/g')
-            echo TAGS=$USER/$APP:$BRANCH >> $GITHUB_OUTPUT
-          elif [[ $GITHUB_REF == refs/pull/* ]]
-          then
-            BRANCH=${{ github.head_ref || github.ref_name }}
-            echo TAGS=$USER/$APP:$BRANCH >> $GITHUB_OUTPUT
-          else
-            echo TAGS=$USER/$APP:${GITHUB_REF#refs/tags/} >> $GITHUB_OUTPUT
-          fi
-
-      - name: Show tags
-        run: echo ${{ steps.set-tags.outputs.TAGS }}
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
-
-      - name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v6
-        with:
-          push: true
-          provenance: false
-          tags: ghcr.io/${{ steps.set-tags.outputs.TAGS }}
-
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
-```
-
-Replace `<user>` with the GitHub user or organization (e.g., `sdss`) and `<app>` with the name of the repository. To make sure the images are associated with the correct repository, add the following line in the `Dockerfile`
-
-```text
-LABEL org.opencontainers.image.source=https://github.com/<user>/<app>
-```
-
-The image will be available as `ghcr.io/<user>/<app>:<tag>`, e.g., `ghcr.io/sdss/lvmgort:latest`.
 
 ### What if I really don't want to use uv?
 

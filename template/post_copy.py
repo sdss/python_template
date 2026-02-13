@@ -268,6 +268,13 @@ def post_copy():
                     + "  ! 'gh' binary not found. Not creating GitHub repository."
                 )
 
+    # Delete docker files if we are not building and image.
+    if not answers.get("build_docker_image", True):
+        cwd = pathlib.Path.cwd()
+        (cwd / "Dockerfile").unlink(missing_ok=True)
+        (cwd / ".github" / "workflows" / "docker.yml").unlink(missing_ok=True)
+        print(colorama.Fore.WHITE + "  > Deleted Dockerfile and GitHub workflow.")
+
     delete_copier_files(keep_answers=keep_answers)
 
 

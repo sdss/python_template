@@ -45,6 +45,7 @@ This will create a virtual environment in `.venv/` and install the project along
 * Ready-to-write and -deploy Sphinx documentation using the [furo](https://github.com/pradyunsg/furo) theme.
 * Unit-testing using [pytest](https://docs.pytest.org/en/stable/).
 * GitHub Actions workflows for linting, testing, and deployment.
+* A `Dockerfile` and GitHub Actions workflow for building and publishing a Docker image to the GitHub Container Registry.
 
 ## Coding standards
 

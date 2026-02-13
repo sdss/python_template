@@ -1,0 +1,69 @@
+name: Docker
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+    paths-ignore:
+      - 'docs/**'
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  docker:
+    name: Docker
+
+    runs-on: ubuntu-24.04
+
+    env:
+      USER: {{ github_organization }}
+      APP: {{ project_name }}
+
+    steps:
+      - name: Set docker tags
+        id: set-tags
+        run: |
+          if [[ $GITHUB_REF == refs/heads/main ]]
+          then
+            echo TAGS=$USER/$APP:latest >> $GITHUB_OUTPUT
+          elif [[ $GITHUB_REF == refs/heads/* ]]
+          then
+            BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed -r 's/[\/]/_/g')
+            echo TAGS=$USER/$APP:$BRANCH >> $GITHUB_OUTPUT
+          elif [[ $GITHUB_REF == refs/pull/* ]]
+          then
+            BRANCH={{ '${{ github.head_ref || github.ref_name }}' }}
+            echo TAGS=$USER/$APP:$BRANCH >> $GITHUB_OUTPUT
+          else
+            echo TAGS=$USER/$APP:${GITHUB_REF#refs/tags/} >> $GITHUB_OUTPUT
+          fi
+
+      - name: Show tags
+        run: echo {{ '${{ steps.set-tags.outputs.TAGS }}' }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to registry
+        run: echo {{ '"${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin' }}
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          provenance: false
+          tags: ghcr.io/{{ '${{ steps.set-tags.outputs.TAGS }}' }}
+
+      - name: Image digest
+        run: echo {{ '${{ steps.docker_build.outputs.digest }}' }}
