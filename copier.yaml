@@ -68,7 +68,7 @@ github_username:
 push_to_github:
   type: bool
   qmark: 🚀
-  help: Whether to create a GitHub repository and push the initial commit (requires GitHub CLI).
+  help: Create a GitHub repository and push the initial commit (requires GitHub CLI).
   default: false
 
 private_repository:
@@ -81,7 +81,7 @@ private_repository:
 sync_project:
   type: bool
   qmark: 🔄
-  help: Whether to create a venv and sync the project after creation using uv.
+  help: Create a virtual env and sync the project after creation using uv.
   default: true
 
 _subdirectory: template
