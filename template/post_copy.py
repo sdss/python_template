@@ -43,12 +43,12 @@ def delete_copier_files(keep_answers: bool = False) -> None:
     file_path = pathlib.Path(__file__).resolve()
     if file_path.exists():
         file_path.unlink(missing_ok=True)
-        print(colorama.Fore.WHITE + "  > Deleted post_copy.py file.")
+        print(f"{colorama.Fore.WHITE}  > Deleted post_copy.py file.")
 
     answers_path = pathlib.Path.cwd() / ".copier-answers.yml"
     if not keep_answers and answers_path.exists():
         answers_path.unlink(missing_ok=True)
-        print(colorama.Fore.WHITE + "  > Deleted .copier-answers.yml file.")
+        print(f"{colorama.Fore.WHITE}  > Deleted .copier-answers.yml file.")
 
 
 def get_license_text(license_file: str) -> str:
@@ -87,7 +87,7 @@ def update_license(license: str) -> bool:
         f.write(text)
         f.truncate()
 
-    print(colorama.Fore.WHITE + f"  > Updated LICENSE file to {license}.")
+    print(f"{colorama.Fore.WHITE}  > Updated LICENSE file to {license}.")
 
     return True
 
@@ -118,8 +118,8 @@ def run_command(
 
     if result.returncode != 0:
         if error_message:
-            print(colorama.Fore.RED + f"  ! {error_message}")
-            print(colorama.Fore.RED + result.stderr)
+            print(f"{colorama.Fore.RED}  ! {error_message}")
+            print(f"{colorama.Fore.RED}{result.stderr}")
 
         if exit_on_error:
             delete_copier_files(keep_answers=keep_answers)
@@ -128,7 +128,7 @@ def run_command(
         return False
     else:
         if success_message:
-            print(colorama.Fore.WHITE + f"  > {success_message}")
+            print(f"{colorama.Fore.WHITE}  > {success_message}")
         return True
 
 
@@ -140,9 +140,9 @@ def post_copy():
     answers: dict[str, Any] = {}
     if answer_file.exists():
         answers = yaml.safe_load(answer_file.read_text())
-        print(colorama.Fore.WHITE + "  > Parsed Copier answers file.")
+        print(f"{colorama.Fore.WHITE}  > Parsed Copier answers file.")
     else:
-        print(colorama.Fore.YELLOW + "  ! No Copier answers file found.")
+        print(f"{colorama.Fore.YELLOW}  ! No Copier answers file found.")
         delete_copier_files()
         return
 
@@ -150,7 +150,7 @@ def post_copy():
     project_name = answers.get("project_name", "").strip()
 
     if not project_name:
-        print(colorama.Fore.RED + "  ! No project name found in answers.")
+        print(f"{colorama.Fore.RED}  ! No project name found in answers.")
         delete_copier_files(keep_answers=keep_answers)
         return
 
@@ -163,8 +163,8 @@ def post_copy():
         uv_path = get_binary_path("uv")
         if not uv_path:
             print(
-                colorama.Fore.YELLOW
-                + "  ! 'uv' binary not found in PATH. Skipping project sync."
+                f"{colorama.Fore.YELLOW}  ! 'uv' binary not found in PATH. "
+                "Skipping project sync."
             )
         else:
             cwd = pathlib.Path.cwd().resolve()
@@ -187,7 +187,7 @@ def post_copy():
     # If git is available, initialize a repository.
     git_path = get_binary_path("git")
     if not git_path:
-        print(colorama.Fore.YELLOW + "  ! 'git' binary not found in PATH.")
+        print(f"{colorama.Fore.YELLOW}  ! 'git' binary not found in PATH.")
     else:
         result = run_command(
             [str(git_path), "init"],
@@ -264,8 +264,8 @@ def post_copy():
                     )
             else:
                 print(
-                    colorama.Fore.YELLOW
-                    + "  ! 'gh' binary not found. Not creating GitHub repository."
+                    f"{colorama.Fore.YELLOW}  ! 'gh' binary not found. "
+                    "Not creating GitHub repository."
                 )
 
     # Delete docker files if we are not building and image.
@@ -273,7 +273,7 @@ def post_copy():
         cwd = pathlib.Path.cwd()
         (cwd / "Dockerfile").unlink(missing_ok=True)
         (cwd / ".github" / "workflows" / "docker.yml").unlink(missing_ok=True)
-        print(colorama.Fore.WHITE + "  > Deleted Dockerfile and GitHub workflow.")
+        print(f"{colorama.Fore.WHITE}  > Deleted Dockerfile and GitHub workflow.")
 
     delete_copier_files(keep_answers=keep_answers)
 
