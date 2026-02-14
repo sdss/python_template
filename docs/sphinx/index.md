@@ -350,6 +350,21 @@ As you develop your package you will settle on a workflow that works for you. Th
 * Bump the version back to pre-release, `uv version 1.2.4a1`. Commit the changes with message `"Bump version to 1.2.4a1"`.
 * Continue developing against the `main` branch.
 
+## Updating a project that uses this template
+
+The SDSS template is actively maintained with bug fixes and new features. You can update an existing project generated from the template to incorporate these improvements. To enable updates, you must preserve the `.copier-answers.yml` file when initially generating your project. This file tracks your project's relationship to the upstream template and should not be manually edited.
+
+To update your project, go to the root of the local checkout, ensure that there are no uncommitted changes (either commit or stash them), and run
+
+```console
+$ uvx copier update --skip-tasks --skip-answered --trust
+Updating to template version 2.1.0.post27.dev0+5b8f556
+```
+
+After the update you may have one or more file that have been updated. Those will show up if you do a `git status`. The update will never commit any changes, so you can always revert or discard the update.
+
+It is possible for the updates to conflict with your own changes (for example if you have manually edited the GitHub workflows). Carefully review any changes and solve conflicts before you commit the new files.
+
 ## Building and publishing a Docker image
 
 During the project generation process you will be asked if you want to include a `Dockerfile` and workflow for build a Docker image. If you select "Yes", a `Dockerfile` will be added to your project and the `docker.yml` GitHub Action workflow will run on each push and tag. The action will build the image and upload it to the [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) under the `ghcr.io` namespace. The resulting image will be automatically associated with your repository (you can find it on the right sidebar under "Packages"). You can then pull the image with
