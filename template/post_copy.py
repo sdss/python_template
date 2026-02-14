@@ -99,7 +99,7 @@ def run_command(
     error_message: str | None = None,
     shell: bool = False,
     exit_on_error: bool = False,
-    keep_answers: bool = False,
+    keep_answers: bool = True,
 ) -> bool:
     """Runs a command in a subprocess."""
 
@@ -146,7 +146,7 @@ def post_copy():
         delete_copier_files()
         return
 
-    keep_answers = answers.get("keep_answers", False)
+    keep_answers = answers.get("keep_answers", True)
     project_name = answers.get("project_name", "").strip()
 
     if not project_name:

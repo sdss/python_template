@@ -90,12 +90,6 @@ build_docker_image:
   help: Create a GitHub workflow to build and push a Docker image to the GitHub Container Registry
   default: false
 
-keep_answers:
-  type: bool
-  qmark: 💾
-  help: Keep the .copier-answers.yaml file to allow future updates.
-  default: true
-
 _subdirectory: template
 
 _tasks:
