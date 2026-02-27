@@ -12,6 +12,11 @@ requires-python = ">={{ minimum_python_version }},<4"
 
 dependencies = [
     "sdsstools>=1.9.2",
+    {%- if framework_deps %}
+    "sdssdb>=1.0.0",
+    "sdss-tree>=4.1.0",
+    "sdss-access>=3.0.10",
+    {%- endif %}
 ]
 
 [dependency-groups]

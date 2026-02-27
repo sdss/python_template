@@ -64,6 +64,12 @@ minimum_python_version:
     Answer must be in the format "X.Y" where X and Y are integers.
     {% endif %}
 
+framework_deps:
+  type: bool
+  qmark: 🧱
+  help: Include SDSS Framework dependencies in the project?
+  default: false
+
 github_organization:
   type: str
   qmark: 🐙
