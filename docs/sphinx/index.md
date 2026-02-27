@@ -67,6 +67,10 @@ $ uvx copier copy --trust gh:sdss/python_template ~/Downloads/my_project
    john-smith@university.edu
 ⚖️ The license for the project.
    BSD-3-Clause
+🐍 The minimum Python version required to use the project (>= 3.8).
+   3.11
+🧱 Include SDSS Framework dependencies in the project?
+   No
 🐙 The GitHub organization or user where the repository will be hosted.
    sdss
 👤 The GitHub username of the project maintainer.
@@ -77,6 +81,8 @@ $ uvx copier copy --trust gh:sdss/python_template ~/Downloads/my_project
    No
 🔄 Whether to create a venv and sync the project after creation using uv.
    Yes
+🐳 Create a GitHub workflow to build and push a Docker image to the GitHub Container Registry
+   No
 
 Copying from template version 2.1.0.post5.dev0+39f02f1
     create  readthedocs.yml
