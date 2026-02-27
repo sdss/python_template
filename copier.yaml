@@ -54,6 +54,16 @@ license:
     - Apache-2.0
     - MIT
 
+minimum_python_version:
+  type: str
+  qmark: 🐍
+  help: The minimum Python version required to use the project (>= 3.8).
+  default: '3.11'
+  validator: >-
+    {% if (not (minimum_python_version | regex_search("^3\.\d{1,2}$"))) or (minimum_python_version.split('.')[1] | int) < 8 %}
+    Answer must be in the format "X.Y" where X and Y are integers.
+    {% endif %}
+
 github_organization:
   type: str
   qmark: 🐙
