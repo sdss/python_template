@@ -148,6 +148,7 @@ def post_copy():
 
     keep_answers = answers.get("keep_answers", True)
     project_name = answers.get("project_name", "").strip()
+    project_description = answers.get("project_description", "").strip()
 
     if not project_name:
         print(f"{colorama.Fore.RED}  ! No project name found in answers.")
@@ -253,6 +254,8 @@ def post_copy():
                         "create",
                         f"{github_organization}/{project_name}",
                         "--private" if private else "--public",
+                        "--description",
+                        project_description,
                     ],
                     success_message="Created GitHub repository.",
                     error_message="Failed to create GitHub repository.",
