@@ -20,7 +20,7 @@ package_name:
 project_description:
   type: str
   qmark: 📝
-  help: A short description of the project.
+  help: A short description of the purpose project.
   validator: >-
     {% if project_description == "" %}
     Answer must not be an empty string.
