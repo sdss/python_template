@@ -11,6 +11,7 @@ package_name:
   type: str
   qmark: 📦
   help: The name of the Python package to create. This is the import name and the name of the package in PyPI.
+  default: '{{ project_name | lower | replace(" ", "_") | replace("-", "_") }}'
   validator: >-
     {% if package_name == "" %}
     Answer must not be an empty string.
