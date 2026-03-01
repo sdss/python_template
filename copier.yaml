@@ -29,7 +29,7 @@ project_description:
 author_name:
   type: str
   qmark: 🙋
-  help: The full name of the project maintainer.
+  help: The full name of the project author.
   validator: >-
     {% if author_name == "" %}
     Answer must not be an empty string.
@@ -38,7 +38,7 @@ author_name:
 author_email:
   type: str
   qmark: 📧
-  help: The email of the project maintainer.
+  help: The email of the project author.
   validator: >-
     {% if author_email == "" %}
     Answer must not be an empty string.
@@ -47,7 +47,7 @@ author_email:
 license:
   type: str
   qmark: ⚖️
-  help: The license for the project.
+  help: The license under which the project will be shared.
   default: BSD-3-Clause
   choices:
     - BSD-3-Clause
@@ -98,13 +98,13 @@ private_repository:
 sync_project:
   type: bool
   qmark: 🔄
-  help: Create a virtual env and sync the project after creation using uv.
+  help: Create a virtual environment and sync the project after creation? Requires uv.
   default: true
 
 build_docker_image:
   type: bool
   qmark: 🐳
-  help: Create a GitHub workflow to build and push a Docker image to the GitHub Container Registry
+  help: Create a GitHub workflow to build and push a Docker image to the GitHub Container Registry?
   default: false
 
 _subdirectory: template
