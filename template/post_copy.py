@@ -196,13 +196,14 @@ def post_copy():
             error_message="Failed to initialize git repository.",
         )
 
+        github_username = answers.get("github_username", "").strip()
         github_organization = answers.get("github_organization", "").strip()
         push_to_github = answers.get("push_to_github", False)
         private = answers.get("private_repository", False)
 
         # If we are pushing to GitHub, set the remote and push. We need to add and
         # commit all files first but skip the copier files.
-        if result and push_to_github and github_organization:
+        if result and push_to_github and github_organization and github_username:
             # Set the remote
             github_repo_url = f"git@github.com:{github_organization}/{project_name}.git"
             run_command(
