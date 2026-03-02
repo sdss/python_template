@@ -1,0 +1,113 @@
+project_name:
+  type: str
+  qmark: 📚
+  help: The name of the project. Used as repository name, in documentation, and other places.
+  validator: >-
+    {% if project_name == "" %}
+    Answer must not be an empty string.
+    {% endif %}
+
+package_name:
+  type: str
+  qmark: 📦
+  help: The name of the Python package to create. This is the import name and the name of the package in PyPI.
+  default: '{{ project_name | lower | replace(" ", "_") | replace("-", "_") }}'
+  validator: >-
+    {% if package_name == "" %}
+    Answer must not be an empty string.
+    {% endif %}
+
+project_description:
+  type: str
+  qmark: 📝
+  help: A short description of the purpose project.
+  validator: >-
+    {% if project_description == "" %}
+    Answer must not be an empty string.
+    {% endif %}
+
+author_name:
+  type: str
+  qmark: 🙋
+  help: The full name of the project author.
+  validator: >-
+    {% if author_name == "" %}
+    Answer must not be an empty string.
+    {% endif %}
+
+author_email:
+  type: str
+  qmark: 📧
+  help: The email of the project author.
+  validator: >-
+    {% if author_email == "" %}
+    Answer must not be an empty string.
+    {% endif %}
+
+license:
+  type: str
+  qmark: ⚖️
+  help: The license under which the project will be shared.
+  default: BSD-3-Clause
+  choices:
+    - BSD-3-Clause
+    - GPL-3.0-or-later
+    - Apache-2.0
+    - MIT
+
+minimum_python_version:
+  type: str
+  qmark: 🐍
+  help: The minimum Python version required to use the project (>= 3.8).
+  default: '3.11'
+  validator: >-
+    {% if (not (minimum_python_version | regex_search("^3\.\d{1,2}$"))) or (minimum_python_version.split('.')[1] | int) < 8 %}
+    Answer must be in the format "X.Y" where X and Y are integers.
+    {% endif %}
+
+framework_deps:
+  type: bool
+  qmark: 🧱
+  help: Include SDSS Framework dependencies in the project?
+  default: false
+
+github_organization:
+  type: str
+  qmark: 🐙
+  help: The GitHub organization or user where the repository will be hosted.
+  default: sdss
+
+github_username:
+  type: str
+  qmark: 👤
+  help: The GitHub username of the project maintainer.
+
+push_to_github:
+  type: bool
+  qmark: 🚀
+  help: Create a GitHub repository and push the initial commit (requires GitHub CLI).
+  default: false
+
+private_repository:
+  type: bool
+  qmark: 🔒
+  help: Create a private GitHub repository?
+  default: false
+  when: '{{ push_to_github == true }}'
+
+sync_project:
+  type: bool
+  qmark: 🔄
+  help: Create a virtual environment and sync the project after creation? Requires uv.
+  default: true
+
+build_docker_image:
+  type: bool
+  qmark: 🐳
+  help: Create a GitHub workflow to build and push a Docker image to the GitHub Container Registry?
+  default: false
+
+_subdirectory: template
+
+_tasks:
+  - command: ['{{ _copier_python }}', 'post_copy.py']

@@ -1,0 +1,90 @@
+[project]
+name = "{{package_name}}"
+version = "0.1.0a1"
+description = "{{ project_description }}"
+authors = [
+    { name = "{{ author_name }}", email = "{{ author_email }}" },
+]
+license = "{{ license }}"
+license-files = ["LICENSE"]
+readme = "README.md"
+requires-python = ">={{ minimum_python_version }},<4"
+
+dependencies = [
+    "sdsstools>=1.9.2",
+    {%- if framework_deps %}
+    "sdssdb>=1.0.0",
+    "sdss-tree>=4.1.0",
+    "sdss-access>=3.0.10",
+    {%- endif %}
+]
+
+[dependency-groups]
+dev = [
+    "ipython>=8.0.0",
+    "ipdb>=0.12.3",
+    "ruff>=0.14.10",
+]
+docs = [
+    "furo>=2025.12.19",
+    "myst-parser>=2.0.0",
+    "nox>=2025.11.12",
+    "sphinx-autobuild>=2021.3.14",
+    "sphinx-copybutton>=0.4.0",
+    "sphinx-autodoc-typehints>=1.23.2",
+    "sphinx_inline_tabs>=2025.12.21.14",
+]
+test = [
+    "pytest>=5.2.2",
+    "pytest-asyncio>=0.10.0",
+    "pytest-cov>=2.8.1",
+    "pytest-mock>=1.13.0",
+    "pytest-sugar>=0.9.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/{{github_organization}}/{{project_name}}"
+Repository = "https://github.com/{{github_organization}}/{{project_name}}"
+
+[tool.uv]
+package = true
+
+[tool.ruff]
+line-length = 88
+target-version = 'py313'
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+unfixable = ["F841"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F403", "E402", "F401"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["{{package_name}}"]
+lines-after-imports = 2
+section-order = ["future", "standard-library", "typing", "third-party", "sdss", "first-party", "local-folder"]
+
+[tool.ruff.lint.isort.sections]
+typing = ["typing"]
+sdss = ["sdsstools", "sdssdb", "clu", "tree", "sdss_access", "datamodel", "coordio"]
+
+[tool.pytest.ini_options]
+addopts = "--cov {{package_name}} --cov-report xml --cov-report html --cov-report term -W ignore"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.coverage.run]
+branch = true
+include = ["src/{{package_name}}/*"]
+omit = []
+
+[tool.coverage.report]
+exclude_lines = [
+    "if TYPE_CHECKING:",
+    "# pragma: no cover"
+]
+
+[build-system]
+requires = ["uv_build>=0.9.20,<0.10.0"]
+build-backend = "uv_build"

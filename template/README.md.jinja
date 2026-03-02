@@ -1,0 +1,69 @@
+# {{ project_name }}
+
+![Versions](https://img.shields.io/badge/python-{{ minimum_python_version }}+-blue)
+[![Test](https://github.com/{{github_organization}}/{{project_name}}/actions/workflows/test.yml/badge.svg)](https://github.com/{{github_organization}}/{{project_name}}/actions/workflows/test.yml)
+{%- if license == "BSD-3-Clause" %}
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+{% elif license == "MIT" %}
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/license/mit)
+{% elif license == "Apache-2.0" %}
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+{% elif license == "GPL-3.0-or-later" %}
+[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+{% endif %}
+<!-- [![Documentation Status](https://readthedocs.org/projects/{{ project_name }}/badge/?version=latest)](https://{{ project_name }}.readthedocs.io/en/latest/) -->
+<!-- [![codecov](https://codecov.io/gh/{{github_organization}}/{{ project_name }}/branch/main/graph/badge.svg)](https://codecov.io/gh/{{github_organization}}/{{ project_name }}) -->
+
+{{ project_description }}
+
+## Managing your new project
+
+After creation, your new project is ready to be used. If you answered yes to the question "Create a virtual env and sync the project after creation using uv" your project will already be synced to a virtual environment in the same directory as the project. If you need to create the venv and sync manually, go to the project directory and run:
+
+```console
+uv venv
+uv sync --all-extras --all-groups
+```
+
+If you want tos specify a different Python version for the virtual environment, you can use the `--python` flag with `uv venv`, e.g.
+
+```console
+uv venv --python 3.11
+```
+
+uv will try to find the specified Python version in your system. If it can't find it, it will download an standalone version of Python and use that to create the virtual environment.
+
+Dependencies can be added by using the `uv add` command, e.g. `uv add numpy`. You can also edit the `pyproject.toml` file directly and then run `uv sync` to install the new dependencies and update the `uv.lock` file.
+
+Similarly, you can use `uv run` to run commands using the project virtual environment, e.g. `uv run python` to start a Python REPL with the project dependencies available, or `uv run pytest` to run the tests.
+
+More information on how to manage your project can be found in the template [documentation](https://sdss-python-template.readthedocs.io/en/latest/index.html#developing-with-your-new-package) or in the [uv projects page](https://docs.astral.sh/uv/concepts/projects/).
+
+## Coding standards
+
+Before you start writing your code, make sure to read and understand the [SDSS coding standards](https://sdss-python-template.readthedocs.io/en/latest/style/STYLE_v2.html).
+
+## Building the documentation
+
+The template include a stub for [Sphinx](https://www.sphinx-doc.org/en/master/) documentation under `docs/sphinx`. To build the documentation locally, run the following command from the project root:
+
+```console
+sdss docs.build
+```
+
+To have the docs autobuild and watch for changes, use `nox`. To build and run the local docs server, run
+
+```console
+nox
+```
+
+This will start a local docs server on a random port. You should see something like,
+
+```console
+[sphinx-autobuild] Serving on http://127.0.0.1:54429
+[sphinx-autobuild] Waiting to detect changes...
+```
+
+It should open the site automatically in a new browser window.  If `127.0.0.1:[port]` fails to load, try `localhost:[port]`.
+
+Additional information on how to build the documentation can be found in the [docs](https://sdss-python-template.readthedocs.io/en/latest/index.html#package-documentation) section of the documentation.

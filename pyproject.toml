@@ -1,0 +1,55 @@
+[project]
+name = "python_template"
+version = "3.0.0a1"
+description = "SDSS Python package template"
+authors = [
+    { name = "José Sánchez-Gallego", email = "gallegoj@uw.edu" },
+    { name = "Brian Cherinka", email = "bcherinka@stsci.edu" }
+]
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+readme = "README.md"
+requires-python = ">=3.10,<4"
+
+dependencies = [
+    "ipython>=8.0.0",
+    "ipdb>=0.12.3",
+    "ruff>=0.14.10",
+    "Sphinx>=8.0.0",
+    "furo>=2025.12.19",
+    "myst-parser>=2.0.0",
+    "nox>=2025.11.12",
+    "sphinx-autobuild>=2021.3.14",
+    "sphinx-copybutton>=0.4.0",
+    "sphinx-autodoc-typehints>=1.23.2",
+    "sphinx_inline_tabs>=2025.12.21.14",
+    "copier>=9.11.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/sdss/python-template"
+Repository = "https://github.com/sdss/python-template"
+Documentation = "https://sdss-python-template.readthedocs.io/en/latest/"
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 88
+target-version = 'py312'
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+unfixable = ["F841"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F403", "E402", "F401"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["python_template"]
+lines-after-imports = 2
+section-order = ["future", "standard-library", "typing", "third-party", "sdss", "first-party", "local-folder"]
+
+[tool.ruff.lint.isort.sections]
+typing = ["typing"]
+sdss = ["sdsstools"]

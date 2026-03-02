@@ -1,0 +1,16 @@
+FROM ghcr.io/astral-sh/uv:python{{ minimum_python_version }}-bookworm-slim
+
+LABEL org.opencontainers.image.authors="{{ author_name }} <{{ author_email }}>"
+LABEL org.opencontainers.image.source=https://github.com/{{ github_organization }}/{{ project_name }}
+
+WORKDIR /opt
+
+COPY . {{ package_name }}
+
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_LINK_MODE=copy
+
+ENV PATH="$PATH:/opt/{{ package_name }}/.venv/bin"
+
+# Sync the project
+RUN cd {{ package_name }} && uv sync --frozen --no-cache

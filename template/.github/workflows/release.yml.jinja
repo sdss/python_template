@@ -1,0 +1,44 @@
+on:
+  push:
+    tags:
+      - '*'
+
+name: Create Release
+
+jobs:
+  release:
+    name: Build and publish
+
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Create release
+        uses: taiki-e/create-gh-release-action@v1
+        with:
+          title: {{package_name}} $version
+          changelog: CHANGELOG.md
+          token: ${{ '{{ secrets.GITHUB_TOKEN }}' }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Build source and dist
+        run: |
+          uv build
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
