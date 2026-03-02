@@ -174,7 +174,7 @@ def post_copy():
                     "UV_ACTIVE=0",
                     f"UV_PROJECT_ENVIRONMENT={cwd!s}/.venv",
                     f"VIRTUAL_ENV={cwd!s}/.venv",
-                    "UV_PYTHON=''",
+                    f"UV_PYTHON='{answers.get('minimum_python_version', '3.11')}'",
                     str(uv_path),
                     "sync",
                     "--all-groups",
