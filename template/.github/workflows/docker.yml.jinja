@@ -17,6 +17,7 @@ on:
       - 'docs/**'
       - 'CHANGELOG.md'
       - 'README.md'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -33,43 +34,39 @@ jobs:
       APP: {{ project_name }}
 
     steps:
-      - name: Set docker tags
-        id: set-tags
-        run: |
-          if [[ $GITHUB_REF == refs/heads/main ]]
-          then
-            echo TAGS=$USER/$APP:latest >> $GITHUB_OUTPUT
-          elif [[ $GITHUB_REF == refs/heads/* ]]
-          then
-            BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed -r 's/[\/]/_/g')
-            echo TAGS=$USER/$APP:$BRANCH >> $GITHUB_OUTPUT
-          elif [[ $GITHUB_REF == refs/pull/* ]]
-          then
-            BRANCH={{ '${{ github.head_ref || github.ref_name }}' }}
-            echo TAGS=$USER/$APP:$BRANCH >> $GITHUB_OUTPUT
-          else
-            echo TAGS=$USER/$APP:${GITHUB_REF#refs/tags/} >> $GITHUB_OUTPUT
-          fi
-
-      - name: Show tags
-        run: echo {{ '${{ steps.set-tags.outputs.TAGS }}' }}
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: |
+            ghcr.io/{{ '${{ env.USER }}/${{ env.APP }}' }}
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{ '{{version}}' }}
+            type=semver,pattern={{ '{{major}}.{{minor}}' }}
+            type=semver,pattern={{ '{{major}}' }}
+            type=sha
+            type=raw,value=latest,enable={{ '{{is_default_branch}}' }}
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       - name: Log in to registry
         run: echo {{ '"${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin' }}
 
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
-          push: true
           provenance: false
-          tags: ghcr.io/{{ '${{ steps.set-tags.outputs.TAGS }}' }}
+          push: {{ '${{ github.event_name != \'pull_request\' }}' }}
+          tags: {{ '${{ steps.meta.outputs.tags }}' }}
+          labels: {{ '${{ steps.meta.outputs.labels }}' }}
 
       - name: Image digest
         run: echo {{ '${{ steps.docker_build.outputs.digest }}' }}
