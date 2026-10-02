@@ -4,6 +4,10 @@ This document records the main changes to the `python-template` code.
 
 ## Next release
 
+### 🚀 New
+
+* [#38](https://github.com/sdss/python_template/pull/38) Add AGENTS.md and CLAUDE.md files to the root and template directories.
+
 ### ✨ Improved
 
 * Updated the GitHub Docker action to use [docker/metadata-action](https://github.com/docker/metadata-action).
