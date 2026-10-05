@@ -1,6 +1,6 @@
 # Python Source Guidance
 
-This directory contains the generated package source; package code lives inssude the `src` subdirectory.
+This directory contains the generated package source; package code lives inside the `src` subdirectory.
 
 - Keep package code inside the package directory and follow the SDSS Python coding standards.
 - Use type hints and clear, descriptive names; keep public APIs intentional and documented.
