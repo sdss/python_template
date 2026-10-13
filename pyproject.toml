@@ -1,6 +1,6 @@
 [project]
 name = "python_template"
-version = "3.1.0"
+version = "3.1.1a1"
 description = "SDSS Python package template"
 authors = [
     { name = "José Sánchez-Gallego", email = "gallegoj@uw.edu" },
