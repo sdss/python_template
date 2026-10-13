@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.10, <4"
 resolution-markers = [
     "python_full_version >= '3.12'",
@@ -989,7 +989,7 @@ wheels = [
 
 [[package]]
 name = "python-template"
-version = "3.0.0a1"
+version = "3.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "copier" },
