@@ -10,6 +10,7 @@ This document records the main changes to the `python-template` code.
 
 ### ✨ Improved
 
+* Include more strict (and standard) Ruff lint rules.
 * Updated the GitHub Docker action to use [docker/metadata-action](https://github.com/docker/metadata-action).
 
 

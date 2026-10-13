@@ -32,18 +32,20 @@ def docs_live(session):
     else:
         docs_dir = "."
 
-    with cd(os.path.join(os.path.dirname(__file__), "docs/sphinx")):
-        with tempfile.TemporaryDirectory() as destination:
-            session.run(
-                "sphinx-autobuild",
-                # for sphinx-autobuild
-                "--port=0",
-                "--open-browser",
-                # for sphinx
-                "-b=dirhtml",
-                "-a",
-                "--watch=../../src",
-                docs_dir,
-                destination,
-                external=True,
-            )
+    with (
+        cd(os.path.join(os.path.dirname(__file__), "docs/sphinx")),
+        tempfile.TemporaryDirectory() as destination,
+    ):
+        session.run(
+            "sphinx-autobuild",
+            # for sphinx-autobuild
+            "--port=0",
+            "--open-browser",
+            # for sphinx
+            "-b=dirhtml",
+            "-a",
+            "--watch=../../src",
+            docs_dir,
+            destination,
+            external=True,
+        )

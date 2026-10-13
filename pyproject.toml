@@ -39,7 +39,7 @@ line-length = 88
 target-version = 'py312'
 
 [tool.ruff.lint]
-select = ["E", "F", "I"]
+ignore = ["UP009", "EXE001", "BLE001"]
 unfixable = ["F841"]
 
 [tool.ruff.lint.per-file-ignores]
