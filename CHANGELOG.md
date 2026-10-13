@@ -2,7 +2,7 @@
 
 This document records the main changes to the `python-template` code.
 
-## 3.1.0 ((2026-10-13))
+## 3.1.0 (2026-10-13)
 
 ### 🚀 New
 
